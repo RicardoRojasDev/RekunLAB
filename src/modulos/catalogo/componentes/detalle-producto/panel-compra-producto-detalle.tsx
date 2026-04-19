@@ -3,12 +3,27 @@
 import { useState } from "react";
 import { Boton, Contenedor, Etiqueta } from "@/compartido/componentes/ui";
 import { formatearPrecioClp } from "@/compartido/utilidades/formatear-precio-clp";
-import type { ProductoCatalogo } from "../../tipos/producto-catalogo";
+import type {
+  ConfiguracionVariantesProductoCatalogo,
+  EstadoValidacionVariantesProductoCatalogo,
+  MapaOpcionesDisponiblesVariantesProductoCatalogo,
+  ProductoCatalogo,
+  SeleccionVarianteProductoCatalogo,
+  VistaDetalleProductoCatalogo,
+} from "../../tipos/producto-catalogo";
 import { BloqueConfianzaComercialProducto } from "./bloque-confianza-comercial-producto";
+import { SelectorVariantesProducto } from "./selector-variantes-producto";
 import { SelectorCantidadProducto } from "./selector-cantidad-producto";
 
 type PropiedadesPanelCompraProductoDetalle = Readonly<{
   producto: ProductoCatalogo;
+  configuracionVariantes: ConfiguracionVariantesProductoCatalogo | null;
+  tieneVariantes: boolean;
+  seleccion: SeleccionVarianteProductoCatalogo;
+  opcionesDisponibles: MapaOpcionesDisponiblesVariantesProductoCatalogo;
+  vistaDetalle: VistaDetalleProductoCatalogo;
+  validacion: EstadoValidacionVariantesProductoCatalogo;
+  alSeleccionarOpcion: (codigoAtributo: string, opcionId: string) => void;
 }>;
 
 function resolverEtiquetaUnidades(cantidad: number) {
@@ -17,13 +32,37 @@ function resolverEtiquetaUnidades(cantidad: number) {
 
 export function PanelCompraProductoDetalle({
   producto,
+  configuracionVariantes,
+  tieneVariantes,
+  seleccion,
+  opcionesDisponibles,
+  vistaDetalle,
+  validacion,
+  alSeleccionarOpcion,
 }: PropiedadesPanelCompraProductoDetalle) {
   const [cantidad, setCantidad] = useState(1);
   const [ultimaCantidadAgregada, setUltimaCantidadAgregada] = useState<number | null>(
     null,
   );
+  const [mensajeErrorVariante, setMensajeErrorVariante] = useState<string | null>(
+    null,
+  );
+
+  function manejarSeleccionVariante(codigoAtributo: string, opcionId: string) {
+    setMensajeErrorVariante(null);
+    alSeleccionarOpcion(codigoAtributo, opcionId);
+  }
 
   function agregarSeleccionLocal() {
+    if (!validacion.esValida) {
+      setMensajeErrorVariante(
+        validacion.mensaje ?? "Selecciona una variante valida para continuar.",
+      );
+      setUltimaCantidadAgregada(null);
+      return;
+    }
+
+    setMensajeErrorVariante(null);
     setUltimaCantidadAgregada(cantidad);
   }
 
@@ -57,7 +96,7 @@ export function PanelCompraProductoDetalle({
               Precio final
             </p>
             <p className="font-[var(--fuente-titulos)] text-[clamp(2.1rem,4vw,3rem)] font-semibold leading-none tracking-[-0.06em] text-slate-950">
-              {formatearPrecioClp(producto.precioIvaIncluido)}
+              {formatearPrecioClp(vistaDetalle.precioIvaIncluido)}
             </p>
             <p className="text-sm text-slate-500">IVA incluido</p>
           </div>
@@ -69,6 +108,57 @@ export function PanelCompraProductoDetalle({
               </Etiqueta>
             ))}
           </div>
+
+          {tieneVariantes && configuracionVariantes ? (
+            <Contenedor variante="base">
+              <div className="space-y-5">
+                <div className="space-y-2">
+                  <Etiqueta variante="primaria">Variantes</Etiqueta>
+                  <h2 className="text-xl font-semibold text-slate-950">
+                    Selecciona color, peso o formato segun corresponda
+                  </h2>
+                  <p className="text-sm leading-7 text-slate-600">
+                    La estructura ya admite atributos futuros sin convertir cada
+                    combinacion en un producto separado.
+                  </p>
+                </div>
+
+                <SelectorVariantesProducto
+                  configuracionVariantes={configuracionVariantes}
+                  seleccion={seleccion}
+                  opcionesDisponibles={opcionesDisponibles}
+                  alSeleccionarOpcion={manejarSeleccionVariante}
+                />
+
+                <div
+                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/76 px-4 py-4"
+                  aria-live="polite"
+                >
+                  {mensajeErrorVariante ? (
+                    <p className="text-sm font-medium text-[color:var(--color-error-600)]">
+                      {mensajeErrorVariante}
+                    </p>
+                  ) : vistaDetalle.varianteSeleccionada ? (
+                    <div className="space-y-1">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                        Variante validada
+                      </p>
+                      <p className="text-sm font-semibold text-slate-900">
+                        {vistaDetalle.varianteSeleccionada.etiqueta}
+                      </p>
+                      <p className="text-xs text-slate-500">
+                        Codigo referencia {vistaDetalle.varianteSeleccionada.codigoReferencia}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-sm text-slate-500">
+                      Selecciona una combinacion valida para continuar.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </Contenedor>
+          ) : null}
 
           <Contenedor variante="base">
             <div className="space-y-5">
@@ -101,7 +191,10 @@ export function PanelCompraProductoDetalle({
                 {ultimaCantidadAgregada ? (
                   <p className="text-sm font-medium text-[color:var(--color-primario-700)]">
                     {ultimaCantidadAgregada} {resolverEtiquetaUnidades(ultimaCantidadAgregada)}{" "}
-                    agregadas a la seleccion local.
+                    agregadas a la seleccion local
+                    {vistaDetalle.varianteSeleccionada
+                      ? ` (${vistaDetalle.varianteSeleccionada.etiqueta}).`
+                      : "."}
                   </p>
                 ) : null}
               </div>

@@ -17,6 +17,44 @@ export type EspecificacionProductoCatalogo = Readonly<{
   valor: string;
 }>;
 
+export type TipoPresentacionAtributoVarianteProductoCatalogo =
+  | "texto"
+  | "color";
+
+export type OpcionAtributoVarianteProductoCatalogo = Readonly<{
+  id: string;
+  etiqueta: string;
+  valor: string;
+  descripcion?: string;
+  colorHex?: string;
+}>;
+
+export type AtributoVarianteProductoCatalogo = Readonly<{
+  codigo: string;
+  etiqueta: string;
+  tipoPresentacion: TipoPresentacionAtributoVarianteProductoCatalogo;
+  opciones: readonly OpcionAtributoVarianteProductoCatalogo[];
+}>;
+
+export type SeleccionVarianteProductoCatalogo = Readonly<Record<string, string>>;
+
+export type VarianteProductoCatalogo = Readonly<{
+  id: string;
+  codigoReferencia: string;
+  etiqueta: string;
+  precioIvaIncluido: number;
+  selecciones: SeleccionVarianteProductoCatalogo;
+  imagen?: ImagenProductoCatalogo;
+  imagenesGaleria?: readonly ImagenGaleriaProductoCatalogo[];
+  especificacionesComplementarias?: readonly EspecificacionProductoCatalogo[];
+}>;
+
+export type ConfiguracionVariantesProductoCatalogo = Readonly<{
+  atributos: readonly AtributoVarianteProductoCatalogo[];
+  variantes: readonly VarianteProductoCatalogo[];
+  variantePorDefectoId?: string;
+}>;
+
 export type ResumenProductoCatalogo = Readonly<{
   id: string;
   slug: string;
@@ -35,10 +73,38 @@ export type ProductoCatalogo = Readonly<
     descripcion: string;
     imagenesGaleria: readonly ImagenGaleriaProductoCatalogo[];
     especificaciones: readonly EspecificacionProductoCatalogo[];
+    configuracionVariantes?: ConfiguracionVariantesProductoCatalogo;
   }
 >;
 
 export type ProductoRelacionadoCatalogo = ResumenProductoCatalogo;
+
+export type OpcionDisponibleVarianteProductoCatalogo = Readonly<
+  OpcionAtributoVarianteProductoCatalogo & {
+    disponible: boolean;
+    seleccionada: boolean;
+  }
+>;
+
+export type MapaOpcionesDisponiblesVariantesProductoCatalogo = Readonly<
+  Record<string, readonly OpcionDisponibleVarianteProductoCatalogo[]>
+>;
+
+export type EstadoValidacionVariantesProductoCatalogo = Readonly<{
+  esValida: boolean;
+  mensaje: string | null;
+  atributosFaltantes: readonly string[];
+  varianteSeleccionada: VarianteProductoCatalogo | null;
+}>;
+
+export type VistaDetalleProductoCatalogo = Readonly<{
+  productoBase: ProductoCatalogo;
+  varianteSeleccionada: VarianteProductoCatalogo | null;
+  precioIvaIncluido: number;
+  imagen: ImagenProductoCatalogo;
+  imagenesGaleria: readonly ImagenGaleriaProductoCatalogo[];
+  especificaciones: readonly EspecificacionProductoCatalogo[];
+}>;
 
 export type RespuestaCatalogoResumen = readonly ResumenProductoCatalogo[];
 

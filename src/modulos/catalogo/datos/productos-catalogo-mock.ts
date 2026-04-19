@@ -1,4 +1,5 @@
 import type {
+  ConfiguracionVariantesProductoCatalogo,
   ImagenProductoCatalogo,
   ImagenGaleriaProductoCatalogo,
   RespuestaCatalogoProductos,
@@ -48,39 +49,391 @@ function crearGaleriaProducto(
   ] as const;
 }
 
+function crearConfiguracionVariantesFilamentoSpectrum(): ConfiguracionVariantesProductoCatalogo {
+  return {
+    variantePorDefectoId: "var-filamento-spectrum-bosque-sur-750g",
+    atributos: [
+      {
+        codigo: "color",
+        etiqueta: "Color",
+        tipoPresentacion: "color",
+        opciones: [
+          {
+            id: "bosque-sur",
+            etiqueta: "Bosque Sur",
+            valor: "Bosque Sur",
+            colorHex: "#0D7C66",
+          },
+          {
+            id: "niebla-litoral",
+            etiqueta: "Niebla Litoral",
+            valor: "Niebla Litoral",
+            colorHex: "#C6D5D8",
+          },
+          {
+            id: "grafito-patagonia",
+            etiqueta: "Grafito Patagonia",
+            valor: "Grafito Patagonia",
+            colorHex: "#2C3338",
+          },
+        ],
+      },
+      {
+        codigo: "peso",
+        etiqueta: "Peso",
+        tipoPresentacion: "texto",
+        opciones: [
+          {
+            id: "750g",
+            etiqueta: "750 g",
+            valor: "750 g",
+          },
+          {
+            id: "1kg",
+            etiqueta: "1 kg",
+            valor: "1 kg",
+          },
+        ],
+      },
+    ],
+    variantes: [
+      {
+        id: "var-filamento-spectrum-bosque-sur-750g",
+        codigoReferencia: "RKL-PLA-SPC-BOS-750",
+        etiqueta: "Bosque Sur / 750 g",
+        precioIvaIncluido: 19990,
+        selecciones: {
+          color: "bosque-sur",
+          peso: "750g",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/filamento-bosque-sur.svg",
+          "Vista mock de la variante Bosque Sur 750 g de Filamento PLA Rekun Spectrum",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/filamento-bosque-sur.svg",
+          "Filamento PLA Rekun Spectrum Bosque Sur",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Bosque Sur",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Bobina de 750 g",
+          },
+        ],
+      },
+      {
+        id: "var-filamento-spectrum-bosque-sur-1kg",
+        codigoReferencia: "RKL-PLA-SPC-BOS-1000",
+        etiqueta: "Bosque Sur / 1 kg",
+        precioIvaIncluido: 24990,
+        selecciones: {
+          color: "bosque-sur",
+          peso: "1kg",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/filamento-bosque-sur.svg",
+          "Vista mock de la variante Bosque Sur 1 kg de Filamento PLA Rekun Spectrum",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/filamento-bosque-sur.svg",
+          "Filamento PLA Rekun Spectrum Bosque Sur",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Bosque Sur",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Bobina de 1 kg",
+          },
+        ],
+      },
+      {
+        id: "var-filamento-spectrum-niebla-750g",
+        codigoReferencia: "RKL-PLA-SPC-NIE-750",
+        etiqueta: "Niebla Litoral / 750 g",
+        precioIvaIncluido: 20990,
+        selecciones: {
+          color: "niebla-litoral",
+          peso: "750g",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/filamento-niebla-litoral.svg",
+          "Vista mock de la variante Niebla Litoral 750 g de Filamento PLA Rekun Spectrum",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/filamento-niebla-litoral.svg",
+          "Filamento PLA Rekun Spectrum Niebla Litoral",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Niebla Litoral",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Bobina de 750 g",
+          },
+        ],
+      },
+      {
+        id: "var-filamento-spectrum-niebla-1kg",
+        codigoReferencia: "RKL-PLA-SPC-NIE-1000",
+        etiqueta: "Niebla Litoral / 1 kg",
+        precioIvaIncluido: 25990,
+        selecciones: {
+          color: "niebla-litoral",
+          peso: "1kg",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/filamento-niebla-litoral.svg",
+          "Vista mock de la variante Niebla Litoral 1 kg de Filamento PLA Rekun Spectrum",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/filamento-niebla-litoral.svg",
+          "Filamento PLA Rekun Spectrum Niebla Litoral",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Niebla Litoral",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Bobina de 1 kg",
+          },
+        ],
+      },
+      {
+        id: "var-filamento-spectrum-grafito-750g",
+        codigoReferencia: "RKL-PLA-SPC-GRA-750",
+        etiqueta: "Grafito Patagonia / 750 g",
+        precioIvaIncluido: 21990,
+        selecciones: {
+          color: "grafito-patagonia",
+          peso: "750g",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/filamento-grafito-patagonia.svg",
+          "Vista mock de la variante Grafito Patagonia 750 g de Filamento PLA Rekun Spectrum",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/filamento-grafito-patagonia.svg",
+          "Filamento PLA Rekun Spectrum Grafito Patagonia",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Grafito Patagonia",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Bobina de 750 g",
+          },
+        ],
+      },
+      {
+        id: "var-filamento-spectrum-grafito-1kg",
+        codigoReferencia: "RKL-PLA-SPC-GRA-1000",
+        etiqueta: "Grafito Patagonia / 1 kg",
+        precioIvaIncluido: 26990,
+        selecciones: {
+          color: "grafito-patagonia",
+          peso: "1kg",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/filamento-grafito-patagonia.svg",
+          "Vista mock de la variante Grafito Patagonia 1 kg de Filamento PLA Rekun Spectrum",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/filamento-grafito-patagonia.svg",
+          "Filamento PLA Rekun Spectrum Grafito Patagonia",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Grafito Patagonia",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Bobina de 1 kg",
+          },
+        ],
+      },
+    ],
+  };
+}
+
+function crearConfiguracionVariantesOrganizadorGrid(): ConfiguracionVariantesProductoCatalogo {
+  return {
+    variantePorDefectoId: "var-organizador-grid-grafito-simple",
+    atributos: [
+      {
+        codigo: "color",
+        etiqueta: "Color",
+        tipoPresentacion: "color",
+        opciones: [
+          {
+            id: "grafito-mineral",
+            etiqueta: "Grafito Mineral",
+            valor: "Grafito Mineral",
+            colorHex: "#26312E",
+          },
+          {
+            id: "arena-reciclada",
+            etiqueta: "Arena Reciclada",
+            valor: "Arena Reciclada",
+            colorHex: "#CFA66A",
+          },
+        ],
+      },
+      {
+        codigo: "formato",
+        etiqueta: "Formato",
+        tipoPresentacion: "texto",
+        opciones: [
+          {
+            id: "modulo-simple",
+            etiqueta: "Modulo simple",
+            valor: "Modulo simple",
+            descripcion: "Una unidad modular",
+          },
+          {
+            id: "set-x3",
+            etiqueta: "Set x3",
+            valor: "Set x3",
+            descripcion: "Trio listo para escritorio",
+          },
+        ],
+      },
+    ],
+    variantes: [
+      {
+        id: "var-organizador-grid-grafito-simple",
+        codigoReferencia: "RKL-GRD-GRA-UNI",
+        etiqueta: "Grafito Mineral / Modulo simple",
+        precioIvaIncluido: 31990,
+        selecciones: {
+          color: "grafito-mineral",
+          formato: "modulo-simple",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/organizador-rekun-grid.svg",
+          "Vista mock de la variante Grafito Mineral del Organizador modular Rekun Grid",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/organizador-rekun-grid.svg",
+          "Organizador modular Rekun Grid Grafito Mineral",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Grafito Mineral",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Modulo simple",
+          },
+        ],
+      },
+      {
+        id: "var-organizador-grid-grafito-setx3",
+        codigoReferencia: "RKL-GRD-GRA-SET3",
+        etiqueta: "Grafito Mineral / Set x3",
+        precioIvaIncluido: 82990,
+        selecciones: {
+          color: "grafito-mineral",
+          formato: "set-x3",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/organizador-rekun-grid.svg",
+          "Vista mock de la variante Grafito Mineral Set x3 del Organizador modular Rekun Grid",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/organizador-rekun-grid.svg",
+          "Organizador modular Rekun Grid Grafito Mineral",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Grafito Mineral",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Set x3",
+          },
+        ],
+      },
+      {
+        id: "var-organizador-grid-arena-simple",
+        codigoReferencia: "RKL-GRD-ARE-UNI",
+        etiqueta: "Arena Reciclada / Modulo simple",
+        precioIvaIncluido: 33990,
+        selecciones: {
+          color: "arena-reciclada",
+          formato: "modulo-simple",
+        },
+        imagen: crearImagenProducto(
+          "/imagenes/mock/productos/organizador-rekun-grid-arena.svg",
+          "Vista mock de la variante Arena Reciclada del Organizador modular Rekun Grid",
+        ),
+        imagenesGaleria: crearGaleriaProducto(
+          "/imagenes/mock/productos/organizador-rekun-grid-arena.svg",
+          "Organizador modular Rekun Grid Arena Reciclada",
+        ),
+        especificacionesComplementarias: [
+          {
+            etiqueta: "Color",
+            valor: "Arena Reciclada",
+          },
+          {
+            etiqueta: "Formato",
+            valor: "Modulo simple",
+          },
+        ],
+      },
+    ],
+  };
+}
+
 export const productosCatalogoMock: RespuestaCatalogoProductos = [
   {
-    id: "filamento-pla-bosque-sur-1kg",
-    slug: "filamento-pla-bosque-sur-1kg",
-    nombre: "Filamento PLA Bosque Sur 1kg",
+    id: "filamento-pla-rekun-spectrum",
+    slug: "filamento-pla-rekun-spectrum",
+    nombre: "Filamento PLA Rekun Spectrum",
     resumen:
-      "PLA ecologico con tono mineral profundo, pensado para piezas de uso diario y prototipos de terminacion limpia.",
+      "Familia de filamentos PLA con variantes de color y peso pensadas para prototipos, piezas de uso diario y produccion visual cuidada.",
     categoria: "Filamento PLA ecologico",
     tipoProducto: "Consumible",
-    coleccion: "Bosque Sur",
-    precioIvaIncluido: 24990,
+    coleccion: "Spectrum Circular",
+    precioIvaIncluido: 19990,
     imagen: crearImagenProducto(
       "/imagenes/mock/productos/filamento-bosque-sur.svg",
-      "Vista mock del producto Filamento PLA Bosque Sur 1kg",
+      "Vista mock del producto Filamento PLA Rekun Spectrum",
     ),
     descripcion:
-      "Filamento PLA con expresion visual mineral y enfoque sustentable, pensado para prototipos, piezas decorativas y componentes de uso diario donde importa tanto la lectura del color como la estabilidad del resultado. Su presencia sobria dialoga bien con piezas tecnicas, objetos editoriales y series cortas con identidad de marca.",
+      "Linea de filamento PLA creada para dar libertad de eleccion en color y formato sin separar cada combinacion en un producto distinto. La estructura esta pensada para crecer a futuro con nuevas formulaciones, pesos y acabados, manteniendo una experiencia comercial clara y un modelo de datos listo para integracion real.",
     imagenesGaleria: crearGaleriaProducto(
       "/imagenes/mock/productos/filamento-bosque-sur.svg",
-      "Filamento PLA Bosque Sur 1kg",
+      "Filamento PLA Rekun Spectrum",
     ),
     especificaciones: [
       {
         etiqueta: "Formato",
-        valor: "Bobina de 1 kg",
+        valor: "Variable segun variante",
       },
       {
         etiqueta: "Material",
         valor: "PLA ecologico",
       },
       {
-        etiqueta: "Acabado visual",
-        valor: "Mate mineral",
+        etiqueta: "Color",
+        valor: "Variable segun variante",
       },
       {
         etiqueta: "Uso recomendado",
@@ -91,6 +444,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
         valor: "Impresoras FDM configuradas para PLA",
       },
     ],
+    configuracionVariantes: crearConfiguracionVariantesFilamentoSpectrum(),
     etiquetasComerciales: ["Reciclado", "Baja deformacion", "Uso diario"],
   },
   {
@@ -247,15 +601,15 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
     especificaciones: [
       {
         etiqueta: "Formato",
-        valor: "Sistema modular para escritorio",
+        valor: "Variable segun variante",
       },
       {
         etiqueta: "Material",
         valor: "PLA ecologico",
       },
       {
-        etiqueta: "Coleccion",
-        valor: "Circular Living",
+        etiqueta: "Color",
+        valor: "Variable segun variante",
       },
       {
         etiqueta: "Uso recomendado",
@@ -266,6 +620,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
         valor: "Tecnico, limpio y premium",
       },
     ],
+    configuracionVariantes: crearConfiguracionVariantesOrganizadorGrid(),
     etiquetasComerciales: ["Material reciclado", "Modular", "Edicion taller"],
   },
   {

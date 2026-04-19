@@ -4,20 +4,33 @@ import { useState } from "react";
 import Image from "next/image";
 import { Contenedor, Etiqueta } from "@/compartido/componentes/ui";
 import { unirClases } from "@/compartido/utilidades/unir-clases";
-import type { ProductoCatalogo } from "../../tipos/producto-catalogo";
+import type {
+  ProductoCatalogo,
+  VistaDetalleProductoCatalogo,
+} from "../../tipos/producto-catalogo";
 
 type PropiedadesGaleriaProductoDetalle = Readonly<{
   producto: ProductoCatalogo;
+  vistaDetalle: VistaDetalleProductoCatalogo;
 }>;
 
 export function GaleriaProductoDetalle({
   producto,
+  vistaDetalle,
 }: PropiedadesGaleriaProductoDetalle) {
   const [indiceImagenActiva, setIndiceImagenActiva] = useState(0);
+  const imagenesGaleria = vistaDetalle.imagenesGaleria.length
+    ? vistaDetalle.imagenesGaleria
+    : [
+        {
+          ...vistaDetalle.imagen,
+          etiqueta: "Vista principal",
+        },
+      ];
   const imagenActiva =
-    producto.imagenesGaleria[indiceImagenActiva] ??
-    producto.imagenesGaleria[0] ?? {
-      ...producto.imagen,
+    imagenesGaleria[indiceImagenActiva] ??
+    imagenesGaleria[0] ?? {
+      ...vistaDetalle.imagen,
       etiqueta: "Vista principal",
     };
 
@@ -52,15 +65,22 @@ export function GaleriaProductoDetalle({
               ) : null}
             </div>
 
-            <Etiqueta variante="oscura" tamanio="sm">
-              {imagenActiva.etiqueta}
-            </Etiqueta>
+            <div className="flex flex-wrap justify-end gap-2">
+              <Etiqueta variante="oscura" tamanio="sm">
+                {imagenActiva.etiqueta}
+              </Etiqueta>
+              {vistaDetalle.varianteSeleccionada ? (
+                <Etiqueta variante="premium" tamanio="sm">
+                  {vistaDetalle.varianteSeleccionada.etiqueta}
+                </Etiqueta>
+              ) : null}
+            </div>
           </div>
         </div>
       </Contenedor>
 
       <div className="grid gap-3 sm:grid-cols-3">
-        {producto.imagenesGaleria.map((imagen, indice) => {
+        {imagenesGaleria.map((imagen, indice) => {
           const estaActiva = indice === indiceImagenActiva;
 
           return (

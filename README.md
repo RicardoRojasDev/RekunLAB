@@ -8,6 +8,7 @@ La guia de componentes UI base esta en `docs/modulo-5-componentes-ui-base.md`.
 La guia del catalogo de productos esta en `docs/modulo-6-catalogo-de-productos.md`.
 La guia del sistema de filtros del catalogo esta en `docs/modulo-7-sistema-de-filtros-catalogo.md`.
 La guia del detalle de producto esta en `docs/modulo-8-detalle-de-producto.md`.
+La guia de variantes de producto esta en `docs/modulo-9-logica-de-variantes-producto.md`.
 
 ## Objetivo de esta base
 
@@ -96,6 +97,7 @@ src/
         productos-catalogo-mock.ts
       hooks/
         use-filtros-catalogo.ts
+        use-variantes-producto.ts
       servicios/
         obtener-detalle-producto-catalogo.ts
         obtener-productos-catalogo.ts
@@ -106,6 +108,7 @@ src/
         aplicar-filtros-catalogo.ts
         extraer-opciones-filtros-catalogo.ts
         query-params-catalogo.ts
+        variantes-producto-catalogo.ts
       index.ts
 public/
   imagenes/
@@ -143,4 +146,4 @@ npm run typecheck
 
 ## Alcance de esta base
 
-La base actual ya incluye catalogo visual, filtros por query params y ficha de producto con galeria, especificaciones, cantidad local, CTA de carrito no persistente y relacionados mock. Aun no incorpora carrito global funcional, checkout, autenticacion funcional ni panel administrativo.
+La base actual ya incluye catalogo visual, filtros por query params, ficha de producto y logica de variantes escalable para color, peso y formato con cambios de precio, imagen y especificaciones en frontend. Aun no incorpora carrito global funcional, checkout, autenticacion funcional ni panel administrativo.

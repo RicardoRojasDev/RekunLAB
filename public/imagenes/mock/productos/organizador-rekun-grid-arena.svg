@@ -1,0 +1,16 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="960" fill="#FBF7EF"/>
+  <circle cx="632" cy="172" r="182" fill="#E6C896" fill-opacity="0.24"/>
+  <circle cx="174" cy="828" r="228" fill="#B38631" fill-opacity="0.14"/>
+  <rect x="152" y="172" width="496" height="572" rx="88" fill="#2C241D"/>
+  <rect x="214" y="234" width="114" height="114" rx="24" fill="#C28D4A"/>
+  <rect x="344" y="234" width="114" height="114" rx="24" fill="#F4D9B3"/>
+  <rect x="474" y="234" width="114" height="114" rx="24" fill="#6D5439"/>
+  <rect x="214" y="364" width="114" height="114" rx="24" fill="#F8E9D1"/>
+  <rect x="344" y="364" width="114" height="114" rx="24" fill="#8D6A44"/>
+  <rect x="474" y="364" width="114" height="114" rx="24" fill="#D6AE72"/>
+  <rect x="214" y="494" width="114" height="114" rx="24" fill="#715838"/>
+  <rect x="344" y="494" width="114" height="114" rx="24" fill="#C28D4A"/>
+  <rect x="474" y="494" width="114" height="114" rx="24" fill="#FFF2DD"/>
+  <text x="400" y="810" text-anchor="middle" fill="#4B3B27" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="5">REKUN GRID ARENA</text>
+</svg>
