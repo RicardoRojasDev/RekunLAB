@@ -490,3 +490,50 @@ select:focus-visible {
     transform: rotate(360deg);
   }
 }
+
+.esqueleto-carga {
+  position: relative;
+  overflow: hidden;
+}
+
+.esqueleto-carga-clara {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(240, 244, 241, 0.84) 100%
+  );
+}
+
+.esqueleto-carga-oscura {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+.esqueleto-carga::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-140%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.42) 50%,
+    transparent 100%
+  );
+  animation: barrido-esqueleto 1.5s ease-in-out infinite;
+}
+
+@keyframes barrido-esqueleto {
+  to {
+    transform: translateX(140%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .esqueleto-carga::after {
+    animation: none;
+  }
+}

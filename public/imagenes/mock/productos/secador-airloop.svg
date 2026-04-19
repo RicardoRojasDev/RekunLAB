@@ -1,0 +1,12 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="960" fill="#F5F8F7"/>
+  <circle cx="640" cy="172" r="170" fill="#B8DAD1" fill-opacity="0.24"/>
+  <circle cx="174" cy="822" r="222" fill="#D9C06E" fill-opacity="0.12"/>
+  <rect x="146" y="182" width="508" height="536" rx="112" fill="#172220"/>
+  <rect x="208" y="252" width="384" height="396" rx="76" fill="#243734"/>
+  <circle cx="400" cy="450" r="118" fill="#0D7C66"/>
+  <circle cx="400" cy="450" r="72" fill="#0D1715"/>
+  <path d="M400 348C429.333 382.667 444 416.667 444 450C444 483.333 429.333 517.333 400 552" stroke="#D5F3EA" stroke-width="16" stroke-linecap="round"/>
+  <path d="M350 374C376 399.333 389 424.667 389 450C389 475.333 376 500.667 350 526" stroke="#D5F3EA" stroke-width="14" stroke-linecap="round"/>
+  <text x="400" y="794" text-anchor="middle" fill="#2D373D" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="5">AIRLOOP</text>
+</svg>

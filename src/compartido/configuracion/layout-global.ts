@@ -2,12 +2,12 @@ export const enlacesNavegacionPrincipal = [
   {
     etiqueta: "Inicio",
     href: "/",
-    estado: "activo",
+    estado: "disponible",
   },
   {
     etiqueta: "Catalogo",
-    href: null,
-    estado: "preparado",
+    href: "/catalogo",
+    estado: "disponible",
   },
   {
     etiqueta: "Servicios",

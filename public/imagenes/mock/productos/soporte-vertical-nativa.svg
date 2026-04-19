@@ -1,0 +1,11 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="960" fill="#F6F8F6"/>
+  <circle cx="632" cy="158" r="178" fill="#D9C06E" fill-opacity="0.22"/>
+  <circle cx="174" cy="816" r="236" fill="#0D7C66" fill-opacity="0.1"/>
+  <path d="M262 770C251.333 642 282.333 512.667 355 382C389.667 318 430 260.333 476 209H556C489.333 290.333 442.333 370.333 415 449C381.667 545 374.333 652 393 770H262Z" fill="#0D1715"/>
+  <path d="M470 194C511.2 194 544.6 227.4 544.6 268.6V281H342V268.6C342 227.4 375.4 194 416.6 194H470Z" fill="#244540"/>
+  <rect x="312" y="282" width="272" height="72" rx="36" fill="#D5F3EA"/>
+  <path d="M292 770H502C480.667 676 482.333 583.333 507 492C528.333 412.667 569.667 334.333 631 257H560C499.333 331.667 459.333 404 440 474C414 568 414 666.667 440 770H292Z" fill="#0D7C66"/>
+  <path d="M330 770H530" stroke="#D9C06E" stroke-width="26" stroke-linecap="round"/>
+  <text x="400" y="842" text-anchor="middle" fill="#18211E" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="5">NATIVA DOCK</text>
+</svg>
