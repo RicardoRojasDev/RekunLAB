@@ -1,3 +1,9 @@
+import type {
+  EntidadObjetivoEstadoDominioNegocio,
+  NaturalezaAtributoProductoDominioNegocio,
+  TipoDatoAtributoProductoDominioNegocio,
+} from "./catalogos-dominio-negocio";
+
 export type ValorMetadatoDominioNegocio =
   | string
   | number
@@ -28,33 +34,6 @@ export type CatalogoAuxiliarBaseDominioNegocio = Readonly<
     ordenVisual: number;
   }
 >;
-
-export type TipoDatoAtributoProductoDominioNegocio =
-  | "texto-corto"
-  | "texto-largo"
-  | "numero"
-  | "decimal"
-  | "booleano"
-  | "fecha"
-  | "seleccion-simple"
-  | "seleccion-multiple"
-  | "color"
-  | "json";
-
-export type NaturalezaAtributoProductoDominioNegocio =
-  | "informativo"
-  | "comercial"
-  | "tecnico"
-  | "variante"
-  | "compatibilidad";
-
-export type EntidadObjetivoEstadoDominioNegocio =
-  | "categoria-producto"
-  | "producto"
-  | "variante-producto"
-  | "cliente"
-  | "pedido"
-  | "cotizacion";
 
 export type EstadoEntidadDominioNegocio = Readonly<
   CatalogoAuxiliarBaseDominioNegocio & {
@@ -309,7 +288,6 @@ export type ConfiguracionComercialDominioNegocio = Readonly<
     loginGoogleHabilitado: boolean;
     compraInvitadoHabilitada: boolean;
     stockVisiblePublico: boolean;
-    pedidosGuardadosEnSupabase: boolean;
     respaldoCorreoPedidos: boolean;
     catalogoAdministrableDesdePanel: boolean;
     cotizacionMedianteFormulario: boolean;

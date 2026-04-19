@@ -1,32 +1,8 @@
-export const tiposDatoAtributoProductoDominioNegocio = [
-  "texto-corto",
-  "texto-largo",
-  "numero",
-  "decimal",
-  "booleano",
-  "fecha",
-  "seleccion-simple",
-  "seleccion-multiple",
-  "color",
-  "json",
-] as const;
-
-export const naturalezasAtributoProductoDominioNegocio = [
-  "informativo",
-  "comercial",
-  "tecnico",
-  "variante",
-  "compatibilidad",
-] as const;
-
-export const entidadesObjetivoEstadoDominioNegocio = [
-  "categoria-producto",
-  "producto",
-  "variante-producto",
-  "cliente",
-  "pedido",
-  "cotizacion",
-] as const;
+export {
+  entidadesObjetivoEstadoDominioNegocio,
+  naturalezasAtributoProductoDominioNegocio,
+  tiposDatoAtributoProductoDominioNegocio,
+} from "../tipos/catalogos-dominio-negocio";
 
 export const catalogosAuxiliaresDominioNegocio = [
   {
