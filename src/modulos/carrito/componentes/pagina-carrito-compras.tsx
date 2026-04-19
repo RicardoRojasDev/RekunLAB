@@ -45,8 +45,8 @@ export function PaginaCarritoCompras() {
             </h1>
             <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-[1.05rem]">
               Ajusta cantidades, elimina productos o sigue explorando el
-              catalogo. Esta etapa no crea pedidos ni avanza todavia al checkout
-              completo.
+              catalogo. Esta etapa no crea pedidos; el checkout visual valida tus
+              datos y direccion antes de integrar pagos.
             </p>
           </div>
         </div>
@@ -86,6 +86,13 @@ export function PaginaCarritoCompras() {
                 pie={
                   <div className="grid gap-3">
                     <Link
+                      href="/checkout"
+                      className="boton-base boton-primario min-h-11 justify-center px-4 text-sm"
+                    >
+                      Ir al checkout
+                    </Link>
+
+                    <Link
                       href="/catalogo"
                       className="boton-base boton-secundario min-h-11 justify-center px-4 text-sm"
                     >
@@ -93,8 +100,9 @@ export function PaginaCarritoCompras() {
                     </Link>
 
                     <p className="text-xs leading-6 text-slate-500">
-                      El checkout se integrara en el siguiente modulo. El carrito
-                      ya queda preparado para conectarlo sin rehacer esta capa.
+                      El checkout actual es visual: valida datos y muestra el
+                      resumen con IVA incluido, sin crear pedidos ni integrar
+                      pagos todavia.
                     </p>
                   </div>
                 }

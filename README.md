@@ -10,6 +10,7 @@ La guia del sistema de filtros del catalogo esta en `docs/modulo-7-sistema-de-fi
 La guia del detalle de producto esta en `docs/modulo-8-detalle-de-producto.md`.
 La guia de variantes de producto esta en `docs/modulo-9-logica-de-variantes-producto.md`.
 La guia del carrito de compras esta en `docs/modulo-10-carrito-de-compras.md`.
+La guia del checkout visual esta en `docs/modulo-11-checkout-visual.md`.
 
 ## Objetivo de esta base
 
@@ -23,6 +24,9 @@ La guia del carrito de compras esta en `docs/modulo-10-carrito-de-compras.md`.
 src/
   app/
     carrito/
+      page.tsx
+    checkout/
+      loading.tsx
       page.tsx
     catalogo/
       [slug]/
@@ -99,6 +103,23 @@ src/
       utilidades/
         operaciones-carrito.ts
       index.ts
+    checkout/
+      componentes/
+        bloque-confianza-checkout.tsx
+        checkout-cargando.tsx
+        estado-vacio-checkout.tsx
+        pagina-checkout-visual.tsx
+        resumen-checkout.tsx
+        seccion-datos-cliente-checkout.tsx
+        seccion-direccion-envio-checkout.tsx
+        seccion-identificacion-checkout.tsx
+      hooks/
+        use-formulario-checkout.ts
+      tipos/
+        checkout.ts
+      utilidades/
+        validaciones-checkout.ts
+      index.ts
     catalogo/
       componentes/
         catalogo-cargando.tsx
@@ -173,4 +194,4 @@ npm run typecheck
 
 ## Alcance de esta base
 
-La base actual ya incluye catalogo visual, filtros por query params, ficha de producto, logica de variantes escalable para color, peso y formato, y un carrito de compras con persistencia local, drawer global, pagina dedicada y subtotal con IVA incluido. Aun no incorpora checkout completo, autenticacion funcional ni panel administrativo.
+La base actual ya incluye catalogo visual, filtros por query params, ficha de producto, logica de variantes escalable para color, peso y formato, carrito de compras con persistencia local y un checkout visual con formularios validados y resumen del carrito. Aun no incorpora creacion de pedidos definitiva, pagos, autenticacion funcional ni panel administrativo.

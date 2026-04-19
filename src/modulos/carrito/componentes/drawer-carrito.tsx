@@ -105,9 +105,17 @@ export function DrawerCarrito({
               pie={
                 <div className="grid gap-3">
                   <Link
-                    href="/carrito"
+                    href="/checkout"
                     onClick={alCerrar}
                     className="boton-base boton-primario min-h-11 justify-center px-4 text-sm"
+                  >
+                    Ir al checkout
+                  </Link>
+
+                  <Link
+                    href="/carrito"
+                    onClick={alCerrar}
+                    className="boton-base boton-secundario min-h-11 justify-center px-4 text-sm"
                   >
                     Ver carrito completo
                   </Link>
