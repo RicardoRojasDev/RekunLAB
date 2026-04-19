@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import type {
   DatosClienteCheckout,
   DireccionEnvioCheckout,
   ErroresFormularioCheckout,
+  ModoCheckout,
   ValoresFormularioCheckout,
 } from "../tipos/checkout";
 import { validarFormularioCheckout } from "../utilidades/validaciones-checkout";
@@ -61,6 +62,7 @@ export function useFormularioCheckout() {
   );
   const [intentoEnvio, setIntentoEnvio] = useState(false);
   const [estadoEnvio, setEstadoEnvio] = useState<EstadoEnvioCheckout>("inactivo");
+  const precargaSesionAplicada = useRef(false);
 
   const validar = useCallback(
     (siguienteValores: ValoresFormularioCheckout) => {
@@ -113,6 +115,44 @@ export function useFormularioCheckout() {
     [intentoEnvio, validar],
   );
 
+  const actualizarModoCheckout = useCallback((modo: ModoCheckout) => {
+    setValores((previo) => {
+      if (previo.datosCliente.modo === modo) {
+        return previo;
+      }
+
+      return {
+        ...previo,
+        datosCliente: {
+          ...previo.datosCliente,
+          modo,
+        },
+      };
+    });
+  }, []);
+
+  const hidratarDatosClienteDesdeSesion = useCallback(
+    (datos: Pick<DatosClienteCheckout, "nombre" | "apellido" | "correo">) => {
+      if (precargaSesionAplicada.current) {
+        return;
+      }
+
+      setValores((previo) => ({
+        ...previo,
+        datosCliente: {
+          ...previo.datosCliente,
+          modo: "autenticado",
+          nombre: previo.datosCliente.nombre || datos.nombre,
+          apellido: previo.datosCliente.apellido || datos.apellido,
+          correo: previo.datosCliente.correo || datos.correo,
+        },
+      }));
+
+      precargaSesionAplicada.current = true;
+    },
+    [],
+  );
+
   const prepararEnvio = useCallback(() => {
     setIntentoEnvio(true);
     return validar(valores);
@@ -147,9 +187,10 @@ export function useFormularioCheckout() {
     setEstadoEnvio,
     actualizarDatosCliente,
     actualizarDireccionEnvio,
+    actualizarModoCheckout,
+    hidratarDatosClienteDesdeSesion,
     prepararEnvio,
     marcarEnvioExitoso,
     reiniciarEstadoEnvio,
   };
 }
-

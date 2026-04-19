@@ -2,6 +2,7 @@ import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-pr
 import { Etiqueta } from "@/compartido/componentes/ui/etiqueta";
 import { NavegacionPrincipal } from "@/compartido/componentes/layout/navegacion-principal";
 import { indicadoresOperacionInicial } from "@/compartido/configuracion/layout-global";
+import { AccionesAutenticacionCabecera } from "@/modulos/autenticacion";
 import { AccionesCarritoCabecera } from "@/modulos/carrito";
 import { MarcaPrincipal } from "./marca-principal";
 
@@ -31,7 +32,10 @@ export function HeaderGlobal() {
                 ))}
               </div>
 
-              <AccionesCarritoCabecera />
+              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+                <AccionesAutenticacionCabecera />
+                <AccionesCarritoCabecera />
+              </div>
             </div>
           </div>
 

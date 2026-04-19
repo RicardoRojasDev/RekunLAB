@@ -1,11 +1,12 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
 import { Boton, Etiqueta, MensajeError, ModalBase } from "@/compartido/componentes/ui";
 import { formatearPrecioClp } from "@/compartido/utilidades/formatear-precio-clp";
+import { useAutenticacion } from "@/modulos/autenticacion";
 import { useCarrito } from "@/modulos/carrito";
 import { useFormularioCheckout } from "../hooks/use-formulario-checkout";
 import { BloqueConfianzaCheckout } from "./bloque-confianza-checkout";
@@ -51,12 +52,36 @@ function enfocarPrimerError(checkout: ReturnType<typeof useFormularioCheckout>) 
 
 export function PaginaCheckoutVisual() {
   const { hidratado, items, resumen } = useCarrito();
+  const { esAutenticado, usuario } = useAutenticacion();
   const checkout = useFormularioCheckout();
+  const { actualizarModoCheckout, hidratarDatosClienteDesdeSesion } = checkout;
   const [modalAbierto, setModalAbierto] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
 
   const estaVacio = hidratado && items.length === 0;
-  const puedeContinuar = useMemo(() => checkout.puedeEnviar && items.length > 0, [checkout.puedeEnviar, items.length]);
+  const puedeContinuar = useMemo(
+    () => checkout.puedeEnviar && items.length > 0,
+    [checkout.puedeEnviar, items.length],
+  );
+
+  useEffect(() => {
+    if (esAutenticado && usuario) {
+      actualizarModoCheckout("autenticado");
+      hidratarDatosClienteDesdeSesion({
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo ?? "",
+      });
+      return;
+    }
+
+    actualizarModoCheckout("invitado");
+  }, [
+    actualizarModoCheckout,
+    esAutenticado,
+    hidratarDatosClienteDesdeSesion,
+    usuario,
+  ]);
 
   if (!hidratado) {
     return <CheckoutCargando />;
@@ -112,7 +137,11 @@ export function PaginaCheckoutVisual() {
         <header className="space-y-4">
           <div className="flex flex-wrap gap-2">
             <Etiqueta variante="primaria">Checkout</Etiqueta>
-            <Etiqueta variante="suave">Invitado</Etiqueta>
+            <Etiqueta variante="suave">
+              {checkout.valores.datosCliente.modo === "autenticado"
+                ? "Autenticado"
+                : "Invitado"}
+            </Etiqueta>
             <Etiqueta variante="premium">IVA incluido</Etiqueta>
           </div>
 

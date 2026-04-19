@@ -11,6 +11,7 @@ La guia del detalle de producto esta en `docs/modulo-8-detalle-de-producto.md`.
 La guia de variantes de producto esta en `docs/modulo-9-logica-de-variantes-producto.md`.
 La guia del carrito de compras esta en `docs/modulo-10-carrito-de-compras.md`.
 La guia del checkout visual esta en `docs/modulo-11-checkout-visual.md`.
+La guia de autenticacion frontend esta en `docs/modulo-12-autenticacion-frontend.md`.
 
 ## Objetivo de esta base
 
@@ -23,6 +24,8 @@ La guia del checkout visual esta en `docs/modulo-11-checkout-visual.md`.
 ```text
 src/
   app/
+    acceso/
+      page.tsx
     carrito/
       page.tsx
     checkout/
@@ -77,6 +80,20 @@ src/
       formatear-precio-clp.ts
       unir-clases.ts
   modulos/
+    autenticacion/
+      componentes/
+        acciones-autenticacion-cabecera.tsx
+        boton-google-autenticacion.tsx
+        pagina-acceso-usuario.tsx
+      contexto/
+        proveedor-autenticacion.tsx
+      hooks/
+        use-autenticacion.ts
+      servicios/
+        cliente-supabase-autenticacion.ts
+      tipos/
+        autenticacion.ts
+      index.ts
     base-proyecto/
       componentes/
         resumen-base-proyecto.tsx
@@ -194,4 +211,4 @@ npm run typecheck
 
 ## Alcance de esta base
 
-La base actual ya incluye catalogo visual, filtros por query params, ficha de producto, logica de variantes escalable para color, peso y formato, carrito de compras con persistencia local y un checkout visual con formularios validados y resumen del carrito. Aun no incorpora creacion de pedidos definitiva, pagos, autenticacion funcional ni panel administrativo.
+La base actual ya incluye catalogo visual, filtros por query params, ficha de producto, logica de variantes escalable para color, peso y formato, carrito de compras con persistencia local, checkout visual y una capa frontend de autenticacion preparada para Supabase Auth con Google sin bloquear la compra como invitado. Aun no incorpora creacion de pedidos definitiva, pagos, endurecimiento final de seguridad ni panel administrativo.

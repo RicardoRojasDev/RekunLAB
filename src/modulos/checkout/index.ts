@@ -4,7 +4,7 @@ export type {
   DatosClienteCheckout,
   DireccionEnvioCheckout,
   ErroresFormularioCheckout,
+  ModoCheckout,
   ResultadoValidacionCheckout,
   ValoresFormularioCheckout,
 } from "./tipos/checkout";
-

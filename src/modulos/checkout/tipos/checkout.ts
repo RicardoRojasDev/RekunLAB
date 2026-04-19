@@ -1,4 +1,4 @@
-export type ModoCheckout = "invitado";
+export type ModoCheckout = "invitado" | "autenticado";
 
 export type DatosClienteCheckout = Readonly<{
   modo: ModoCheckout;
@@ -49,4 +49,3 @@ export type ResultadoValidacionCheckout = Readonly<{
   esValido: boolean;
   errores: ErroresFormularioCheckout;
 }>;
-
