@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { configuracionSitio } from "@/configuracion/sitio";
-import type { PropiedadesConHijos } from "@/tipos/comunes";
+import { configuracionSitio } from "@/compartido/configuracion/sitio";
+import type { PropiedadesConHijos } from "@/compartido/tipos/comunes";
 import "./globals.css";
 
 export const metadata: Metadata = {

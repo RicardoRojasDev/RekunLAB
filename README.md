@@ -2,6 +2,8 @@
 
 Base tecnica inicial del ecommerce de Rekun LAB construida con Next.js App Router, TypeScript, Tailwind CSS y preparacion para Supabase.
 
+La guia formal de arquitectura y convenciones del proyecto esta en `docs/modulo-2-arquitectura-y-convenciones.md`.
+
 ## Objetivo de esta base
 
 - Partir con una estructura limpia y mantenible.
@@ -16,37 +18,36 @@ src/
     globals.css
     layout.tsx
     page.tsx
-  componentes/
-    base/
-      contenedor-pagina.tsx
-  configuracion/
-    entorno.ts
-    sitio.ts
+  compartido/
+    componentes/
+      base/
+        contenedor-pagina.tsx
+    configuracion/
+      entorno.ts
+      sitio.ts
+    servicios/
+      supabase/
+        cliente-publico.ts
+        index.ts
+    tipos/
+      comunes.ts
+      entorno.ts
+    utilidades/
+      unir-clases.ts
   modulos/
     base-proyecto/
       componentes/
         resumen-base-proyecto.tsx
       index.ts
-  servicios/
-    supabase/
-      cliente-publico.ts
-      index.ts
-  tipos/
-    comunes.ts
-    entorno.ts
-  utilidades/
-    unir-clases.ts
 ```
 
 ## Criterios de escalabilidad
 
 - `app/` queda como punto de entrada y composicion de rutas, no como lugar para mezclar logica de negocio.
-- `modulos/` permite encapsular cada dominio futuro del ecommerce, por ejemplo catalogo, carrito, checkout o administracion.
-- `componentes/` concentra piezas reutilizables compartidas entre modulos.
-- `servicios/` reune integraciones externas y acceso a infraestructura.
-- `configuracion/` mantiene centralizadas las constantes del proyecto y la lectura de variables de entorno.
-- `tipos/` evita repetir contratos comunes a medida que crece el codigo.
-- `utilidades/` agrupa funciones puras y transversales.
+- `compartido/` concentra el codigo transversal del proyecto.
+- `modulos/` encapsula cada dominio funcional y expone su API publica.
+- `compartido/servicios/` reune integraciones externas y acceso a infraestructura.
+- `compartido/configuracion/`, `compartido/tipos/` y `compartido/utilidades/` evitan dispersion del codigo comun.
 
 ## Variables de entorno
 

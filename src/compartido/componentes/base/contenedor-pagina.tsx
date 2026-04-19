@@ -1,5 +1,5 @@
-import type { PropiedadesConHijos } from "@/tipos/comunes";
-import { unirClases } from "@/utilidades/unir-clases";
+import type { PropiedadesConHijos } from "@/compartido/tipos/comunes";
+import { unirClases } from "@/compartido/utilidades/unir-clases";
 
 type PropiedadesContenedorPagina = Readonly<
   PropiedadesConHijos & {

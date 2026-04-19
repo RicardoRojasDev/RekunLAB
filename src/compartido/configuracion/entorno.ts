@@ -1,4 +1,4 @@
-import type { CredencialesPublicasSupabase } from "@/tipos/entorno";
+import type { CredencialesPublicasSupabase } from "@/compartido/tipos/entorno";
 
 const variablesPublicasRequeridasSupabase = [
   "NEXT_PUBLIC_SUPABASE_URL",
