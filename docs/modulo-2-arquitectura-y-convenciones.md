@@ -237,7 +237,7 @@ Ejemplos:
 Ejemplo recomendado:
 
 ```ts
-import { ContenedorPagina } from "@/compartido/componentes/base/contenedor-pagina";
+import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
 import { obtenerPedidoPorId } from "@/modulos/pedidos";
 import { mapearResumenPedido } from "../utilidades/mapear-resumen-pedido";
 ```
@@ -326,7 +326,7 @@ Ejemplos:
 - `formatearPrecioClp` -> `compartido/utilidades`
 - `mapearProductoParaTarjeta` -> `modulos/catalogo/utilidades`
 - `FormularioCotizacion` -> `modulos/cotizaciones/componentes`
-- `ContenedorPagina` -> `compartido/componentes`
+- `ContenedorPrincipal` -> `compartido/componentes`
 
 ## Reglas para estilos reutilizables
 

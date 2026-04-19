@@ -19,10 +19,7 @@ export function HeaderGlobal() {
 
             <div className="flex flex-wrap items-center gap-2 sm:justify-end">
               {etiquetasCabecera.map((etiqueta) => (
-                <span
-                  key={etiqueta}
-                  className="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-borde)] bg-white/75 px-3 py-2 text-xs font-medium tracking-[0.14em] uppercase text-slate-600"
-                >
+                <span key={etiqueta} className="etiqueta-tecnica">
                   <span className="h-2 w-2 rounded-full bg-[color:var(--color-acento)]" />
                   {etiqueta}
                 </span>
@@ -40,8 +37,7 @@ export function HeaderGlobal() {
                 <span
                   key={etiqueta}
                   className={unirClases(
-                    "rounded-full px-3 py-2 text-xs tracking-[0.16em] uppercase",
-                    "bg-slate-950 text-white",
+                    "etiqueta-tecnica etiqueta-tecnica-oscura",
                   )}
                 >
                   {etiqueta}

@@ -1,136 +1,344 @@
+import type { CSSProperties, ReactNode } from "react";
+import { BotonBase } from "@/compartido/componentes/base/boton-base";
 import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
+import {
+  escalaEspaciadosSistemaDiseno,
+  escalaRadiosSistemaDiseno,
+  escalaSombrasSistemaDiseno,
+  escalaTipograficaSistemaDiseno,
+  estadosInteractivosSistemaDiseno,
+  gruposPaletaSistemaDiseno,
+  lineamientosComponentesFuturos,
+  narrativaSistemaDiseno,
+} from "@/compartido/configuracion/sistema-diseno";
 
-const bloquesBase = [
-  {
-    titulo: "Header global",
-    descripcion:
-      "La cabecera queda lista para branding, carrito futuro y navegacion comercial con una presencia sobria y clara.",
-  },
-  {
-    titulo: "Navegacion preparada",
-    descripcion:
-      "La navegacion principal se monto como estructura compartida para sumar catalogo, servicios y cotizaciones sin rehacer el layout.",
-  },
-  {
-    titulo: "Footer consistente",
-    descripcion:
-      "El cierre global incorpora contexto de marca, operacion inicial y una base limpia para SEO tecnico y enlaces futuros.",
-  },
-] as const;
+type PropiedadesMuestraColor = Readonly<{
+  nombre: string;
+  token: string;
+  valor: string;
+  uso: string;
+}>;
 
-const capasPreparadas = [
-  "Branding principal",
-  "Contenedor principal reusable",
-  "Carrito futuro",
-  "Navegacion comercial escalable",
-  "Estructura mobile first",
-  "Metadata tecnica base",
-] as const;
+type PropiedadesTarjetaToken = Readonly<{
+  nombre: string;
+  token: string;
+  valor: string;
+  uso: string;
+  muestra: ReactNode;
+}>;
+
+function MuestraColor({
+  nombre,
+  token,
+  valor,
+  uso,
+}: PropiedadesMuestraColor) {
+  const estiloColor: CSSProperties = {
+    backgroundColor: `var(${token})`,
+  };
+
+  return (
+    <article className="panel-diseno rounded-[var(--radio-md)] p-4">
+      <div
+        aria-hidden="true"
+        style={estiloColor}
+        className="h-24 rounded-[var(--radio-sm)] border border-black/5"
+      />
+
+      <div className="mt-4 space-y-2">
+        <p className="text-sm font-semibold text-slate-950">{nombre}</p>
+        <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
+          {token}
+        </p>
+        <p className="text-xs font-medium text-slate-700">{valor}</p>
+        <p className="texto-soporte">{uso}</p>
+      </div>
+    </article>
+  );
+}
+
+function TarjetaToken({
+  nombre,
+  token,
+  valor,
+  uso,
+  muestra,
+}: PropiedadesTarjetaToken) {
+  return (
+    <article className="panel-diseno rounded-[var(--radio-md)] p-4">
+      <div className="flex min-h-24 items-center justify-center rounded-[var(--radio-sm)] border border-[color:var(--color-borde-suave)] bg-[rgba(255,255,255,0.68)]">
+        {muestra}
+      </div>
+
+      <div className="mt-4 space-y-2">
+        <p className="text-sm font-semibold text-slate-950">{nombre}</p>
+        <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
+          {token}
+        </p>
+        <p className="text-xs font-medium text-slate-700">{valor}</p>
+        <p className="texto-soporte">{uso}</p>
+      </div>
+    </article>
+  );
+}
 
 export function ResumenBaseProyecto() {
   return (
     <section>
-      <ContenedorPrincipal claseName="flex flex-col gap-8">
-        <header className="max-w-4xl space-y-5">
-          <span className="inline-flex w-fit rounded-full border border-[color:var(--color-borde-fuerte)] bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-600 shadow-[0_14px_30px_rgba(12,25,22,0.06)] backdrop-blur">
-            Modulo 3 - Layout global
-          </span>
+      <ContenedorPrincipal claseName="flex flex-col gap-[var(--espacio-xl)] pb-[var(--espacio-xl)]">
+        <header className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+          <div className="space-y-6">
+            <span className="etiqueta-tecnica">Modulo 4 - Sistema de diseno</span>
 
-          <div className="space-y-4">
-            <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-              Base visual sobria, premium y lista para sostener el ecommerce de
-              Rekun LAB
-            </h1>
+            <div className="space-y-4">
+              <h1 className="titulo-display max-w-5xl text-slate-950">
+                Base visual premium, tecnologica y sustentable para el ecommerce
+                de Rekun LAB
+              </h1>
 
-            <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
-              El sitio ya tiene layout raiz, cabecera global, navegacion
-              principal, footer global, contenedor reusable y una capa minima
-              de SEO tecnico para que las futuras paginas comerciales compartan
-              una estructura coherente.
-            </p>
+              <p className="texto-destacado max-w-3xl">
+                {narrativaSistemaDiseno.identidad}
+              </p>
+
+              <p className="texto-soporte max-w-3xl">
+                {narrativaSistemaDiseno.direccion}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <BotonBase variante="primario" tamanio="lg">
+                Primario
+              </BotonBase>
+              <BotonBase variante="secundario" tamanio="lg">
+                Secundario
+              </BotonBase>
+              <BotonBase variante="fantasma" tamanio="lg">
+                Fantasma
+              </BotonBase>
+              <BotonBase variante="secundario" tamanio="lg" disabled>
+                Disabled
+              </BotonBase>
+            </div>
           </div>
-        </header>
 
-        <section className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
-          <article className="rounded-[2rem] border border-[color:var(--color-borde)] bg-[color:var(--color-superficie)] p-6 shadow-[0_22px_60px_rgba(12,25,22,0.08)] backdrop-blur">
-            <div className="max-w-2xl space-y-4">
-              <span className="inline-flex rounded-full bg-slate-950 px-3 py-2 text-[11px] font-medium uppercase tracking-[0.22em] text-white">
-                Estructura comercial
-              </span>
+          <aside className="panel-diseno-elevado rounded-[var(--radio-xl)] p-6 sm:p-8">
+            <div className="space-y-4">
+              <p className="etiqueta-tecnica">Direccion visual</p>
 
-              <h2 className="text-2xl font-semibold text-slate-950 sm:text-3xl">
-                Un marco global preparado para branding, carrito y crecimiento
-                por modulos
+              <h2 className="titulo-seccion text-slate-950">
+                El sistema evita lo generico y usa materialidad, contraste y
+                precision visual.
               </h2>
 
-              <p className="text-sm leading-7 text-slate-600 sm:text-base">
-                Esta base trabaja mobile first, usa landmarks semanticos y deja
-                espacio claro para sumar catalogo, cotizaciones, carrito y
-                otras rutas sin romper la consistencia visual del sitio.
-              </p>
+              <ul className="grid gap-3 text-sm text-slate-700">
+                <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
+                  Verdes minerales profundos como base de confianza.
+                </li>
+                <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
+                  Grafitos tecnicos para sobriedad y lectura premium.
+                </li>
+                <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
+                  Acentos metalicos y vivos solo en puntos de valor.
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </header>
+
+        <section className="space-y-5">
+          <div className="space-y-3">
+            <span className="etiqueta-tecnica">Paleta de colores</span>
+            <h2 className="titulo-seccion text-slate-950">
+              Una paleta con tension entre precision industrial y sostenibilidad
+              contemporanea
+            </h2>
+          </div>
+
+          <div className="grid gap-4 xl:grid-cols-2">
+            {gruposPaletaSistemaDiseno.map((grupo) => (
+              <article
+                key={grupo.nombre}
+                className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6"
+              >
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-slate-950">
+                    {grupo.nombre}
+                  </h3>
+                  <p className="texto-soporte">{grupo.descripcion}</p>
+                </div>
+
+                <div className="mt-5 grid gap-4 sm:grid-cols-3">
+                  {grupo.muestras.map((muestra) => (
+                    <MuestraColor key={muestra.nombre} {...muestra} />
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+          <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
+            <div className="space-y-3">
+              <span className="etiqueta-tecnica">Tipografia y jerarquia</span>
+              <h2 className="titulo-seccion text-slate-950">
+                Space Grotesk para estructura y Manrope para lectura sostenida
+              </h2>
+            </div>
+
+            <div className="mt-6 grid gap-4">
+              {escalaTipograficaSistemaDiseno.map((item) => (
+                <article
+                  key={item.nombre}
+                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/70 p-4"
+                >
+                  <div className="space-y-2">
+                    <p className="text-sm font-semibold text-slate-950">
+                      {item.nombre}
+                    </p>
+                    <div className={item.claseVista}>{item.muestra}</div>
+                    <p className="texto-soporte">{item.uso}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </article>
 
-          <aside className="rounded-[2rem] border border-[color:var(--color-borde)] bg-white/82 p-6 shadow-[0_18px_40px_rgba(12,25,22,0.05)] backdrop-blur">
-            <h2 className="text-lg font-semibold text-slate-950">
-              Espacios ya resueltos
-            </h2>
+          <div className="grid gap-4">
+            <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
+              <div className="space-y-3">
+                <span className="etiqueta-tecnica">Espaciados</span>
+                <h2 className="text-2xl font-semibold text-slate-950">
+                  Ritmo respirable
+                </h2>
+              </div>
 
-            <ul className="mt-5 grid gap-3 text-sm text-slate-700">
-              {capasPreparadas.map((capa) => (
-                <li
-                  key={capa}
-                  className="rounded-2xl border border-[color:var(--color-borde)] bg-slate-50/90 px-4 py-3"
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                {escalaEspaciadosSistemaDiseno.map((item) => (
+                  <TarjetaToken
+                    key={item.token}
+                    {...item}
+                    muestra={
+                      <div className="flex w-full items-center gap-3 px-4">
+                        <div
+                          aria-hidden="true"
+                          style={{ width: `var(${item.token})` }}
+                          className="h-3 rounded-full bg-[color:var(--color-primario-500)]"
+                        />
+                        <span className="text-xs text-slate-500">
+                          {item.valor}
+                        </span>
+                      </div>
+                    }
+                  />
+                ))}
+              </div>
+            </article>
+
+            <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
+              <div className="space-y-3">
+                <span className="etiqueta-tecnica">Radios y sombras</span>
+                <h2 className="text-2xl font-semibold text-slate-950">
+                  Bordes suaves, no blandos
+                </h2>
+              </div>
+
+              <div className="mt-5 grid gap-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {escalaRadiosSistemaDiseno.map((item) => (
+                    <TarjetaToken
+                      key={item.token}
+                      {...item}
+                      muestra={
+                        <div
+                          aria-hidden="true"
+                          style={{ borderRadius: `var(${item.token})` }}
+                          className="h-16 w-28 border border-[color:var(--color-borde-fuerte)] bg-[linear-gradient(135deg,rgba(13,124,102,0.14),rgba(179,134,49,0.12))]"
+                        />
+                      }
+                    />
+                  ))}
+                </div>
+
+                <div className="grid gap-4">
+                  {escalaSombrasSistemaDiseno.map((item) => (
+                    <TarjetaToken
+                      key={item.token}
+                      {...item}
+                      muestra={
+                        <div
+                          aria-hidden="true"
+                          style={{ boxShadow: `var(${item.token})` }}
+                          className="h-[4.5rem] w-full max-w-[11rem] rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white"
+                        />
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section className="grid gap-4 xl:grid-cols-[0.95fr_1.05fr]">
+          <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
+            <div className="space-y-3">
+              <span className="etiqueta-tecnica">Estados interactivos</span>
+              <h2 className="titulo-seccion text-slate-950">
+                Hover, focus, active y disabled con reglas visibles
+              </h2>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <BotonBase variante="primario">Hover premium</BotonBase>
+              <BotonBase variante="secundario">Superficie clara</BotonBase>
+              <BotonBase variante="fantasma">Accion sutil</BotonBase>
+              <BotonBase variante="primario" disabled>
+                No disponible
+              </BotonBase>
+            </div>
+
+            <div className="mt-6 grid gap-3">
+              {estadosInteractivosSistemaDiseno.map((estado) => (
+                <article
+                  key={estado.nombre}
+                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/72 p-4"
                 >
-                  {capa}
+                  <p className="text-sm font-semibold text-slate-950">
+                    {estado.nombre}
+                  </p>
+                  <p className="texto-soporte mt-2">{estado.criterio}</p>
+                </article>
+              ))}
+            </div>
+          </article>
+
+          <article className="panel-diseno-oscuro rounded-[var(--radio-lg)] p-5 sm:p-6">
+            <div className="space-y-3">
+              <span className="etiqueta-tecnica etiqueta-tecnica-oscura">
+                Lineamientos futuros
+              </span>
+              <h2 className="titulo-seccion text-white">
+                Reglas visuales para componentes que vengan despues
+              </h2>
+              <p className="max-w-2xl text-sm leading-8 text-white/64">
+                El sistema esta pensado para que botones, cards, inputs,
+                banners, bloques editoriales y modulos comerciales futuros
+                compartan una misma logica visual.
+              </p>
+            </div>
+
+            <ul className="mt-6 grid gap-3">
+              {lineamientosComponentesFuturos.map((lineamiento) => (
+                <li
+                  key={lineamiento}
+                  className="rounded-[var(--radio-md)] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-7 text-white/72"
+                >
+                  {lineamiento}
                 </li>
               ))}
             </ul>
-          </aside>
-        </section>
-
-        <section className="grid gap-4 md:grid-cols-3">
-          {bloquesBase.map((bloque) => (
-            <article
-              key={bloque.titulo}
-              className="rounded-[2rem] border border-[color:var(--color-borde)] bg-[color:var(--color-superficie)] p-6 shadow-[0_18px_45px_rgba(12,25,22,0.05)] backdrop-blur"
-            >
-              <h2 className="text-xl font-semibold text-slate-900">
-                {bloque.titulo}
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                {bloque.descripcion}
-              </p>
-            </article>
-          ))}
-        </section>
-
-        <section className="rounded-[2rem] border border-[color:var(--color-borde)] bg-white/88 p-6 shadow-[0_20px_40px_rgba(12,25,22,0.05)] backdrop-blur">
-          <div className="max-w-2xl space-y-3">
-            <h2 className="text-2xl font-semibold text-slate-900">
-              Criterios del layout
-            </h2>
-            <p className="text-sm leading-7 text-slate-600">
-              El layout no incorpora catalogo funcional ni flujos reales de
-              compra. Solo resuelve la columna vertebral visual y tecnica sobre
-              la que se montaran las paginas comerciales del ecommerce.
-            </p>
-          </div>
-
-          <ul className="mt-6 grid gap-3 text-sm text-slate-700 md:grid-cols-2">
-            <li className="rounded-2xl border border-[color:var(--color-borde)] bg-slate-50 px-4 py-3">
-              Layout raiz con header, main y footer semanticos
-            </li>
-            <li className="rounded-2xl border border-[color:var(--color-borde)] bg-slate-50 px-4 py-3">
-              Navegacion global responsive y preparada para futuras rutas
-            </li>
-            <li className="rounded-2xl border border-[color:var(--color-borde)] bg-slate-50 px-4 py-3">
-              Footer global con contexto de marca y operacion inicial
-            </li>
-            <li className="rounded-2xl border border-[color:var(--color-borde)] bg-slate-50 px-4 py-3">
-              SEO tecnico base con metadata, canonical, viewport y semantica
-            </li>
-          </ul>
+          </article>
         </section>
       </ContenedorPrincipal>
     </section>

@@ -3,6 +3,7 @@
 Base tecnica inicial del ecommerce de Rekun LAB construida con Next.js App Router, TypeScript, Tailwind CSS y preparacion para Supabase.
 
 La guia formal de arquitectura y convenciones del proyecto esta en `docs/modulo-2-arquitectura-y-convenciones.md`.
+La guia del sistema de diseno esta en `docs/modulo-4-sistema-de-diseno.md`.
 
 ## Objetivo de esta base
 
@@ -21,9 +22,18 @@ src/
   compartido/
     componentes/
       base/
-        contenedor-pagina.tsx
+        boton-base.tsx
+        contenedor-principal.tsx
+      layout/
+        estructura-layout-global.tsx
+        footer-global.tsx
+        header-global.tsx
+        marca-principal.tsx
+        navegacion-principal.tsx
     configuracion/
       entorno.ts
+      layout-global.ts
+      sistema-diseno.ts
       sitio.ts
     servicios/
       supabase/
