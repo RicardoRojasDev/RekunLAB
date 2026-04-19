@@ -14,6 +14,7 @@ La guia del checkout visual esta en `docs/modulo-11-checkout-visual.md`.
 La guia de autenticacion frontend esta en `docs/modulo-12-autenticacion-frontend.md`.
 La guia del modelado de datos del negocio esta en `docs/modulo-13-modelado-de-datos-del-negocio.md`.
 La guia de base de datos en Supabase esta en `docs/modulo-14-base-de-datos-supabase.md`.
+La guia de integracion base con Supabase esta en `docs/modulo-15-integracion-base-supabase.md`.
 
 ## Objetivo de esta base
 
@@ -73,8 +74,12 @@ src/
       sitio.ts
     servicios/
       supabase/
+        cliente-navegador.ts
         cliente-publico.ts
+        cliente-servidor.ts
+        index-servidor.ts
         index.ts
+        respuesta-supabase.ts
     tipos/
       comunes.ts
       entorno.ts

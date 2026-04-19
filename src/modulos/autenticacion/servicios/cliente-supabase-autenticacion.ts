@@ -1,12 +1,12 @@
 import {
-  createClient,
   type Session,
-  type SupabaseClient,
   type User,
 } from "@supabase/supabase-js";
 import type { UsuarioAutenticadoFrontend } from "../tipos/autenticacion";
-
-let clienteSupabaseAutenticacionSingleton: SupabaseClient | null | undefined;
+import {
+  obtenerClienteSupabaseNavegador,
+  supabaseNavegadorEstaDisponible,
+} from "@/compartido/servicios/supabase";
 
 function obtenerTextoMetadata(
   metadatos: Record<string, unknown> | undefined,
@@ -54,53 +54,12 @@ function dividirNombreCompleto(nombreCompleto: string) {
   };
 }
 
-function obtenerCredencialesPublicasSupabaseSeguras() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
-  const claveAnonima = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
-
-  if (!url || !claveAnonima) {
-    return null;
-  }
-
-  return {
-    url,
-    claveAnonima,
-  };
-}
-
 export function obtenerClienteSupabaseAutenticacion() {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  if (clienteSupabaseAutenticacionSingleton !== undefined) {
-    return clienteSupabaseAutenticacionSingleton;
-  }
-
-  const credenciales = obtenerCredencialesPublicasSupabaseSeguras();
-
-  if (!credenciales) {
-    clienteSupabaseAutenticacionSingleton = null;
-    return clienteSupabaseAutenticacionSingleton;
-  }
-
-  clienteSupabaseAutenticacionSingleton = createClient(
-    credenciales.url,
-    credenciales.claveAnonima,
-    {
-      auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        detectSessionInUrl: true,
-      },
-    },
-  );
-
-  return clienteSupabaseAutenticacionSingleton;
+  return obtenerClienteSupabaseNavegador();
 }
 
 export function autenticacionSupabaseEstaDisponible() {
-  return Boolean(obtenerCredencialesPublicasSupabaseSeguras());
+  return supabaseNavegadorEstaDisponible();
 }
 
 export function mapearUsuarioAutenticadoFrontend(
