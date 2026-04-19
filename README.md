@@ -13,6 +13,7 @@ La guia del carrito de compras esta en `docs/modulo-10-carrito-de-compras.md`.
 La guia del checkout visual esta en `docs/modulo-11-checkout-visual.md`.
 La guia de autenticacion frontend esta en `docs/modulo-12-autenticacion-frontend.md`.
 La guia del modelado de datos del negocio esta en `docs/modulo-13-modelado-de-datos-del-negocio.md`.
+La guia de base de datos en Supabase esta en `docs/modulo-14-base-de-datos-supabase.md`.
 
 ## Objetivo de esta base
 
