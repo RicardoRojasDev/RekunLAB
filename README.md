@@ -7,6 +7,7 @@ La guia del sistema de diseno esta en `docs/modulo-4-sistema-de-diseno.md`.
 La guia de componentes UI base esta en `docs/modulo-5-componentes-ui-base.md`.
 La guia del catalogo de productos esta en `docs/modulo-6-catalogo-de-productos.md`.
 La guia del sistema de filtros del catalogo esta en `docs/modulo-7-sistema-de-filtros-catalogo.md`.
+La guia del detalle de producto esta en `docs/modulo-8-detalle-de-producto.md`.
 
 ## Objetivo de esta base
 
@@ -20,6 +21,10 @@ La guia del sistema de filtros del catalogo esta en `docs/modulo-7-sistema-de-fi
 src/
   app/
     catalogo/
+      [slug]/
+        loading.tsx
+        not-found.tsx
+        page.tsx
       loading.tsx
       page.tsx
     globals.css
@@ -71,6 +76,7 @@ src/
     catalogo/
       componentes/
         catalogo-cargando.tsx
+        pagina-detalle-producto.tsx
         encabezado-catalogo-productos.tsx
         experiencia-catalogo-productos.tsx
         estado-vacio-catalogo.tsx
@@ -79,11 +85,19 @@ src/
         pagina-catalogo-productos.tsx
         resumen-filtros-activos-catalogo.tsx
         tarjeta-producto-catalogo.tsx
+        detalle-producto/
+          bloque-confianza-comercial-producto.tsx
+          detalle-producto-cargando.tsx
+          galeria-producto-detalle.tsx
+          panel-compra-producto-detalle.tsx
+          productos-relacionados-detalle.tsx
+          selector-cantidad-producto.tsx
       datos/
         productos-catalogo-mock.ts
       hooks/
         use-filtros-catalogo.ts
       servicios/
+        obtener-detalle-producto-catalogo.ts
         obtener-productos-catalogo.ts
       tipos/
         filtros-catalogo.ts
@@ -129,4 +143,4 @@ npm run typecheck
 
 ## Alcance de esta base
 
-La base actual ya incluye un catalogo visual con datos mock profesionales, loading simulado y sistema de filtros por categoria, coleccion, tipo y orden con base de query params. Aun no incorpora detalle completo de producto, carrito funcional, checkout, autenticacion funcional ni panel administrativo.
+La base actual ya incluye catalogo visual, filtros por query params y ficha de producto con galeria, especificaciones, cantidad local, CTA de carrito no persistente y relacionados mock. Aun no incorpora carrito global funcional, checkout, autenticacion funcional ni panel administrativo.
