@@ -1,20 +1,20 @@
 import type { PropiedadesConHijos } from "@/compartido/tipos/comunes";
 import { unirClases } from "@/compartido/utilidades/unir-clases";
 
-type PropiedadesContenedorPagina = Readonly<
+type PropiedadesContenedorPrincipal = Readonly<
   PropiedadesConHijos & {
     claseName?: string;
   }
 >;
 
-export function ContenedorPagina({
+export function ContenedorPrincipal({
   children,
   claseName,
-}: PropiedadesContenedorPagina) {
+}: PropiedadesContenedorPrincipal) {
   return (
     <div
       className={unirClases(
-        "mx-auto flex w-full max-w-7xl flex-col px-6 py-10 sm:px-8 lg:px-10",
+        "mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 xl:px-12",
         claseName,
       )}
     >

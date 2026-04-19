@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --color-fondo: #f4f6f2;
-  --color-superficie: #ffffff;
-  --color-texto: #0f172a;
-  --color-texto-secundario: #475569;
-  --color-borde: #d8e0d8;
-  --color-acento: #0f766e;
+  --fuente-cuerpo: "Manrope", sans-serif;
+  --fuente-titulos: "Space Grotesk", sans-serif;
+  --color-fondo: #edf2ed;
+  --color-fondo-suave: #f8faf7;
+  --color-superficie: rgba(255, 255, 255, 0.84);
+  --color-texto: #13211f;
+  --color-texto-secundario: #556461;
+  --color-borde: rgba(19, 33, 31, 0.1);
+  --color-borde-fuerte: rgba(19, 33, 31, 0.18);
+  --color-acento: #0d7c66;
 }
 
 * {
@@ -14,22 +18,38 @@
 }
 
 html {
+  min-height: 100%;
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   background:
-    radial-gradient(circle at top, rgba(15, 118, 110, 0.08), transparent 38%),
-    linear-gradient(180deg, #f8faf8 0%, var(--color-fondo) 100%);
+    linear-gradient(180deg, rgba(248, 250, 247, 0.92) 0%, rgba(237, 242, 237, 0.96) 100%),
+    radial-gradient(circle at top left, rgba(13, 124, 102, 0.12), transparent 36%),
+    radial-gradient(circle at top right, rgba(190, 178, 133, 0.18), transparent 24%);
   color: var(--color-texto);
-  font-family:
-    "Segoe UI",
-    "Helvetica Neue",
-    sans-serif;
+  font-family: var(--fuente-cuerpo);
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--fuente-titulos);
+  letter-spacing: -0.03em;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+::selection {
+  background: rgba(13, 124, 102, 0.18);
+  color: var(--color-texto);
 }
