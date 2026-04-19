@@ -8,6 +8,7 @@ import { Boton, Etiqueta, MensajeError, ModalBase } from "@/compartido/component
 import { formatearPrecioClp } from "@/compartido/utilidades/formatear-precio-clp";
 import { useAutenticacion } from "@/modulos/autenticacion";
 import { useCarrito } from "@/modulos/carrito";
+import type { RespuestaApiCrearPedido, ResultadoCrearPedido, SolicitudCrearPedido } from "@/modulos/pedidos";
 import { useFormularioCheckout } from "../hooks/use-formulario-checkout";
 import { BloqueConfianzaCheckout } from "./bloque-confianza-checkout";
 import { CheckoutCargando } from "./checkout-cargando";
@@ -51,12 +52,14 @@ function enfocarPrimerError(checkout: ReturnType<typeof useFormularioCheckout>) 
 }
 
 export function PaginaCheckoutVisual() {
-  const { hidratado, items, resumen } = useCarrito();
+  const { hidratado, items, resumen, vaciarCarrito } = useCarrito();
   const { esAutenticado, usuario } = useAutenticacion();
   const checkout = useFormularioCheckout();
   const { actualizarModoCheckout, hidratarDatosClienteDesdeSesion } = checkout;
   const [modalAbierto, setModalAbierto] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
+  const [pedidoCreado, setPedidoCreado] = useState<ResultadoCrearPedido | null>(null);
+  const [cantidadUnidadesPedido, setCantidadUnidadesPedido] = useState(0);
 
   const estaVacio = hidratado && items.length === 0;
   const puedeContinuar = useMemo(
@@ -100,6 +103,8 @@ export function PaginaCheckoutVisual() {
   function manejarEnvio(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
     setErrorEnvio(null);
+    setPedidoCreado(null);
+    setCantidadUnidadesPedido(0);
 
     const esValido = checkout.prepararEnvio();
 
@@ -108,12 +113,80 @@ export function PaginaCheckoutVisual() {
       return;
     }
 
-    try {
-      checkout.marcarEnvioExitoso();
-      setModalAbierto(true);
-    } catch {
-      setErrorEnvio("No pudimos continuar. Intenta nuevamente.");
-    }
+    checkout.setEstadoEnvio("enviando");
+
+    const solicitud: SolicitudCrearPedido = {
+      datosCliente: {
+        nombre: checkout.valores.datosCliente.nombre,
+        apellido: checkout.valores.datosCliente.apellido,
+        correo: checkout.valores.datosCliente.correo,
+        telefono: checkout.valores.datosCliente.telefono,
+      },
+      direccionDespacho: {
+        region: checkout.valores.direccionEnvio.region,
+        comuna: checkout.valores.direccionEnvio.comuna,
+        calle: checkout.valores.direccionEnvio.calle,
+        numero: checkout.valores.direccionEnvio.numero,
+        departamento: checkout.valores.direccionEnvio.departamento,
+        referencias: checkout.valores.direccionEnvio.referencias,
+        codigoPostal: checkout.valores.direccionEnvio.codigoPostal,
+      },
+      items: items.map((item) => ({
+        slug: item.slug,
+        nombre: item.nombre,
+        resumen: item.resumen,
+        categoria: item.categoria,
+        tipoProducto: item.tipoProducto,
+        coleccion: item.coleccion,
+        precioUnitarioIvaIncluidoSnapshot: item.precioUnitarioIvaIncluido,
+        cantidad: item.cantidad,
+        etiquetasComerciales: item.etiquetasComerciales,
+        variante: item.variante
+          ? {
+              etiqueta: item.variante.etiqueta,
+              codigoReferencia: item.variante.codigoReferencia,
+              selecciones: item.variante.selecciones,
+            }
+          : null,
+      })),
+    };
+
+    fetch("/api/pedidos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(solicitud),
+    })
+      .then(async (respuesta) => {
+        const payload = (await respuesta.json()) as RespuestaApiCrearPedido;
+
+        if (!payload.ok) {
+          throw new Error(payload.mensaje || "No pudimos registrar tu pedido.");
+        }
+
+        if (!respuesta.ok) {
+          throw new Error("No pudimos registrar tu pedido.");
+        }
+
+        return payload;
+      })
+      .then((resultado) => {
+        const unidades = items.reduce((acumulador, item) => acumulador + item.cantidad, 0);
+        setPedidoCreado(resultado);
+        setCantidadUnidadesPedido(unidades);
+        vaciarCarrito();
+        checkout.marcarEnvioExitoso();
+        setModalAbierto(true);
+      })
+      .catch((error: unknown) => {
+        checkout.reiniciarEstadoEnvio();
+        setErrorEnvio(
+          error instanceof Error
+            ? error.message
+            : "No pudimos continuar. Intenta nuevamente.",
+        );
+      });
   }
 
   return (
@@ -154,7 +227,7 @@ export function PaginaCheckoutVisual() {
             </h1>
             <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-[1.05rem]">
               Ingresa tus datos y direccion de envio. Esta interfaz queda lista
-              para conectar pagos y creacion del pedido en modulos posteriores.
+              para registrar el pedido y luego integrar pagos y correos.
             </p>
           </div>
         </header>
@@ -162,7 +235,7 @@ export function PaginaCheckoutVisual() {
         {errorEnvio ? (
           <MensajeError
             mensaje={errorEnvio}
-            detalle="El checkout aun no envia informacion a backend, pero el formulario debe validarse correctamente."
+            detalle="Revisa los campos e intenta nuevamente. Si el problema persiste, puede faltar configuracion de Supabase en el servidor."
           />
         ) : null}
 
@@ -191,7 +264,7 @@ export function PaginaCheckoutVisual() {
               items={items}
               resumen={resumen}
               deshabilitado={!puedeContinuar}
-              textoBoton="Continuar"
+              textoBoton="Crear pedido"
             />
             <BloqueConfianzaCheckout />
           </div>
@@ -201,8 +274,8 @@ export function PaginaCheckoutVisual() {
       <ModalBase
         abierto={modalAbierto}
         alCerrar={() => setModalAbierto(false)}
-        titulo="Datos validados"
-        descripcion="El checkout visual esta listo. El siguiente paso sera integrar pagos y creacion del pedido."
+        titulo="Pedido registrado"
+        descripcion="Tu compra quedo registrada. El siguiente paso sera integrar pagos y confirmaciones por correo."
         pie={
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
             <Boton variante="secundario" onClick={() => setModalAbierto(false)}>
@@ -210,7 +283,7 @@ export function PaginaCheckoutVisual() {
             </Boton>
             <Boton
               onClick={() => setModalAbierto(false)}
-              title="Pagos y pedidos se integran en modulos posteriores"
+              title="Pagos y correos se integran en modulos posteriores"
             >
               Continuar
             </Boton>
@@ -219,9 +292,8 @@ export function PaginaCheckoutVisual() {
       >
         <div className="space-y-3">
           <p className="texto-destacado">
-            En esta etapa no se genera un pedido definitivo ni se solicita pago.
-            La interfaz queda preparada para conectar Supabase y un proveedor de
-            pagos cuando se definan esos modulos.
+            En esta etapa no se solicita pago. El pedido queda registrado para
+            mantener trazabilidad y luego conectar un proveedor de pagos.
           </p>
 
           <div className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-4">
@@ -229,12 +301,24 @@ export function PaginaCheckoutVisual() {
               Resumen rapido
             </p>
             <p className="text-sm leading-7 text-slate-700">
-              {resumen.cantidadUnidades} unidades, subtotal{" "}
+              {pedidoCreado ? cantidadUnidadesPedido : resumen.cantidadUnidades} unidades, subtotal{" "}
               <span className="font-semibold text-slate-950">
-                {formatearPrecioClp(resumen.subtotalIvaIncluido)}
+                {formatearPrecioClp(
+                  pedidoCreado
+                    ? pedidoCreado.subtotalIvaIncluido
+                    : resumen.subtotalIvaIncluido,
+                )}
               </span>{" "}
               (IVA incluido).
             </p>
+            {pedidoCreado ? (
+              <p className="mt-2 text-sm leading-7 text-slate-700">
+                Numero de pedido:{" "}
+                <span className="font-semibold text-slate-950">
+                  {pedidoCreado.numeroPedido}
+                </span>
+              </p>
+            ) : null}
           </div>
         </div>
       </ModalBase>

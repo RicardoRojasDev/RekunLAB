@@ -48,6 +48,12 @@ type AccionCarrito =
       tipo: "cerrar-drawer";
     };
 
+type AccionVaciarCarrito = Readonly<{
+  tipo: "vaciar";
+}>;
+
+type AccionCarritoTotal = AccionCarrito | AccionVaciarCarrito;
+
 type ValorContextoCarrito = Readonly<{
   items: readonly ItemCarrito[];
   resumen: ResumenCarrito;
@@ -60,6 +66,7 @@ type ValorContextoCarrito = Readonly<{
   ) => void;
   actualizarCantidadItem: (idLinea: string, cantidad: number) => void;
   eliminarItem: (idLinea: string) => void;
+  vaciarCarrito: () => void;
   abrirDrawer: () => void;
   cerrarDrawer: () => void;
 }>;
@@ -74,7 +81,7 @@ export const ContextoCarrito = createContext<ValorContextoCarrito | null>(null);
 
 function reductorCarrito(
   estado: EstadoCarrito,
-  accion: AccionCarrito,
+  accion: AccionCarritoTotal,
 ): EstadoCarrito {
   switch (accion.tipo) {
     case "hidratar":
@@ -104,6 +111,12 @@ function reductorCarrito(
       return {
         ...estado,
         items: eliminarItemCarrito(estado.items, accion.idLinea),
+      };
+
+    case "vaciar":
+      return {
+        ...estado,
+        items: [],
       };
 
     case "abrir-drawer":
@@ -177,6 +190,12 @@ export function ProveedorCarrito({ children }: PropiedadesConHijos) {
     });
   }, []);
 
+  const vaciarCarrito = useCallback(() => {
+    dispatch({
+      tipo: "vaciar",
+    });
+  }, []);
+
   const abrirDrawer = useCallback(() => {
     dispatch({
       tipo: "abrir-drawer",
@@ -204,6 +223,7 @@ export function ProveedorCarrito({ children }: PropiedadesConHijos) {
       agregarItem,
       actualizarCantidadItem,
       eliminarItem,
+      vaciarCarrito,
       abrirDrawer,
       cerrarDrawer,
     }),
@@ -213,6 +233,7 @@ export function ProveedorCarrito({ children }: PropiedadesConHijos) {
       cerrarDrawer,
       abrirDrawer,
       eliminarItem,
+      vaciarCarrito,
       estado.drawerAbierto,
       estado.hidratado,
       estado.items,

@@ -15,6 +15,7 @@ La guia de autenticacion frontend esta en `docs/modulo-12-autenticacion-frontend
 La guia del modelado de datos del negocio esta en `docs/modulo-13-modelado-de-datos-del-negocio.md`.
 La guia de base de datos en Supabase esta en `docs/modulo-14-base-de-datos-supabase.md`.
 La guia de integracion base con Supabase esta en `docs/modulo-15-integracion-base-supabase.md`.
+La guia del sistema de pedidos esta en `docs/modulo-16-sistema-de-pedidos.md`.
 
 ## Objetivo de esta base
 
@@ -27,6 +28,9 @@ La guia de integracion base con Supabase esta en `docs/modulo-15-integracion-bas
 ```text
 src/
   app/
+    api/
+      pedidos/
+        route.ts
     acceso/
       page.tsx
     carrito/
@@ -143,6 +147,17 @@ src/
         checkout.ts
       utilidades/
         validaciones-checkout.ts
+      index.ts
+    pedidos/
+      repositorios/
+        crear-pedido-supabase.ts
+      servicios/
+        registrar-pedido-desde-checkout.ts
+      tipos/
+        crear-pedido.ts
+      validaciones/
+        crear-pedido.ts
+        parsear-solicitud-crear-pedido.ts
       index.ts
     dominio-negocio/
       configuracion/
