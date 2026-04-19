@@ -1,13 +1,9 @@
 import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
 import { Etiqueta } from "@/compartido/componentes/ui/etiqueta";
 import { NavegacionPrincipal } from "@/compartido/componentes/layout/navegacion-principal";
-import { espaciosPreparadosLayout } from "@/compartido/configuracion/layout-global";
+import { indicadoresOperacionInicial } from "@/compartido/configuracion/layout-global";
+import { AccionesCarritoCabecera } from "@/modulos/carrito/componentes/acciones-carrito-cabecera";
 import { MarcaPrincipal } from "./marca-principal";
-
-const etiquetasCabecera = [
-  "Solo Chile",
-  "Carrito preparado",
-] as const;
 
 export function HeaderGlobal() {
   return (
@@ -17,35 +13,31 @@ export function HeaderGlobal() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <MarcaPrincipal />
 
-            <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-              {etiquetasCabecera.map((etiqueta) => (
-                <Etiqueta
-                  key={etiqueta}
-                  variante="suave"
-                  inicio={
-                    <span
-                      aria-hidden="true"
-                      className="h-2 w-2 rounded-full bg-[color:var(--color-acento)]"
-                    />
-                  }
-                >
-                  {etiqueta}
-                </Etiqueta>
-              ))}
+            <div className="flex flex-col gap-3 sm:items-end">
+              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+                {indicadoresOperacionInicial.map((etiqueta) => (
+                  <Etiqueta
+                    key={etiqueta}
+                    variante="suave"
+                    inicio={
+                      <span
+                        aria-hidden="true"
+                        className="h-2 w-2 rounded-full bg-[color:var(--color-acento)]"
+                      />
+                    }
+                  >
+                    {etiqueta}
+                  </Etiqueta>
+                ))}
+              </div>
+
+              <AccionesCarritoCabecera />
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-3">
             <div className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <NavegacionPrincipal claseName="w-full" />
-            </div>
-
-            <div className="hidden flex-wrap items-center gap-2 lg:flex">
-              {espaciosPreparadosLayout.slice(0, 2).map((etiqueta) => (
-                <Etiqueta key={etiqueta} variante="oscura">
-                  {etiqueta}
-                </Etiqueta>
-              ))}
             </div>
           </div>
         </div>

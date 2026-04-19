@@ -3,6 +3,8 @@ import { Manrope, Space_Grotesk } from "next/font/google";
 import { EstructuraLayoutGlobal } from "@/compartido/componentes/layout/estructura-layout-global";
 import { configuracionSitio } from "@/compartido/configuracion/sitio";
 import type { PropiedadesConHijos } from "@/compartido/tipos/comunes";
+import { CapaCarritoGlobal } from "@/modulos/carrito/componentes/capa-carrito-global";
+import { ProveedorCarrito } from "@/modulos/carrito/contexto/proveedor-carrito";
 import "./globals.css";
 
 const fuenteCuerpo = Manrope({
@@ -75,7 +77,10 @@ export default function DisposicionRaiz({ children }: PropiedadesConHijos) {
           Saltar al contenido principal
         </a>
 
-        <EstructuraLayoutGlobal>{children}</EstructuraLayoutGlobal>
+        <ProveedorCarrito>
+          <EstructuraLayoutGlobal>{children}</EstructuraLayoutGlobal>
+          <CapaCarritoGlobal />
+        </ProveedorCarrito>
       </body>
     </html>
   );

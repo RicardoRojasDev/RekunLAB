@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Boton, Contenedor, Etiqueta } from "@/compartido/componentes/ui";
 import { formatearPrecioClp } from "@/compartido/utilidades/formatear-precio-clp";
+import { useCarrito } from "@/modulos/carrito/hooks/use-carrito";
+import type { SeleccionVarianteItemCarrito } from "@/modulos/carrito/tipos/carrito";
 import type {
   ConfiguracionVariantesProductoCatalogo,
   EstadoValidacionVariantesProductoCatalogo,
@@ -30,6 +32,34 @@ function resolverEtiquetaUnidades(cantidad: number) {
   return cantidad === 1 ? "unidad" : "unidades";
 }
 
+function resolverSeleccionesVarianteParaCarrito(
+  configuracionVariantes: ConfiguracionVariantesProductoCatalogo | null,
+  vistaDetalle: VistaDetalleProductoCatalogo,
+): readonly SeleccionVarianteItemCarrito[] {
+  if (!configuracionVariantes || !vistaDetalle.varianteSeleccionada) {
+    return [];
+  }
+
+  return configuracionVariantes.atributos
+    .map((atributo) => {
+      const opcionId = vistaDetalle.varianteSeleccionada?.selecciones[atributo.codigo];
+      const opcion = atributo.opciones.find((item) => item.id === opcionId);
+
+      if (!opcionId || !opcion) {
+        return null;
+      }
+
+      return {
+        codigoAtributo: atributo.codigo,
+        etiquetaAtributo: atributo.etiqueta,
+        opcionId,
+        etiquetaOpcion: opcion.etiqueta,
+        valorOpcion: opcion.valor,
+      };
+    })
+    .filter((seleccion): seleccion is SeleccionVarianteItemCarrito => Boolean(seleccion));
+}
+
 export function PanelCompraProductoDetalle({
   producto,
   configuracionVariantes,
@@ -40,6 +70,7 @@ export function PanelCompraProductoDetalle({
   validacion,
   alSeleccionarOpcion,
 }: PropiedadesPanelCompraProductoDetalle) {
+  const { agregarItem } = useCarrito();
   const [cantidad, setCantidad] = useState(1);
   const [ultimaCantidadAgregada, setUltimaCantidadAgregada] = useState<number | null>(
     null,
@@ -61,6 +92,38 @@ export function PanelCompraProductoDetalle({
       setUltimaCantidadAgregada(null);
       return;
     }
+
+    const seleccionesVariante = resolverSeleccionesVarianteParaCarrito(
+      configuracionVariantes,
+      vistaDetalle,
+    );
+
+    agregarItem(
+      {
+        productoId: producto.id,
+        slug: producto.slug,
+        nombre: producto.nombre,
+        resumen: producto.resumen,
+        categoria: producto.categoria,
+        tipoProducto: producto.tipoProducto,
+        coleccion: producto.coleccion,
+        imagen: vistaDetalle.imagen,
+        precioUnitarioIvaIncluido: vistaDetalle.precioIvaIncluido,
+        cantidad,
+        etiquetasComerciales: producto.etiquetasComerciales,
+        variante: vistaDetalle.varianteSeleccionada
+          ? {
+              id: vistaDetalle.varianteSeleccionada.id,
+              etiqueta: vistaDetalle.varianteSeleccionada.etiqueta,
+              codigoReferencia: vistaDetalle.varianteSeleccionada.codigoReferencia,
+              selecciones: seleccionesVariante,
+            }
+          : null,
+      },
+      {
+        abrirDrawer: true,
+      },
+    );
 
     setMensajeErrorVariante(null);
     setUltimaCantidadAgregada(cantidad);
@@ -172,6 +235,7 @@ export function PanelCompraProductoDetalle({
                   bloque
                   tamanio="lg"
                   onClick={agregarSeleccionLocal}
+                  disabled={tieneVariantes && !validacion.esValida}
                   inicio={
                     <span aria-hidden="true" className="text-base">
                       +
@@ -183,15 +247,15 @@ export function PanelCompraProductoDetalle({
               </div>
 
               <p className="text-xs leading-6 text-slate-500">
-                La accion se mantiene local en esta etapa para validar la UX de
-                compra. No crea pedidos ni persiste un carrito global todavia.
+                El carrito ya persiste en este dispositivo para validar la UX de
+                compra. Todavia no crea pedidos ni avanza al checkout.
               </p>
 
               <div aria-live="polite" className="min-h-6">
                 {ultimaCantidadAgregada ? (
                   <p className="text-sm font-medium text-[color:var(--color-primario-700)]">
                     {ultimaCantidadAgregada} {resolverEtiquetaUnidades(ultimaCantidadAgregada)}{" "}
-                    agregadas a la seleccion local
+                    agregadas al carrito
                     {vistaDetalle.varianteSeleccionada
                       ? ` (${vistaDetalle.varianteSeleccionada.etiqueta}).`
                       : "."}

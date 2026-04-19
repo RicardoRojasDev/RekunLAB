@@ -9,6 +9,7 @@ La guia del catalogo de productos esta en `docs/modulo-6-catalogo-de-productos.m
 La guia del sistema de filtros del catalogo esta en `docs/modulo-7-sistema-de-filtros-catalogo.md`.
 La guia del detalle de producto esta en `docs/modulo-8-detalle-de-producto.md`.
 La guia de variantes de producto esta en `docs/modulo-9-logica-de-variantes-producto.md`.
+La guia del carrito de compras esta en `docs/modulo-10-carrito-de-compras.md`.
 
 ## Objetivo de esta base
 
@@ -21,6 +22,8 @@ La guia de variantes de producto esta en `docs/modulo-9-logica-de-variantes-prod
 ```text
 src/
   app/
+    carrito/
+      page.tsx
     catalogo/
       [slug]/
         loading.tsx
@@ -74,6 +77,28 @@ src/
       componentes/
         resumen-base-proyecto.tsx
       index.ts
+    carrito/
+      componentes/
+        acciones-carrito-cabecera.tsx
+        capa-carrito-global.tsx
+        control-cantidad-linea-carrito.tsx
+        drawer-carrito.tsx
+        estado-vacio-carrito.tsx
+        linea-item-carrito.tsx
+        lista-items-carrito.tsx
+        pagina-carrito-compras.tsx
+        resumen-carrito.tsx
+      contexto/
+        proveedor-carrito.tsx
+      hooks/
+        use-carrito.ts
+      servicios/
+        persistencia-carrito-local.ts
+      tipos/
+        carrito.ts
+      utilidades/
+        operaciones-carrito.ts
+      index.ts
     catalogo/
       componentes/
         catalogo-cargando.tsx
@@ -89,10 +114,12 @@ src/
         detalle-producto/
           bloque-confianza-comercial-producto.tsx
           detalle-producto-cargando.tsx
+          experiencia-detalle-producto.tsx
           galeria-producto-detalle.tsx
           panel-compra-producto-detalle.tsx
           productos-relacionados-detalle.tsx
           selector-cantidad-producto.tsx
+          selector-variantes-producto.tsx
       datos/
         productos-catalogo-mock.ts
       hooks/
@@ -146,4 +173,4 @@ npm run typecheck
 
 ## Alcance de esta base
 
-La base actual ya incluye catalogo visual, filtros por query params, ficha de producto y logica de variantes escalable para color, peso y formato con cambios de precio, imagen y especificaciones en frontend. Aun no incorpora carrito global funcional, checkout, autenticacion funcional ni panel administrativo.
+La base actual ya incluye catalogo visual, filtros por query params, ficha de producto, logica de variantes escalable para color, peso y formato, y un carrito de compras con persistencia local, drawer global, pagina dedicada y subtotal con IVA incluido. Aun no incorpora checkout completo, autenticacion funcional ni panel administrativo.
