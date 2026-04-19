@@ -12,6 +12,7 @@ La guia de variantes de producto esta en `docs/modulo-9-logica-de-variantes-prod
 La guia del carrito de compras esta en `docs/modulo-10-carrito-de-compras.md`.
 La guia del checkout visual esta en `docs/modulo-11-checkout-visual.md`.
 La guia de autenticacion frontend esta en `docs/modulo-12-autenticacion-frontend.md`.
+La guia del modelado de datos del negocio esta en `docs/modulo-13-modelado-de-datos-del-negocio.md`.
 
 ## Objetivo de esta base
 
@@ -137,6 +138,15 @@ src/
       utilidades/
         validaciones-checkout.ts
       index.ts
+    dominio-negocio/
+      configuracion/
+        catalogos-auxiliares-dominio-negocio.ts
+        decisiones-modelado-dominio-negocio.ts
+        entidades-principales-dominio-negocio.ts
+        relaciones-dominio-negocio.ts
+      tipos/
+        entidades-dominio-negocio.ts
+      index.ts
     catalogo/
       componentes/
         catalogo-cargando.tsx
@@ -211,4 +221,4 @@ npm run typecheck
 
 ## Alcance de esta base
 
-La base actual ya incluye catalogo visual, filtros por query params, ficha de producto, logica de variantes escalable para color, peso y formato, carrito de compras con persistencia local, checkout visual y una capa frontend de autenticacion preparada para Supabase Auth con Google sin bloquear la compra como invitado. Aun no incorpora creacion de pedidos definitiva, pagos, endurecimiento final de seguridad ni panel administrativo.
+La base actual ya incluye catalogo visual, filtros por query params, ficha de producto, logica de variantes escalable para color, peso y formato, carrito de compras con persistencia local, checkout visual, una capa frontend de autenticacion preparada para Supabase Auth con Google sin bloquear la compra como invitado y un modulo explicito de modelado del dominio del negocio para preparar la futura implementacion fisica en Supabase. Aun no incorpora creacion de pedidos definitiva, pagos, endurecimiento final de seguridad ni panel administrativo.
