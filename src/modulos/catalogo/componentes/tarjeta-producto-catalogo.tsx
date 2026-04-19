@@ -49,9 +49,14 @@ export function TarjetaProductoCatalogo({
         />
 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-4">
-          <Etiqueta variante="oscura" tamanio="sm">
-            {producto.categoria}
-          </Etiqueta>
+          <div className="flex flex-wrap gap-2">
+            <Etiqueta variante="oscura" tamanio="sm">
+              {producto.categoria}
+            </Etiqueta>
+            <Etiqueta variante="suave" tamanio="sm">
+              {producto.tipoProducto}
+            </Etiqueta>
+          </div>
 
           <span className="rounded-full border border-white/14 bg-[rgba(13,23,21,0.88)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/78">
             IVA incl.

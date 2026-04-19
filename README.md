@@ -6,6 +6,7 @@ La guia formal de arquitectura y convenciones del proyecto esta en `docs/modulo-
 La guia del sistema de diseno esta en `docs/modulo-4-sistema-de-diseno.md`.
 La guia de componentes UI base esta en `docs/modulo-5-componentes-ui-base.md`.
 La guia del catalogo de productos esta en `docs/modulo-6-catalogo-de-productos.md`.
+La guia del sistema de filtros del catalogo esta en `docs/modulo-7-sistema-de-filtros-catalogo.md`.
 
 ## Objetivo de esta base
 
@@ -71,16 +72,26 @@ src/
       componentes/
         catalogo-cargando.tsx
         encabezado-catalogo-productos.tsx
+        experiencia-catalogo-productos.tsx
         estado-vacio-catalogo.tsx
         grilla-productos-catalogo.tsx
+        panel-filtros-catalogo.tsx
         pagina-catalogo-productos.tsx
+        resumen-filtros-activos-catalogo.tsx
         tarjeta-producto-catalogo.tsx
       datos/
         productos-catalogo-mock.ts
+      hooks/
+        use-filtros-catalogo.ts
       servicios/
         obtener-productos-catalogo.ts
       tipos/
+        filtros-catalogo.ts
         producto-catalogo.ts
+      utilidades/
+        aplicar-filtros-catalogo.ts
+        extraer-opciones-filtros-catalogo.ts
+        query-params-catalogo.ts
       index.ts
 public/
   imagenes/
@@ -118,4 +129,4 @@ npm run typecheck
 
 ## Alcance de esta base
 
-La base actual ya incluye un catalogo visual con datos mock profesionales y loading simulado, pero aun no incorpora filtros avanzados, detalle completo de producto, carrito funcional, checkout, autenticacion funcional ni panel administrativo.
+La base actual ya incluye un catalogo visual con datos mock profesionales, loading simulado y sistema de filtros por categoria, coleccion, tipo y orden con base de query params. Aun no incorpora detalle completo de producto, carrito funcional, checkout, autenticacion funcional ni panel administrativo.

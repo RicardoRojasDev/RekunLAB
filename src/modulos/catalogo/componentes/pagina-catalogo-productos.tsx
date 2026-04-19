@@ -1,15 +1,25 @@
 import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
+import type { EstadoFiltrosCatalogo } from "../tipos/filtros-catalogo";
 import type { ProductoCatalogo } from "../tipos/producto-catalogo";
+import { extraerOpcionesFiltrosCatalogo } from "../utilidades/extraer-opciones-filtros-catalogo";
+import { depurarFiltrosCatalogoConOpciones } from "../utilidades/query-params-catalogo";
 import { EncabezadoCatalogoProductos } from "./encabezado-catalogo-productos";
-import { GrillaProductosCatalogo } from "./grilla-productos-catalogo";
+import { ExperienciaCatalogoProductos } from "./experiencia-catalogo-productos";
 
 type PropiedadesPaginaCatalogoProductos = Readonly<{
   productos: readonly ProductoCatalogo[];
+  filtrosIniciales: EstadoFiltrosCatalogo;
 }>;
 
 export function PaginaCatalogoProductos({
   productos,
+  filtrosIniciales,
 }: PropiedadesPaginaCatalogoProductos) {
+  const opcionesFiltros = extraerOpcionesFiltrosCatalogo(productos);
+  const filtrosDepurados = depurarFiltrosCatalogoConOpciones(
+    filtrosIniciales,
+    opcionesFiltros,
+  );
   const cantidadCategorias = new Set(
     productos.map((producto) => producto.categoria),
   ).size;
@@ -19,6 +29,9 @@ export function PaginaCatalogoProductos({
       producto.coleccion ? [producto.coleccion] : [],
     ),
   ).size;
+  const cantidadTiposProducto = new Set(
+    productos.map((producto) => producto.tipoProducto),
+  ).size;
 
   return (
     <section aria-labelledby="titulo-catalogo-productos">
@@ -27,11 +40,13 @@ export function PaginaCatalogoProductos({
           cantidadProductos={productos.length}
           cantidadCategorias={cantidadCategorias}
           cantidadColecciones={cantidadColecciones}
+          cantidadTiposProducto={cantidadTiposProducto}
         />
 
-        <GrillaProductosCatalogo
+        <ExperienciaCatalogoProductos
           productos={productos}
-          cantidadColecciones={cantidadColecciones}
+          filtrosIniciales={filtrosDepurados}
+          opcionesFiltros={opcionesFiltros}
         />
       </ContenedorPrincipal>
     </section>

@@ -8,6 +8,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
     resumen:
       "PLA ecologico con tono mineral profundo, pensado para piezas de uso diario y prototipos de terminacion limpia.",
     categoria: "Filamento PLA ecologico",
+    tipoProducto: "Consumible",
     coleccion: "Bosque Sur",
     precioIvaIncluido: 24990,
     imagen: {
@@ -25,6 +26,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
     resumen:
       "Formula PLA con acabado mate y lectura cromatica calida para piezas visuales, maquetas y objetos editoriales.",
     categoria: "Filamento PLA ecologico",
+    tipoProducto: "Consumible",
     coleccion: "Materia Circular",
     precioIvaIncluido: 25990,
     imagen: {
@@ -42,6 +44,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
     resumen:
       "Equipo FDM de escritorio con lectura visual sobria, pensado para talleres pequenos, estudio y validacion de producto.",
     categoria: "Maquinas 3D",
+    tipoProducto: "Maquina",
     coleccion: "Linea Estudio",
     precioIvaIncluido: 649990,
     imagen: {
@@ -59,6 +62,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
     resumen:
       "Accesorio de soporte para estabilizar humedad del material y proteger consistencia en jornadas largas de impresion.",
     categoria: "Accesorios de impresion",
+    tipoProducto: "Accesorio",
     precioIvaIncluido: 89990,
     imagen: {
       src: "/imagenes/mock/productos/secador-airloop.svg",
@@ -75,6 +79,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
     resumen:
       "Sistema modular impreso para escritorio, empaque interno o almacenaje ligero con lenguaje tecnico y tacto premium.",
     categoria: "Objetos impresos",
+    tipoProducto: "Objeto impreso",
     coleccion: "Circular Living",
     precioIvaIncluido: 31990,
     imagen: {
@@ -92,6 +97,7 @@ export const productosCatalogoMock: RespuestaCatalogoProductos = [
     resumen:
       "Soporte impreso para escritorio con presencia escultorica, pensado para orden visual y aprovecho eficiente de superficie.",
     categoria: "Objetos impresos",
+    tipoProducto: "Objeto impreso",
     coleccion: "Circular Living",
     precioIvaIncluido: 28990,
     imagen: {

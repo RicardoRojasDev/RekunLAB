@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { configuracionSitio } from "@/compartido/configuracion/sitio";
 import {
+  normalizarFiltrosCatalogoDesdeQuery,
   PaginaCatalogoProductos,
   obtenerProductosCatalogo,
 } from "@/modulos/catalogo";
@@ -35,8 +36,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function PaginaCatalogo() {
-  const productos = await obtenerProductosCatalogo();
+type PropiedadesPaginaCatalogo = Readonly<{
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}>;
 
-  return <PaginaCatalogoProductos productos={productos} />;
+export default async function PaginaCatalogo({
+  searchParams,
+}: PropiedadesPaginaCatalogo) {
+  const [productos, query] = await Promise.all([
+    obtenerProductosCatalogo(),
+    searchParams,
+  ]);
+  const filtrosIniciales = normalizarFiltrosCatalogoDesdeQuery(query);
+
+  return (
+    <PaginaCatalogoProductos
+      productos={productos}
+      filtrosIniciales={filtrosIniciales}
+    />
+  );
 }

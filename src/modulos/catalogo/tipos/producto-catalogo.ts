@@ -11,6 +11,7 @@ export type ProductoCatalogo = Readonly<{
   nombre: string;
   resumen: string;
   categoria: string;
+  tipoProducto: string;
   coleccion?: string;
   precioIvaIncluido: number;
   imagen: ImagenProductoCatalogo;

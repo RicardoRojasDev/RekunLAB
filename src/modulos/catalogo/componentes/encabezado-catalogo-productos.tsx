@@ -5,6 +5,7 @@ type PropiedadesEncabezadoCatalogoProductos = Readonly<{
   cantidadProductos: number;
   cantidadCategorias: number;
   cantidadColecciones: number;
+  cantidadTiposProducto: number;
 }>;
 
 const pilaresCatalogo = [
@@ -17,6 +18,7 @@ export function EncabezadoCatalogoProductos({
   cantidadProductos,
   cantidadCategorias,
   cantidadColecciones,
+  cantidadTiposProducto,
 }: PropiedadesEncabezadoCatalogoProductos) {
   const resumenCatalogo = [
     {
@@ -32,8 +34,8 @@ export function EncabezadoCatalogoProductos({
       valor: cantidadColecciones.toString().padStart(2, "0"),
     },
     {
-      etiqueta: "Cobertura",
-      valor: "Chile",
+      etiqueta: "Tipos",
+      valor: cantidadTiposProducto.toString().padStart(2, "0"),
     },
   ] as const;
 
