@@ -1,7 +1,7 @@
 import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
+import { Etiqueta } from "@/compartido/componentes/ui/etiqueta";
 import { NavegacionPrincipal } from "@/compartido/componentes/layout/navegacion-principal";
 import { espaciosPreparadosLayout } from "@/compartido/configuracion/layout-global";
-import { unirClases } from "@/compartido/utilidades/unir-clases";
 import { MarcaPrincipal } from "./marca-principal";
 
 const etiquetasCabecera = [
@@ -19,10 +19,18 @@ export function HeaderGlobal() {
 
             <div className="flex flex-wrap items-center gap-2 sm:justify-end">
               {etiquetasCabecera.map((etiqueta) => (
-                <span key={etiqueta} className="etiqueta-tecnica">
-                  <span className="h-2 w-2 rounded-full bg-[color:var(--color-acento)]" />
+                <Etiqueta
+                  key={etiqueta}
+                  variante="suave"
+                  inicio={
+                    <span
+                      aria-hidden="true"
+                      className="h-2 w-2 rounded-full bg-[color:var(--color-acento)]"
+                    />
+                  }
+                >
                   {etiqueta}
-                </span>
+                </Etiqueta>
               ))}
             </div>
           </div>
@@ -34,14 +42,9 @@ export function HeaderGlobal() {
 
             <div className="hidden flex-wrap items-center gap-2 lg:flex">
               {espaciosPreparadosLayout.slice(0, 2).map((etiqueta) => (
-                <span
-                  key={etiqueta}
-                  className={unirClases(
-                    "etiqueta-tecnica etiqueta-tecnica-oscura",
-                  )}
-                >
+                <Etiqueta key={etiqueta} variante="oscura">
                   {etiqueta}
-                </span>
+                </Etiqueta>
               ))}
             </div>
           </div>

@@ -52,6 +52,9 @@
   --color-active-capa: rgba(13, 124, 102, 0.14);
   --color-disabled-fondo: rgba(19, 33, 31, 0.08);
   --color-disabled-texto: rgba(19, 33, 31, 0.34);
+  --color-error-50: #fff7f4;
+  --color-error-100: #ffe4d8;
+  --color-error-600: #b24e3a;
 
   --espacio-3xs: 0.25rem;
   --espacio-2xs: 0.5rem;
@@ -209,6 +212,51 @@ select:focus-visible {
   color: var(--color-texto-invertido);
 }
 
+.etiqueta-ui {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2xs);
+  border-radius: var(--radio-pill);
+  border: 1px solid transparent;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--duracion-rapida) ease,
+    color var(--duracion-rapida) ease,
+    border-color var(--duracion-rapida) ease;
+}
+
+.etiqueta-ui-suave {
+  border-color: var(--color-borde);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--color-texto-secundario);
+}
+
+.etiqueta-ui-primaria {
+  border-color: rgba(13, 124, 102, 0.18);
+  background: rgba(13, 124, 102, 0.1);
+  color: var(--color-primario-700);
+}
+
+.etiqueta-ui-premium {
+  border-color: rgba(179, 134, 49, 0.18);
+  background: rgba(244, 237, 211, 0.78);
+  color: var(--color-acento-700);
+}
+
+.etiqueta-ui-oscura {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(19, 27, 31, 0.96);
+  color: var(--color-texto-invertido);
+}
+
+.etiqueta-ui-critica {
+  border-color: rgba(178, 78, 58, 0.14);
+  background: rgba(255, 244, 240, 0.92);
+  color: var(--color-error-600);
+}
+
 .panel-diseno {
   border: 1px solid var(--color-borde);
   background: var(--color-superficie);
@@ -320,4 +368,125 @@ select:focus-visible {
 
 .boton-fantasma:active:not(:disabled) {
   background: var(--color-active-capa);
+}
+
+.control-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+}
+
+.control-entrada {
+  min-height: 3rem;
+  width: 100%;
+  border-radius: var(--radio-md);
+  border: 1px solid var(--color-borde);
+  background: rgba(255, 255, 255, 0.86);
+  padding: 0.85rem 1rem;
+  color: var(--color-texto);
+  box-shadow: var(--sombra-suave);
+  transition:
+    border-color var(--duracion-rapida) ease,
+    box-shadow var(--duracion-rapida) ease,
+    background-color var(--duracion-rapida) ease;
+}
+
+.control-entrada::placeholder {
+  color: var(--color-texto-suave);
+}
+
+.control-entrada:hover:not(:disabled) {
+  border-color: rgba(19, 33, 31, 0.2);
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.control-entrada:focus-visible {
+  border-color: rgba(13, 124, 102, 0.4);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.control-entrada:disabled {
+  cursor: not-allowed;
+  border-color: rgba(19, 33, 31, 0.08);
+  background: var(--color-disabled-fondo);
+  color: var(--color-disabled-texto);
+  box-shadow: none;
+}
+
+.control-entrada-error {
+  border-color: rgba(178, 78, 58, 0.28);
+  background: rgba(255, 247, 244, 0.94);
+}
+
+.control-entrada-area {
+  min-height: 8.5rem;
+  resize: vertical;
+}
+
+.control-entrada-selector {
+  appearance: none;
+  padding-right: 2.75rem;
+}
+
+.contenedor-ui {
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+}
+
+.contenedor-ui-base {
+  border: 1px solid var(--color-borde);
+  background: var(--color-superficie);
+  box-shadow: var(--sombra-panel);
+  backdrop-filter: blur(18px);
+}
+
+.contenedor-ui-elevado {
+  border: 1px solid var(--color-borde);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(248, 250, 248, 0.88) 100%
+  );
+  box-shadow: var(--sombra-elevada);
+  backdrop-filter: blur(18px);
+}
+
+.contenedor-ui-oscuro {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(13, 23, 21, 0.98) 0%,
+    rgba(18, 29, 27, 0.98) 100%
+  );
+  color: var(--color-texto-invertido);
+  box-shadow: var(--sombra-elevada);
+}
+
+.cargador-ui {
+  display: inline-block;
+  border-radius: 999px;
+  border: 2px solid rgba(13, 124, 102, 0.16);
+  border-top-color: var(--color-primario-500);
+  animation: giro-cargador 0.85s linear infinite;
+}
+
+.cargador-ui-sm {
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.cargador-ui-md {
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+.cargador-ui-lg {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+@keyframes giro-cargador {
+  to {
+    transform: rotate(360deg);
+  }
 }

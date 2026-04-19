@@ -145,7 +145,7 @@ Base implementada en [src/app/globals.css](</C:/Users/Casa/Documents/GitHub/Reku
 - tokens de sombra
 - clases semanticas como `.panel-diseno`, `.panel-diseno-elevado`, `.boton-base`, `.boton-primario`, `.boton-secundario`, `.boton-fantasma`
 
-Base de boton implementada en [src/compartido/componentes/base/boton-base.tsx](</C:/Users/Casa/Documents/GitHub/RekunLAB/src/compartido/componentes/base/boton-base.tsx>).
+Base de boton implementada en [src/compartido/componentes/ui/boton.tsx](</C:/Users/Casa/Documents/GitHub/RekunLAB/src/compartido/componentes/ui/boton.tsx>).
 
 ## Lineamientos para componentes futuros
 

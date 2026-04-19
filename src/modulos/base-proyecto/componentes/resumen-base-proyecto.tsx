@@ -1,345 +1,261 @@
-import type { CSSProperties, ReactNode } from "react";
-import { BotonBase } from "@/compartido/componentes/base/boton-base";
+"use client";
+
+import { useState } from "react";
 import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
 import {
-  escalaEspaciadosSistemaDiseno,
-  escalaRadiosSistemaDiseno,
-  escalaSombrasSistemaDiseno,
-  escalaTipograficaSistemaDiseno,
-  estadosInteractivosSistemaDiseno,
-  gruposPaletaSistemaDiseno,
-  lineamientosComponentesFuturos,
-  narrativaSistemaDiseno,
-} from "@/compartido/configuracion/sistema-diseno";
+  AreaTexto,
+  Boton,
+  CampoTexto,
+  Cargador,
+  Contenedor,
+  EstadoVacio,
+  Etiqueta,
+  MensajeError,
+  ModalBase,
+  Selector,
+  Tarjeta,
+} from "@/compartido/componentes/ui";
 
-type PropiedadesMuestraColor = Readonly<{
-  nombre: string;
-  token: string;
-  valor: string;
-  uso: string;
-}>;
+const resumenComponentes = [
+  "Boton",
+  "CampoTexto",
+  "AreaTexto",
+  "Selector",
+  "Etiqueta",
+  "Tarjeta",
+  "Contenedor",
+  "Cargador",
+  "EstadoVacio",
+  "MensajeError",
+  "ModalBase",
+] as const;
 
-type PropiedadesTarjetaToken = Readonly<{
-  nombre: string;
-  token: string;
-  valor: string;
-  uso: string;
-  muestra: ReactNode;
-}>;
-
-function MuestraColor({
-  nombre,
-  token,
-  valor,
-  uso,
-}: PropiedadesMuestraColor) {
-  const estiloColor: CSSProperties = {
-    backgroundColor: `var(${token})`,
-  };
-
-  return (
-    <article className="panel-diseno rounded-[var(--radio-md)] p-4">
-      <div
-        aria-hidden="true"
-        style={estiloColor}
-        className="h-24 rounded-[var(--radio-sm)] border border-black/5"
-      />
-
-      <div className="mt-4 space-y-2">
-        <p className="text-sm font-semibold text-slate-950">{nombre}</p>
-        <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
-          {token}
-        </p>
-        <p className="text-xs font-medium text-slate-700">{valor}</p>
-        <p className="texto-soporte">{uso}</p>
-      </div>
-    </article>
-  );
-}
-
-function TarjetaToken({
-  nombre,
-  token,
-  valor,
-  uso,
-  muestra,
-}: PropiedadesTarjetaToken) {
-  return (
-    <article className="panel-diseno rounded-[var(--radio-md)] p-4">
-      <div className="flex min-h-24 items-center justify-center rounded-[var(--radio-sm)] border border-[color:var(--color-borde-suave)] bg-[rgba(255,255,255,0.68)]">
-        {muestra}
-      </div>
-
-      <div className="mt-4 space-y-2">
-        <p className="text-sm font-semibold text-slate-950">{nombre}</p>
-        <p className="text-xs uppercase tracking-[0.16em] text-slate-500">
-          {token}
-        </p>
-        <p className="text-xs font-medium text-slate-700">{valor}</p>
-        <p className="texto-soporte">{uso}</p>
-      </div>
-    </article>
-  );
-}
+const opcionesServicio = [
+  { valor: "prototipo", etiqueta: "Prototipo funcional" },
+  { valor: "produccion", etiqueta: "Produccion por lote" },
+  { valor: "reciclaje", etiqueta: "Reciclaje de plastico" },
+] as const;
 
 export function ResumenBaseProyecto() {
+  const [modalAbierto, setModalAbierto] = useState(false);
+
   return (
     <section>
       <ContenedorPrincipal claseName="flex flex-col gap-[var(--espacio-xl)] pb-[var(--espacio-xl)]">
-        <header className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+        <header className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
           <div className="space-y-6">
-            <span className="etiqueta-tecnica">Modulo 4 - Sistema de diseno</span>
+            <Etiqueta variante="primaria">Modulo 5 - Componentes UI base</Etiqueta>
 
             <div className="space-y-4">
               <h1 className="titulo-display max-w-5xl text-slate-950">
-                Base visual premium, tecnologica y sustentable para el ecommerce
-                de Rekun LAB
+                Biblioteca UI inicial para acelerar el ecommerce sin duplicar
+                estilos ni composicion
               </h1>
 
               <p className="texto-destacado max-w-3xl">
-                {narrativaSistemaDiseno.identidad}
-              </p>
-
-              <p className="texto-soporte max-w-3xl">
-                {narrativaSistemaDiseno.direccion}
+                La libreria base ya resuelve acciones, formularios, superficies
+                y estados comunes con una API en espanol y consistente con el
+                sistema de diseno de Rekun LAB.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <BotonBase variante="primario" tamanio="lg">
-                Primario
-              </BotonBase>
-              <BotonBase variante="secundario" tamanio="lg">
+              <Boton tamanio="lg">Primario</Boton>
+              <Boton variante="secundario" tamanio="lg">
                 Secundario
-              </BotonBase>
-              <BotonBase variante="fantasma" tamanio="lg">
+              </Boton>
+              <Boton variante="fantasma" tamanio="lg">
                 Fantasma
-              </BotonBase>
-              <BotonBase variante="secundario" tamanio="lg" disabled>
-                Disabled
-              </BotonBase>
+              </Boton>
+              <Boton variante="secundario" tamanio="lg" onClick={() => setModalAbierto(true)}>
+                Abrir modal base
+              </Boton>
             </div>
           </div>
 
-          <aside className="panel-diseno-elevado rounded-[var(--radio-xl)] p-6 sm:p-8">
+          <Contenedor variante="elevado" relleno="lg">
             <div className="space-y-4">
-              <p className="etiqueta-tecnica">Direccion visual</p>
+              <Etiqueta variante="premium">Cobertura del modulo</Etiqueta>
 
               <h2 className="titulo-seccion text-slate-950">
-                El sistema evita lo generico y usa materialidad, contraste y
-                precision visual.
+                Componentes reutilizables, props limpias y base lista para
+                crecer
               </h2>
 
-              <ul className="grid gap-3 text-sm text-slate-700">
-                <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
-                  Verdes minerales profundos como base de confianza.
-                </li>
-                <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
-                  Grafitos tecnicos para sobriedad y lectura premium.
-                </li>
-                <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
-                  Acentos metalicos y vivos solo en puntos de valor.
-                </li>
-              </ul>
+              <div className="flex flex-wrap gap-2">
+                {resumenComponentes.map((item) => (
+                  <Etiqueta key={item} variante="suave" tamanio="sm">
+                    {item}
+                  </Etiqueta>
+                ))}
+              </div>
             </div>
-          </aside>
+          </Contenedor>
         </header>
 
-        <section className="space-y-5">
-          <div className="space-y-3">
-            <span className="etiqueta-tecnica">Paleta de colores</span>
-            <h2 className="titulo-seccion text-slate-950">
-              Una paleta con tension entre precision industrial y sostenibilidad
-              contemporanea
-            </h2>
-          </div>
+        <section className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
+          <Tarjeta
+            variante="elevada"
+            etiqueta={<Etiqueta variante="primaria">Formulario base</Etiqueta>}
+            titulo="Campos consistentes para futuras cotizaciones, contacto y flujos de compra"
+            descripcion="Los campos comparten label, ayuda, error, focus y superficie para que no aparezcan variantes improvisadas en cada modulo."
+          >
+            <div className="grid gap-4 md:grid-cols-2">
+              <CampoTexto
+                etiqueta="Nombre del proyecto"
+                placeholder="Ej. Soporte tecnico reciclado"
+                ayuda="Usa una descripcion corta y clara."
+              />
 
-          <div className="grid gap-4 xl:grid-cols-2">
-            {gruposPaletaSistemaDiseno.map((grupo) => (
-              <article
-                key={grupo.nombre}
-                className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6"
-              >
-                <div className="space-y-2">
-                  <h3 className="text-xl font-semibold text-slate-950">
-                    {grupo.nombre}
-                  </h3>
-                  <p className="texto-soporte">{grupo.descripcion}</p>
-                </div>
+              <Selector
+                etiqueta="Tipo de servicio"
+                placeholder="Selecciona una opcion"
+                opciones={opcionesServicio}
+                ayuda="Selector reutilizable con placeholder y lista declarativa."
+                defaultValue=""
+              />
+            </div>
 
-                <div className="mt-5 grid gap-4 sm:grid-cols-3">
-                  {grupo.muestras.map((muestra) => (
-                    <MuestraColor key={muestra.nombre} {...muestra} />
-                  ))}
-                </div>
-              </article>
-            ))}
+            <AreaTexto
+              etiqueta="Descripcion"
+              placeholder="Resume el objetivo, material deseado y volumen aproximado."
+              ayuda="Area de texto base con el mismo sistema visual del campo simple."
+            />
+
+            <CampoTexto
+              etiqueta="Correo de contacto"
+              placeholder="contacto@rekunlab.cl"
+              error="Ejemplo de error visual para validar estados."
+              defaultValue="correo-invalido"
+            />
+          </Tarjeta>
+
+          <div className="grid gap-4">
+            <Tarjeta
+              etiqueta={<Etiqueta variante="premium">Etiquetas y estados</Etiqueta>}
+              titulo="Microcomponentes listos para contexto, filtros y status"
+              descripcion="Las etiquetas mantienen jerarquia y color controlado."
+            >
+              <div className="flex flex-wrap gap-2">
+                <Etiqueta variante="suave">Base</Etiqueta>
+                <Etiqueta variante="primaria">Primaria</Etiqueta>
+                <Etiqueta variante="premium">Premium</Etiqueta>
+                <Etiqueta variante="oscura">Oscura</Etiqueta>
+                <Etiqueta variante="critica">Error</Etiqueta>
+              </div>
+            </Tarjeta>
+
+            <Contenedor variante="base">
+              <div className="space-y-4">
+                <Etiqueta variante="suave">Cargador</Etiqueta>
+                <Cargador etiqueta="Preparando biblioteca UI" />
+              </div>
+            </Contenedor>
           </div>
         </section>
 
-        <section className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-          <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
-            <div className="space-y-3">
-              <span className="etiqueta-tecnica">Tipografia y jerarquia</span>
-              <h2 className="titulo-seccion text-slate-950">
-                Space Grotesk para estructura y Manrope para lectura sostenida
-              </h2>
-            </div>
-
-            <div className="mt-6 grid gap-4">
-              {escalaTipograficaSistemaDiseno.map((item) => (
-                <article
-                  key={item.nombre}
-                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/70 p-4"
-                >
-                  <div className="space-y-2">
-                    <p className="text-sm font-semibold text-slate-950">
-                      {item.nombre}
-                    </p>
-                    <div className={item.claseVista}>{item.muestra}</div>
-                    <p className="texto-soporte">{item.uso}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </article>
-
-          <div className="grid gap-4">
-            <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
-              <div className="space-y-3">
-                <span className="etiqueta-tecnica">Espaciados</span>
-                <h2 className="text-2xl font-semibold text-slate-950">
-                  Ritmo respirable
-                </h2>
+        <section className="grid gap-4 lg:grid-cols-3">
+          <Tarjeta
+            etiqueta={<Etiqueta variante="primaria">Tarjeta</Etiqueta>}
+            titulo="Superficie editorial"
+            descripcion="Componente pensado para resumenes, destacados o bloques comerciales."
+            acciones={<Boton variante="fantasma" tamanio="sm">Accion</Boton>}
+            pie={
+              <div className="flex items-center justify-between gap-3 text-sm text-slate-600">
+                <span>Pie opcional</span>
+                <Etiqueta variante="suave" tamanio="sm">
+                  Reusable
+                </Etiqueta>
               </div>
+            }
+          >
+            <p className="texto-soporte">
+              La tarjeta compone encabezado, acciones, cuerpo y pie sin forzar
+              una estructura cerrada.
+            </p>
+          </Tarjeta>
 
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                {escalaEspaciadosSistemaDiseno.map((item) => (
-                  <TarjetaToken
-                    key={item.token}
-                    {...item}
-                    muestra={
-                      <div className="flex w-full items-center gap-3 px-4">
-                        <div
-                          aria-hidden="true"
-                          style={{ width: `var(${item.token})` }}
-                          className="h-3 rounded-full bg-[color:var(--color-primario-500)]"
-                        />
-                        <span className="text-xs text-slate-500">
-                          {item.valor}
-                        </span>
-                      </div>
-                    }
-                  />
-                ))}
-              </div>
-            </article>
+          <EstadoVacio
+            titulo="Nada configurado todavia"
+            descripcion="Estado base para tablas, listados, favoritos o resultados sin contenido."
+            accion={<Boton variante="secundario">Crear primer item</Boton>}
+            icono={<span aria-hidden="true">O</span>}
+          />
 
-            <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
-              <div className="space-y-3">
-                <span className="etiqueta-tecnica">Radios y sombras</span>
-                <h2 className="text-2xl font-semibold text-slate-950">
-                  Bordes suaves, no blandos
-                </h2>
-              </div>
-
-              <div className="mt-5 grid gap-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {escalaRadiosSistemaDiseno.map((item) => (
-                    <TarjetaToken
-                      key={item.token}
-                      {...item}
-                      muestra={
-                        <div
-                          aria-hidden="true"
-                          style={{ borderRadius: `var(${item.token})` }}
-                          className="h-16 w-28 border border-[color:var(--color-borde-fuerte)] bg-[linear-gradient(135deg,rgba(13,124,102,0.14),rgba(179,134,49,0.12))]"
-                        />
-                      }
-                    />
-                  ))}
-                </div>
-
-                <div className="grid gap-4">
-                  {escalaSombrasSistemaDiseno.map((item) => (
-                    <TarjetaToken
-                      key={item.token}
-                      {...item}
-                      muestra={
-                        <div
-                          aria-hidden="true"
-                          style={{ boxShadow: `var(${item.token})` }}
-                          className="h-[4.5rem] w-full max-w-[11rem] rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white"
-                        />
-                      }
-                    />
-                  ))}
-                </div>
-              </div>
-            </article>
-          </div>
+          <MensajeError
+            titulo="Fallo controlado"
+            mensaje="Este componente resume errores de red, respuestas fallidas o acciones no completadas."
+            detalle="Se puede combinar con acciones de reintento o soporte sin mezclar logica de dominio."
+            accion={<Boton variante="fantasma">Reintentar</Boton>}
+          />
         </section>
 
         <section className="grid gap-4 xl:grid-cols-[0.95fr_1.05fr]">
-          <article className="panel-diseno rounded-[var(--radio-lg)] p-5 sm:p-6">
-            <div className="space-y-3">
-              <span className="etiqueta-tecnica">Estados interactivos</span>
-              <h2 className="titulo-seccion text-slate-950">
-                Hover, focus, active y disabled con reglas visibles
-              </h2>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <BotonBase variante="primario">Hover premium</BotonBase>
-              <BotonBase variante="secundario">Superficie clara</BotonBase>
-              <BotonBase variante="fantasma">Accion sutil</BotonBase>
-              <BotonBase variante="primario" disabled>
-                No disponible
-              </BotonBase>
-            </div>
-
-            <div className="mt-6 grid gap-3">
-              {estadosInteractivosSistemaDiseno.map((estado) => (
-                <article
-                  key={estado.nombre}
-                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/72 p-4"
-                >
-                  <p className="text-sm font-semibold text-slate-950">
-                    {estado.nombre}
-                  </p>
-                  <p className="texto-soporte mt-2">{estado.criterio}</p>
-                </article>
-              ))}
-            </div>
-          </article>
-
-          <article className="panel-diseno-oscuro rounded-[var(--radio-lg)] p-5 sm:p-6">
-            <div className="space-y-3">
-              <span className="etiqueta-tecnica etiqueta-tecnica-oscura">
-                Lineamientos futuros
-              </span>
+          <Contenedor variante="oscuro" relleno="lg">
+            <div className="space-y-4">
+              <Etiqueta variante="oscura">Contenedor</Etiqueta>
               <h2 className="titulo-seccion text-white">
-                Reglas visuales para componentes que vengan despues
+                Superficie base para bloques oscuros de alto contraste
               </h2>
-              <p className="max-w-2xl text-sm leading-8 text-white/64">
-                El sistema esta pensado para que botones, cards, inputs,
-                banners, bloques editoriales y modulos comerciales futuros
-                compartan una misma logica visual.
+              <p className="text-sm leading-8 text-white/66">
+                El contenedor unifica radio, sombra, materialidad y relleno. Es
+                la base compartida de tarjetas, estados y paneles especiales.
               </p>
             </div>
+          </Contenedor>
 
-            <ul className="mt-6 grid gap-3">
-              {lineamientosComponentesFuturos.map((lineamiento) => (
-                <li
-                  key={lineamiento}
-                  className="rounded-[var(--radio-md)] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-7 text-white/72"
-                >
-                  {lineamiento}
-                </li>
-              ))}
+          <Tarjeta
+            variante="elevada"
+            etiqueta={<Etiqueta variante="premium">Composicion</Etiqueta>}
+            titulo="Buenas practicas de uso"
+            descripcion="Los componentes aceptan contenido compuesto, pero mantienen API limpia y semantica visual estable."
+          >
+            <ul className="grid gap-3 text-sm leading-7 text-slate-700">
+              <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
+                Usa `Tarjeta` para estructura editorial y `Contenedor` para superficies libres.
+              </li>
+              <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
+                Usa `CampoTexto`, `AreaTexto` y `Selector` para formularios con estados coherentes.
+              </li>
+              <li className="rounded-[var(--radio-sm)] border border-[color:var(--color-borde)] bg-white/72 px-4 py-3">
+                Usa `Etiqueta`, `Cargador`, `EstadoVacio` y `MensajeError` para microestados comunes del ecommerce.
+              </li>
             </ul>
-          </article>
+          </Tarjeta>
         </section>
+
+        <ModalBase
+          abierto={modalAbierto}
+          alCerrar={() => setModalAbierto(false)}
+          titulo="Modal base"
+          descripcion="Base reusable para confirmaciones, contenido contextual o acciones futuras del ecommerce."
+          pie={
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+              <Boton variante="fantasma" onClick={() => setModalAbierto(false)}>
+                Cerrar
+              </Boton>
+              <Boton onClick={() => setModalAbierto(false)}>Entendido</Boton>
+            </div>
+          }
+        >
+          <div className="space-y-4">
+            <p className="texto-soporte">
+              Este modal no trae logica de negocio. Solo resuelve estructura,
+              foco visual, cierre por escape y click fuera para futuras
+              interacciones del proyecto.
+            </p>
+
+            <Contenedor variante="base">
+              <div className="space-y-3">
+                <Etiqueta variante="primaria">Uso recomendado</Etiqueta>
+                <p className="text-sm leading-7 text-slate-700">
+                  Confirmaciones de acciones, previews ligeros, contenido
+                  contextual o formularios auxiliares.
+                </p>
+              </div>
+            </Contenedor>
+          </div>
+        </ModalBase>
       </ContenedorPrincipal>
     </section>
   );

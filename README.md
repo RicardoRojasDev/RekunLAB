@@ -4,6 +4,7 @@ Base tecnica inicial del ecommerce de Rekun LAB construida con Next.js App Route
 
 La guia formal de arquitectura y convenciones del proyecto esta en `docs/modulo-2-arquitectura-y-convenciones.md`.
 La guia del sistema de diseno esta en `docs/modulo-4-sistema-de-diseno.md`.
+La guia de componentes UI base esta en `docs/modulo-5-componentes-ui-base.md`.
 
 ## Objetivo de esta base
 
@@ -22,7 +23,6 @@ src/
   compartido/
     componentes/
       base/
-        boton-base.tsx
         contenedor-principal.tsx
       layout/
         estructura-layout-global.tsx
@@ -30,6 +30,19 @@ src/
         header-global.tsx
         marca-principal.tsx
         navegacion-principal.tsx
+      ui/
+        area-texto.tsx
+        boton.tsx
+        campo-texto.tsx
+        cargador.tsx
+        contenedor.tsx
+        estado-vacio.tsx
+        etiqueta.tsx
+        index.ts
+        mensaje-error.tsx
+        modal-base.tsx
+        selector.tsx
+        tarjeta.tsx
     configuracion/
       entorno.ts
       layout-global.ts
@@ -55,6 +68,7 @@ src/
 
 - `app/` queda como punto de entrada y composicion de rutas, no como lugar para mezclar logica de negocio.
 - `compartido/` concentra el codigo transversal del proyecto.
+- `compartido/componentes/ui/` concentra la biblioteca visual reusable.
 - `modulos/` encapsula cada dominio funcional y expone su API publica.
 - `compartido/servicios/` reune integraciones externas y acceso a infraestructura.
 - `compartido/configuracion/`, `compartido/tipos/` y `compartido/utilidades/` evitan dispersion del codigo comun.
