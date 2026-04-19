@@ -2,7 +2,7 @@ import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-pr
 import { Etiqueta } from "@/compartido/componentes/ui/etiqueta";
 import { NavegacionPrincipal } from "@/compartido/componentes/layout/navegacion-principal";
 import { indicadoresOperacionInicial } from "@/compartido/configuracion/layout-global";
-import { AccionesCarritoCabecera } from "@/modulos/carrito/componentes/acciones-carrito-cabecera";
+import { AccionesCarritoCabecera } from "@/modulos/carrito";
 import { MarcaPrincipal } from "./marca-principal";
 
 export function HeaderGlobal() {

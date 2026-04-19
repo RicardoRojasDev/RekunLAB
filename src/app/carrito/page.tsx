@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { configuracionSitio } from "@/compartido/configuracion/sitio";
-import { PaginaCarritoCompras } from "@/modulos/carrito/componentes/pagina-carrito-compras";
+import { PaginaCarritoCompras } from "@/modulos/carrito";
 
 const descripcionCarrito =
   "Carrito de compras de Rekun LAB con persistencia local, subtotal con IVA incluido y base lista para conectarse despues al checkout.";

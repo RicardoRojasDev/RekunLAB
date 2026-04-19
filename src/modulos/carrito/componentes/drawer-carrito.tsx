@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Cargador } from "@/compartido/componentes/ui";
 import { useCarrito } from "../hooks/use-carrito";
@@ -19,15 +19,19 @@ export function DrawerCarrito({
   alCerrar,
 }: PropiedadesDrawerCarrito) {
   const { hidratado, items, resumen } = useCarrito();
+  const referenciaDrawer = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!abierto) {
       return;
     }
 
+    const elementoActivoAnterior =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const overflowAnterior = document.body.style.overflow;
 
     document.body.style.overflow = "hidden";
+    referenciaDrawer.current?.focus();
 
     function manejarTeclaEscape(evento: KeyboardEvent) {
       if (evento.key === "Escape") {
@@ -40,6 +44,7 @@ export function DrawerCarrito({
     return () => {
       document.body.style.overflow = overflowAnterior;
       window.removeEventListener("keydown", manejarTeclaEscape);
+      elementoActivoAnterior?.focus();
     };
   }, [abierto, alCerrar]);
 
@@ -57,9 +62,11 @@ export function DrawerCarrito({
       />
 
       <aside
+        ref={referenciaDrawer}
         role="dialog"
         aria-modal="true"
         aria-labelledby="titulo-drawer-carrito"
+        tabIndex={-1}
         className="absolute inset-y-0 right-0 flex h-full w-full max-w-[30rem] flex-col border-l border-white/12 bg-[linear-gradient(180deg,rgba(247,250,248,0.98),rgba(240,244,241,0.98))] shadow-[0_30px_90px_rgba(10,22,20,0.22)]"
       >
         <DrawerHeaderCarrito alCerrar={alCerrar} />

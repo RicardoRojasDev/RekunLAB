@@ -3,8 +3,7 @@ import { Manrope, Space_Grotesk } from "next/font/google";
 import { EstructuraLayoutGlobal } from "@/compartido/componentes/layout/estructura-layout-global";
 import { configuracionSitio } from "@/compartido/configuracion/sitio";
 import type { PropiedadesConHijos } from "@/compartido/tipos/comunes";
-import { CapaCarritoGlobal } from "@/modulos/carrito/componentes/capa-carrito-global";
-import { ProveedorCarrito } from "@/modulos/carrito/contexto/proveedor-carrito";
+import { CapaCarritoGlobal, ProveedorCarrito } from "@/modulos/carrito";
 import "./globals.css";
 
 const fuenteCuerpo = Manrope({

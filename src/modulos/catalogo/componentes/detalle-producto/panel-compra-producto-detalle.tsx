@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Boton, Contenedor, Etiqueta } from "@/compartido/componentes/ui";
 import { formatearPrecioClp } from "@/compartido/utilidades/formatear-precio-clp";
-import { useCarrito } from "@/modulos/carrito/hooks/use-carrito";
-import type { SeleccionVarianteItemCarrito } from "@/modulos/carrito/tipos/carrito";
+import { useCarrito } from "@/modulos/carrito";
+import type { SeleccionVarianteItemCarrito } from "@/modulos/carrito";
 import type {
   ConfiguracionVariantesProductoCatalogo,
   EstadoValidacionVariantesProductoCatalogo,
