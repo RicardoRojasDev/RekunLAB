@@ -30,6 +30,7 @@ export type VariantePedido = Readonly<{
 }>;
 
 export type ItemCrearPedido = Readonly<{
+  // Campos básicos (existentes)
   slug: string;
   nombre: string;
   resumen: string;
@@ -39,6 +40,22 @@ export type ItemCrearPedido = Readonly<{
   precioUnitarioIvaIncluidoSnapshot: number;
   cantidad: number;
   etiquetasComerciales?: readonly string[];
+
+  // Campos NUEVOS para snapshot completo
+  idProducto?: string;
+  nombreCompleto?: string;
+  marca?: string;
+  nivel?: string;
+  formato?: string;
+  pesoKg?: number;
+  acabado?: string;
+  efecto?: string;
+  colorHex?: string;
+  compatiblePLA?: boolean;
+  esDestacado?: boolean;
+  estado?: string;
+
+  // Variante (existente)
   variante?: VariantePedido | null;
 }>;
 

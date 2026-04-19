@@ -145,6 +145,7 @@ function algunErrorPresente(errores: Record<string, string | null>) {
 function validarItemCrearPedido(item: ItemCrearPedido) {
   const errores: string[] = [];
 
+  // Campos requeridos
   if (!normalizarTexto(item.slug).length) {
     errores.push("Falta slug del producto.");
   }
@@ -165,6 +166,17 @@ function validarItemCrearPedido(item: ItemCrearPedido) {
   if (errorPrecio) {
     errores.push(errorPrecio);
   }
+
+  // Validaciones opcionales para snapshot (no bloquean)
+  // Los campos NUEVOS son opcionales (?) y no causan error
+  // Solo se validan si están presentes:
+
+  if (item.pesoKg !== undefined && (typeof item.pesoKg !== "number" || item.pesoKg < 0)) {
+    errores.push("Peso debe ser un numero positivo.");
+  }
+
+  // El resto de campos se validan a nivel de tipo TypeScript
+  // (eslint + tsc verifican que sean string | number | boolean | undefined)
 
   return errores.length ? errores.join(" ") : null;
 }

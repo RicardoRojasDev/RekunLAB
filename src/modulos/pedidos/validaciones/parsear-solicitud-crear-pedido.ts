@@ -70,6 +70,19 @@ function parsearItemCrearPedido(valor: unknown): ItemCrearPedido | null {
   const variante = parsearVariantePedido(valor.variante);
 
   const coleccion = obtenerTexto(valor, "coleccion");
+  const idProducto = obtenerTexto(valor, "idProducto");
+  const nombreCompleto = obtenerTexto(valor, "nombreCompleto");
+  const marca = obtenerTexto(valor, "marca");
+  const nivel = obtenerTexto(valor, "nivel");
+  const formato = obtenerTexto(valor, "formato");
+  const acabado = obtenerTexto(valor, "acabado");
+  const efecto = obtenerTexto(valor, "efecto");
+  const colorHex = obtenerTexto(valor, "colorHex");
+  const estado = obtenerTexto(valor, "estado");
+
+  const pesoKg = obtenerNumero(valor, "pesoKg");
+  const compatiblePLA = valor["compatiblePLA"] === true;
+  const esDestacado = valor["esDestacado"] === true;
 
   return {
     slug: obtenerTexto(valor, "slug"),
@@ -84,6 +97,21 @@ function parsearItemCrearPedido(valor: unknown): ItemCrearPedido | null {
     ),
     cantidad: obtenerNumero(valor, "cantidad"),
     etiquetasComerciales: etiquetasComerciales.length ? etiquetasComerciales : undefined,
+
+    // Campos NUEVOS
+    idProducto: idProducto.length ? idProducto : undefined,
+    nombreCompleto: nombreCompleto.length ? nombreCompleto : undefined,
+    marca: marca.length ? marca : undefined,
+    nivel: nivel.length ? nivel : undefined,
+    formato: formato.length ? formato : undefined,
+    pesoKg: Number.isFinite(pesoKg) ? pesoKg : undefined,
+    acabado: acabado.length ? acabado : undefined,
+    efecto: efecto.length ? efecto : undefined,
+    colorHex: colorHex.length ? colorHex : undefined,
+    compatiblePLA: compatiblePLA ? true : undefined,
+    esDestacado: esDestacado ? true : undefined,
+    estado: estado.length ? estado : undefined,
+
     variante,
   };
 }

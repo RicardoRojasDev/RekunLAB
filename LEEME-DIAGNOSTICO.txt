@@ -1,0 +1,182 @@
+================================================================================
+DIAGNÓSTICO ESTRUCTURAL - MÓDULO 17 (PRE-IMPLEMENTACIÓN)
+================================================================================
+
+Generado: 2026-04-19
+Estado: COMPLETADO ✅
+Archivos: 4 documentos técnicos + memory
+
+================================================================================
+PROBLEMA EN 10 SEGUNDOS
+================================================================================
+
+Supabase ✅ (15+ tablas, esquema completo)
+        ↓
+    [DESCONEXIÓN CRÍTICA 🔴]
+        ↓
+Frontend 🔴 (6 productos mock, solo 8/25+ campos capturados)
+        ↓
+Pedido 🔴 (snapshot incompleto, sin trazabilidad real)
+
+IMPACTO:
+- ❌ Datos falsos hasta Módulo 17+
+- ❌ Imposible escalar a 100+ productos
+- ❌ Snapshot vacío impide auditoría/inteligencia de datos
+- ❌ Admin no puede gestionar catálogo desde BD
+
+================================================================================
+SOLUCIÓN (160 MINUTOS, RIESGO BAJO)
+================================================================================
+
+1. Extender tipos (30 min)     → +40 líneas
+2. Conectar BD (60 min)        → ±60 líneas
+3. Actualizar componentes (40) → +12 líneas
+4. Validar (20 min)            → Tests
+5. Eliminar mocks (10 min)     → -670 líneas
+
+TOTAL CAMBIO NETO: ~100 líneas efectivas
+
+================================================================================
+DOCUMENTOS GENERADOS (LEE EN ESTE ORDEN)
+================================================================================
+
+1. RESUMEN-EJECUTIVO.md
+   └─ Visual overview (5 min)
+   └─ Línea de tiempo, impacto, decisiones arquitectura
+
+2. DIAGNOSTICO-ESTRUCTURAL-MODULO-17.md
+   └─ Diagnóstico completo (20 min)
+   └─ 10 secciones: contexto, problemas, auditoría, solución
+
+3. PLAN-CORRECCION-ESTRUCTURAL.md
+   └─ Plan paso a paso (15 min)
+   └─ Orden implementación, validación, riesgos/mitigación
+
+4. CAMBIOS-CODIGO-LISTOS.md
+   └─ Diffs exactos (10 min)
+   └─ Código listo para copiar/pegar, validaciones
+
+================================================================================
+ARCHIVOS QUE CAMBIAN
+================================================================================
+
+MODIFICAR (6 archivos, ~100 líneas):
+  1. src/modulos/catalogo/tipos/producto-catalogo.ts
+  2. src/modulos/carrito/tipos/carrito.ts
+  3. src/modulos/pedidos/tipos/crear-pedido.ts
+  4. src/modulos/catalogo/servicios/obtener-productos-catalogo.ts
+  5. src/modulos/catalogo/componentes/.../panel-compra-producto-detalle.tsx
+  6. src/modulos/checkout/componentes/pagina-checkout-visual.tsx
+
+ELIMINAR (1 archivo, -670 líneas):
+  - src/modulos/catalogo/datos/productos-catalogo-mock.ts
+
+NO TOCAR (Todo bien estructurado):
+  - Utilidades carrito, contexto, hooks
+  - API pedidos
+  - Migraciones Supabase
+
+================================================================================
+CAMPOS NUEVOS EN SNAPSHOT (CRÍTICOS)
+================================================================================
+
+ACTUAL (8 campos):              REQUERIDO (18+ campos):
+├─ slug                         ├─ idProducto ← NUEVO
+├─ nombre                       ├─ nombreCompleto ← NUEVO
+├─ resumen                      ├─ marca ← NUEVO
+├─ categoria                    ├─ nivel ← NUEVO
+├─ tipoProducto                 ├─ formato ← NUEVO
+├─ coleccion                    ├─ pesoKg ← NUEVO
+├─ precio                       ├─ acabado ← NUEVO
+└─ cantidad                     ├─ efecto ← NUEVO
+                                ├─ colorHex ← NUEVO
+                                ├─ compatiblePLA ← NUEVO
+                                ├─ esDestacado ← NUEVO
+                                ├─ estado ← NUEVO
+                                └─ ... [otros por tipo de producto]
+
+IMPACTO: Snapshot completo para auditoría, inteligencia de datos, trazabilidad
+
+================================================================================
+CHECKLIST DE IMPLEMENTACIÓN
+================================================================================
+
+PRE-IMPLEMENTACIÓN:
+  ☐ Leer RESUMEN-EJECUTIVO.md (5 min)
+  ☐ Leer PLAN-CORRECCION-ESTRUCTURAL.md (15 min)
+  ☐ Leer CAMBIOS-CODIGO-LISTOS.md (10 min)
+
+IMPLEMENTACIÓN (Orden):
+  ☐ Actualizar tipos (30 min)
+  ☐ Implementar servicios BD (60 min)
+  ☐ Actualizar componentes (40 min)
+  ☐ Validar: npm run tsc --noEmit
+  ☐ Validar: grep -r "productosCatalogoMock" src/ → 0 resultados
+  ☐ Eliminar productos-catalogo-mock.ts
+  ☐ Crear 2-3 productos en BD para testing
+  ☐ Test end-to-end: agregar → carrito → checkout → pedido
+
+POST-IMPLEMENTACIÓN:
+  ☐ Verificar item_pedido en BD: atributos_snapshot poblado ✅
+  ☐ Commit: "Reemplazar mocks con catálogo real de Supabase"
+  ☐ Documentar cambios en equipo
+  ☐ Planing Módulo 17A: Admin CRUD de productos
+
+================================================================================
+RIESGOS MITIGADOS
+================================================================================
+
+Riesgo: BD sin datos reales
+└─ Mitigation: Fallback a array vacío, agregar datos manuales
+
+Riesgo: Variantes no existen en BD
+└─ Mitigation: Hacer campos opcionales (?) en tipos
+
+Riesgo: Atributos incompletos
+└─ Mitigation: JSONB flexible, permite expansión futura
+
+Riesgo: LocalStorage incompatible
+└─ Mitigation: Objetos con más campos son retrocompatibles
+
+Riesgo: Componentes aún usan mock
+└─ Mitigation: Grep verificar 0 resultados antes de commit
+
+================================================================================
+GARANTÍAS DE CALIDAD
+================================================================================
+
+✅ No se rompe nada (mismos tipos de retorno públicos)
+✅ Escalable a 1000+ productos
+✅ Admin puede gestionar catálogo desde BD
+✅ Snapshot completo para auditoría/inteligencia
+✅ Fallos en BD → graceful degradation (array vacío)
+✅ Zero nuevas dependencias
+
+INCOMPATIBILITIES:
+❌ Ninguna identificada
+
+================================================================================
+TIMELINE SUGERIDO
+================================================================================
+
+Antes de Módulo 17: OBLIGATORIO
+└─ Impacta: escalabilidad, inteligencia de datos, admin
+
+Semana 1: Implementación (2-3 horas)
+Semana 2: Testing + Módulo 17A Planning (1 hora)
+Semana 3+: Módulo 17A - Admin CRUD de productos
+
+================================================================================
+CONTACTO / DUDAS
+================================================================================
+
+Revisar documentos en este orden:
+1. RESUMEN-EJECUTIVO.md ← Empezar aquí
+2. DIAGNOSTICO-ESTRUCTURAL-MODULO-17.md ← Contexto completo
+3. PLAN-CORRECCION-ESTRUCTURAL.md ← Implementación
+4. CAMBIOS-CODIGO-LISTOS.md ← Código exacto
+
+Memory guardada en:
+  /c/Users/Casa/.claude/projects/.../memory/proyecto-correccion-catalogo-m17.md
+
+================================================================================

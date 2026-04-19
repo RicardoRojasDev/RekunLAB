@@ -132,6 +132,7 @@ export function PaginaCheckoutVisual() {
         codigoPostal: checkout.valores.direccionEnvio.codigoPostal,
       },
       items: items.map((item) => ({
+        // Campos existentes
         slug: item.slug,
         nombre: item.nombre,
         resumen: item.resumen,
@@ -141,6 +142,21 @@ export function PaginaCheckoutVisual() {
         precioUnitarioIvaIncluidoSnapshot: item.precioUnitarioIvaIncluido,
         cantidad: item.cantidad,
         etiquetasComerciales: item.etiquetasComerciales,
+
+        // Campos NUEVOS (si existen en item, se envían)
+        idProducto: item.productoId,
+        nombreCompleto: item.nombreCompleto,
+        marca: item.marca,
+        nivel: item.nivel,
+        formato: item.formato,
+        pesoKg: item.pesoKg,
+        acabado: item.acabado,
+        efecto: item.efecto,
+        colorHex: item.colorHex,
+        compatiblePLA: item.compatiblePLA,
+        esDestacado: item.esDestacado,
+        estado: item.estado,
+
         variante: item.variante
           ? {
               etiqueta: item.variante.etiqueta,

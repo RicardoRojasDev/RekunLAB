@@ -25,10 +25,29 @@ type PayloadRpcCrearPedido = Readonly<{
 
 function construirAtributosSnapshotItem(item: ItemCrearPedido): Record<string, unknown> {
   return {
+    // Campos básicos
     categoria: item.categoria,
     tipoProducto: item.tipoProducto,
     coleccion: item.coleccion ?? null,
     etiquetasComerciales: item.etiquetasComerciales ?? [],
+
+    // Campos NUEVOS para auditoría
+    idProducto: item.idProducto ?? null,
+    nombreCompleto: item.nombreCompleto ?? null,
+    marca: item.marca ?? null,
+    nivel: item.nivel ?? null,
+
+    // Campos NUEVOS específicos por tipo
+    formato: item.formato ?? null,
+    pesoKg: item.pesoKg ?? null,
+    acabado: item.acabado ?? null,
+    efecto: item.efecto ?? null,
+    colorHex: item.colorHex ?? null,
+    compatiblePLA: item.compatiblePLA ?? null,
+    esDestacado: item.esDestacado ?? null,
+    estado: item.estado ?? null,
+
+    // Variante (si aplica)
     variante: item.variante
       ? {
           etiqueta: item.variante.etiqueta,
