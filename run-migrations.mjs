@@ -30,6 +30,10 @@ const migrations = [
     name: "Auditoria - Catalogo y pedidos",
     file: "supabase/migrations/20260419233000_auditoria_catalogo_y_pedidos.sql",
   },
+  {
+    name: "Modulo 18 - Integracion de pagos",
+    file: "supabase/migrations/20260420003000_modulo_18_integracion_pagos.sql",
+  },
 ];
 
 async function executeSql(sql) {

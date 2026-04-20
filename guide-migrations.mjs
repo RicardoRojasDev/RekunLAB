@@ -23,6 +23,11 @@ const migrations = [
     name: "Auditoria - Catalogo y pedidos",
     file: "supabase/migrations/20260419233000_auditoria_catalogo_y_pedidos.sql",
   },
+  {
+    order: 5,
+    name: "Modulo 18 - Integracion de pagos",
+    file: "supabase/migrations/20260420003000_modulo_18_integracion_pagos.sql",
+  },
 ];
 
 console.log("\n=== Guia de migraciones para Supabase ===");
