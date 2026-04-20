@@ -92,7 +92,7 @@ export async function obtenerProductosCatalogo(
         peso_kg,
         es_destacado,
         metadatos,
-        asignacion_categoria_producto(categoria_producto(nombre))
+        asignacion_categoria_producto(id, categoria_id, categoria_producto(id, nombre))
       `
       )
       .eq("estado", "activo")
