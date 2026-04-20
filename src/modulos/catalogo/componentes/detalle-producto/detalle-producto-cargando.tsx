@@ -29,7 +29,7 @@ export function DetalleProductoCargando() {
               <div className="space-y-6">
                 <div className="flex gap-2">
                   <Etiqueta variante="suave">Cargando ficha</Etiqueta>
-                  <Etiqueta variante="premium">Detalle comercial</Etiqueta>
+                  <Etiqueta variante="premium">Detalle de producto</Etiqueta>
                 </div>
 
                 <div className="space-y-4">

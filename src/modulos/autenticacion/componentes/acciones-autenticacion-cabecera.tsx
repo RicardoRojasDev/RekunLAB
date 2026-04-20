@@ -55,7 +55,7 @@ export function AccionesAutenticacionCabecera() {
       aria-label={
         esAutenticado && usuario
           ? `Abrir acceso de ${usuario.nombreCompleto}`
-          : "Abrir modulo de acceso"
+          : "Abrir acceso"
       }
       className="boton-base boton-secundario min-h-11 min-w-[10.5rem] justify-between border-[color:var(--color-borde-fuerte)] bg-white/88 px-4 text-sm"
     >

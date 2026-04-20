@@ -8,7 +8,7 @@ export default function ProductoNoEncontrado() {
       <ContenedorPrincipal claseName="pb-[var(--espacio-2xl)]">
         <EstadoVacio
           titulo="No encontramos esta ficha de producto"
-          descripcion="El producto solicitado no existe, fue desactivado o aun no esta disponible en el catalogo real."
+          descripcion="El producto solicitado no esta disponible o ya no forma parte del catalogo activo."
           accion={
             <Link
               href="/catalogo"

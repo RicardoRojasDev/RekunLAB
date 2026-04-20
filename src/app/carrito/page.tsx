@@ -3,7 +3,7 @@ import { configuracionSitio } from "@/compartido/configuracion/sitio";
 import { PaginaCarritoCompras } from "@/modulos/carrito";
 
 const descripcionCarrito =
-  "Carrito de compras de Rekun LAB con persistencia local, subtotal con IVA incluido y continuidad real hacia checkout y pedidos.";
+  "Carrito de compras de Rekun LAB con subtotal con IVA incluido y continuidad directa hacia checkout.";
 
 export const metadata: Metadata = {
   title: "Carrito",

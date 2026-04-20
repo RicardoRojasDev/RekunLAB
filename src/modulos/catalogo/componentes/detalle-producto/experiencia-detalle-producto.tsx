@@ -47,7 +47,7 @@ export function ExperienciaDetalleProducto({
         <Tarjeta
           variante="elevada"
           etiqueta={<Etiqueta variante="primaria">Descripcion</Etiqueta>}
-          titulo="Pensado para una lectura comercial clara y una decision de compra mas rapida"
+          titulo="Descripcion del producto"
           descripcion={producto.resumen}
         >
           <div className="space-y-4">
@@ -73,11 +73,11 @@ export function ExperienciaDetalleProducto({
         <Tarjeta
           variante="base"
           etiqueta={<Etiqueta variante="premium">Especificaciones</Etiqueta>}
-          titulo="Ficha tecnica base"
+          titulo="Ficha tecnica"
           descripcion={
             tieneVariantes
-              ? "La ficha se ajusta segun color, peso o formato seleccionados."
-              : "Estructura pensada para que en la integracion real estas filas puedan venir desde Supabase sin rehacer la UI."
+              ? "La ficha se ajusta segun color, peso o formato cuando corresponde."
+              : "Informacion clave para evaluar el producto antes de agregarlo al carrito."
           }
         >
           <dl className="grid gap-3">

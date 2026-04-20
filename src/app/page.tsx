@@ -1,5 +1,5 @@
-import { ResumenBaseProyecto } from "@/modulos/base-proyecto";
+import { PaginaInicioRekunLab } from "@/modulos/inicio";
 
 export default function PaginaInicio() {
-  return <ResumenBaseProyecto />;
+  return <PaginaInicioRekunLab />;
 }

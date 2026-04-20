@@ -2,9 +2,9 @@ export const configuracionSitio = {
   nombre: "Rekun LAB",
   descriptorMarca: "Impresion 3D sustentable",
   descripcion:
-    "Ecommerce de Rekun LAB enfocado en impresion 3D sustentable, reciclaje de plastico, filamento PLA ecologico, insumos, maquinas 3D y servicios personalizados en Chile.",
+    "Ecommerce de Rekun LAB enfocado en filamentos PLA, impresion 3D personalizada, impresoras 3D, packs y soluciones sustentables para Chile.",
   descripcionCorta:
-    "Base comercial de Rekun LAB preparada para montar catalogo, servicios, cotizaciones y experiencia de compra sobre una estructura tecnica escalable.",
+    "Marca chilena enfocada en filamentos PLA, impresion 3D y soluciones sustentables con una experiencia de compra clara y profesional.",
   urlBase: process.env.NEXT_PUBLIC_URL_BASE?.trim() || "http://localhost:3000",
   locale: "es-CL",
   palabrasClave: [

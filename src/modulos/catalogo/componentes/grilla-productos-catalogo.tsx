@@ -22,7 +22,7 @@ export function GrillaProductosCatalogo({
     return (
       <EstadoVacioCatalogo
         titulo="No encontramos productos con esta combinacion de filtros"
-        descripcion="Prueba con otra categoria, una coleccion distinta o reinicia la seleccion para volver a ver el catalogo completo."
+        descripcion="Ajusta la categoria, la coleccion o el tipo de producto para volver a recorrer el catalogo."
         accion={
           cantidadFiltrosActivos > 0 ? (
             <Boton variante="secundario" onClick={alLimpiarFiltros}>
@@ -38,15 +38,15 @@ export function GrillaProductosCatalogo({
     <section aria-labelledby="titulo-grilla-catalogo" className="space-y-6">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div className="space-y-3">
-          <Etiqueta variante="suave">Seleccion actual</Etiqueta>
+          <Etiqueta variante="suave">Resultados</Etiqueta>
           <div className="space-y-2">
             <h2 id="titulo-grilla-catalogo" className="titulo-seccion text-slate-950">
-              Exploracion comercial clara, simple y preparada para crecer
+              Productos disponibles
             </h2>
             <p className="texto-soporte max-w-3xl">
               {cantidadFiltrosActivos > 0
                 ? `Mostrando ${productos.length} de ${cantidadProductosTotales} productos segun la seleccion activa.`
-                : "Cada tarjeta expone imagen, nombre comercial, categoria, coleccion, precio final y etiquetas comerciales usando datos reales del catalogo."}
+                : "Una vitrina mas limpia para comparar nombre comercial, categoria, precio final y atributos relevantes."}
             </p>
           </div>
         </div>

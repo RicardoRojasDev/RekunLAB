@@ -58,8 +58,8 @@ export function ResumenCarrito({
               Subtotal del carrito
             </h2>
             <p className="texto-soporte">
-              Esta capa ya conversa con checkout y conserva los datos
-              comerciales necesarios para registrar pedidos reales.
+              Resumen claro de productos, unidades y total antes de pasar al
+              checkout.
             </p>
           </div>
         </div>

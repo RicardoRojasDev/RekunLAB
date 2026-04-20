@@ -7,7 +7,7 @@ type PropiedadesPaginaResultadoCheckout = Readonly<{
 }>;
 
 const descripcion =
-  "Estado del pago y del pedido en Rekun LAB, con confirmacion server-side y reintento seguro si corresponde.";
+  "Estado del pago y del pedido en Rekun LAB con confirmacion clara y opcion de reintento si corresponde.";
 
 export const metadata: Metadata = {
   title: "Resultado del pago",

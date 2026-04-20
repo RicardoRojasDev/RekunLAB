@@ -11,8 +11,8 @@ export function CatalogoCargando() {
           <Contenedor variante="oscuro" relleno="lg">
             <div className="space-y-6">
               <div className="flex flex-wrap gap-2">
-                <Etiqueta variante="oscura">Catalogo en preparacion</Etiqueta>
-                <Etiqueta variante="premium">Consultando Supabase</Etiqueta>
+                <Etiqueta variante="oscura">Catalogo Rekun LAB</Etiqueta>
+                <Etiqueta variante="premium">Cargando productos</Etiqueta>
               </div>
 
               <div className="space-y-4">
@@ -24,7 +24,7 @@ export function CatalogoCargando() {
                 <div className="esqueleto-carga esqueleto-carga-oscura h-[4.5rem] max-w-3xl rounded-[var(--radio-lg)]" />
               </div>
 
-              <Cargador etiqueta="Cargando catalogo visual" tamanio="lg" />
+              <Cargador etiqueta="Cargando catalogo" tamanio="lg" />
             </div>
           </Contenedor>
 

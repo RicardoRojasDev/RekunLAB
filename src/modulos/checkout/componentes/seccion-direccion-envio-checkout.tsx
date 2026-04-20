@@ -46,7 +46,7 @@ export function SeccionDireccionEnvioCheckout({
           onChange={(evento) => alCambiarCampo("region", evento.target.value)}
           error={errores.region ?? undefined}
           autoComplete="address-level1"
-          placeholder="Ej: Metropolitana"
+          placeholder="Region Metropolitana"
         />
 
         <CampoTexto
@@ -57,7 +57,7 @@ export function SeccionDireccionEnvioCheckout({
           onChange={(evento) => alCambiarCampo("comuna", evento.target.value)}
           error={errores.comuna ?? undefined}
           autoComplete="address-level2"
-          placeholder="Ej: Providencia"
+          placeholder="Providencia"
         />
 
         <CampoTexto
@@ -68,7 +68,7 @@ export function SeccionDireccionEnvioCheckout({
           onChange={(evento) => alCambiarCampo("calle", evento.target.value)}
           error={errores.calle ?? undefined}
           autoComplete="address-line1"
-          placeholder="Ej: Av. Siempre Viva"
+          placeholder="Av. Providencia"
         />
 
         <CampoTexto
@@ -79,7 +79,7 @@ export function SeccionDireccionEnvioCheckout({
           onChange={(evento) => alCambiarCampo("numero", evento.target.value)}
           error={errores.numero ?? undefined}
           autoComplete="address-line2"
-          placeholder="Ej: 742"
+          placeholder="1234"
         />
 
         <CampoTexto
@@ -88,7 +88,7 @@ export function SeccionDireccionEnvioCheckout({
           value={valores.departamento}
           onChange={(evento) => alCambiarCampo("departamento", evento.target.value)}
           error={errores.departamento ?? undefined}
-          placeholder="Ej: Depto 1203"
+          placeholder="Depto 1203"
         />
 
         <CampoTexto
@@ -98,7 +98,7 @@ export function SeccionDireccionEnvioCheckout({
           onChange={(evento) => alCambiarCampo("codigoPostal", evento.target.value)}
           error={errores.codigoPostal ?? undefined}
           inputMode="numeric"
-          placeholder="Ej: 7500000"
+          placeholder="7500000"
         />
       </div>
 
@@ -108,9 +108,8 @@ export function SeccionDireccionEnvioCheckout({
         value={valores.referencias}
         onChange={(evento) => alCambiarCampo("referencias", evento.target.value)}
         error={errores.referencias ?? undefined}
-        placeholder="Ej: Timbre azul, porton negro, conserjeria, etc."
+        placeholder="Timbre azul, recepcion o referencia de acceso"
       />
     </Tarjeta>
   );
 }
-

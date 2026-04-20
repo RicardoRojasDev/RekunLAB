@@ -8,8 +8,8 @@ type PropiedadesEstadoVacioCatalogo = Readonly<{
 }>;
 
 export function EstadoVacioCatalogo({
-  titulo = "No hay productos para mostrar todavia",
-  descripcion = "No hay productos activos disponibles en el catalogo real. Revisa la carga en Supabase o ajusta los filtros aplicados.",
+  titulo = "No hay productos disponibles por ahora",
+  descripcion = "No encontramos productos activos para mostrar en este momento. Vuelve a intentarlo en unos minutos o revisa otro filtro.",
   accion,
 }: PropiedadesEstadoVacioCatalogo) {
   return (

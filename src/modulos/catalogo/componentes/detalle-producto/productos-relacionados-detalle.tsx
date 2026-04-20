@@ -24,11 +24,11 @@ export function ProductosRelacionadosDetalle({
               id="titulo-productos-relacionados"
               className="titulo-seccion text-slate-950"
             >
-              Otras opciones del catalogo que conversan con esta ficha
+              Otras opciones para seguir explorando
             </h2>
             <p className="texto-soporte max-w-3xl">
-              La relacion se calcula con el catalogo real segun categoria,
-              subcategoria, coleccion, marca y nivel comercial.
+              Productos del mismo universo comercial para comparar alternativas
+              sin salir del recorrido de compra.
             </p>
           </div>
         </div>

@@ -9,16 +9,6 @@ export const enlacesNavegacionPrincipal = [
     href: "/catalogo",
     estado: "disponible",
   },
-  {
-    etiqueta: "Servicios",
-    href: null,
-    estado: "preparado",
-  },
-  {
-    etiqueta: "Cotizaciones",
-    href: null,
-    estado: "preparado",
-  },
 ] as const;
 
 export const capacidadesMarca = [
@@ -30,7 +20,7 @@ export const capacidadesMarca = [
 export const indicadoresOperacionInicial = [
   "Solo Chile",
   "IVA incluido",
-  "Envios",
+  "Solo envios",
 ] as const;
 
 export const espaciosPreparadosLayout = [

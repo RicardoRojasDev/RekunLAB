@@ -197,8 +197,8 @@ export function PanelCompraProductoDetalle({
                     Selecciona color, peso o formato segun corresponda
                   </h2>
                   <p className="text-sm leading-7 text-slate-600">
-                    La estructura ya admite atributos futuros sin convertir cada
-                    combinacion en un producto separado.
+                    Elige la combinacion disponible antes de agregar el producto
+                    al carrito.
                   </p>
                 </div>
 
@@ -263,8 +263,8 @@ export function PanelCompraProductoDetalle({
               </div>
 
               <p className="text-xs leading-6 text-slate-500">
-                El carrito persiste en este dispositivo y conserva el snapshot
-                comercial del producto para continuar luego en checkout.
+                Puedes seguir ajustando tu compra en el carrito antes de pasar al
+                checkout.
               </p>
 
               <div aria-live="polite" className="min-h-6">

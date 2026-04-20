@@ -123,7 +123,7 @@ export function ProveedorAutenticacion({ children }: PropiedadesConHijos) {
       setDisponibilidad("no-configurada");
       setEstadoSesion("invitado");
       setMensajeError(
-        "Supabase Auth aun no esta configurado. Puedes seguir comprando como invitado.",
+        "El acceso con Google no esta disponible por ahora. Puedes seguir comprando como invitado.",
       );
       return;
     }

@@ -294,9 +294,8 @@ export function PaginaCheckoutVisual() {
               Finaliza tu compra
             </h1>
             <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-[1.05rem]">
-              Registramos el pedido primero en Supabase y luego iniciamos el pago
-              en Webpay Plus desde backend para validar consistencia y evitar
-              confiar en el frontend.
+              Revisa tus datos de contacto, direccion de despacho y resumen de
+              compra antes de continuar a pago.
             </p>
           </div>
         </header>
@@ -330,7 +329,7 @@ export function PaginaCheckoutVisual() {
             detalle={
               pedidoPendientePago
                 ? "El pedido ya existe y permanece vinculado al intento de pago. Puedes volver a intentarlo sin duplicar datos."
-                : "Revisa los campos e intenta nuevamente. Si el problema persiste, puede faltar configuracion de Supabase o de Webpay Plus en el servidor."
+                : "Revisa los campos e intenta nuevamente. Si el problema persiste, vuelve a intentarlo en unos minutos."
             }
           />
         ) : null}

@@ -7,7 +7,7 @@ import {
 } from "@/modulos/catalogo";
 
 const descripcionCatalogo =
-  "Catalogo real de Rekun LAB con productos administrables desde Supabase, enfoque premium y precios con IVA incluido para Chile.";
+  "Catalogo de Rekun LAB con filamentos PLA, impresoras 3D y packs, pensado para una compra clara en Chile.";
 
 export const metadata: Metadata = {
   title: "Catalogo",

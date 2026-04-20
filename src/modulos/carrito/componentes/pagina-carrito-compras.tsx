@@ -32,7 +32,7 @@ export function PaginaCarritoCompras() {
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
             <Etiqueta variante="primaria">Carrito activo</Etiqueta>
-            <Etiqueta variante="suave">Persistencia local</Etiqueta>
+            <Etiqueta variante="suave">Compra en Chile</Etiqueta>
             <Etiqueta variante="premium">IVA incluido</Etiqueta>
           </div>
 
@@ -41,12 +41,11 @@ export function PaginaCarritoCompras() {
               id="titulo-carrito"
               className="font-[var(--fuente-titulos)] text-[clamp(2.4rem,5vw,4.4rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-slate-950"
             >
-              Tu seleccion de compra
+              Tu carrito de compra
             </h1>
             <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-[1.05rem]">
-              Ajusta cantidades, elimina productos o sigue explorando el
-              catalogo. Desde aqui puedes pasar al checkout para validar tus
-              datos, direccion y registrar el pedido en Supabase.
+              Revisa cantidades, elimina productos o vuelve al catalogo antes de
+              pasar al checkout y confirmar tu pago.
             </p>
           </div>
         </div>
@@ -96,13 +95,12 @@ export function PaginaCarritoCompras() {
                       href="/catalogo"
                       className="boton-base boton-secundario min-h-11 justify-center px-4 text-sm"
                     >
-                      Seguir explorando
+                      Volver al catalogo
                     </Link>
 
                     <p className="text-xs leading-6 text-slate-500">
-                      El checkout actual valida datos y crea el pedido. El pago
-                      real y los correos transaccionales se integran en los
-                      modulos siguientes.
+                      El pago se confirma despues de revisar tus datos de contacto
+                      y despacho en el checkout.
                     </p>
                   </div>
                 }

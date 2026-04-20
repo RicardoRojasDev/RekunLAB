@@ -26,7 +26,7 @@ export function BloqueConfianzaComercialProducto() {
         <div className="space-y-2">
           <Etiqueta variante="suave">Confianza comercial</Etiqueta>
           <h2 className="text-xl font-semibold text-slate-950">
-            Senales claras para reducir friccion antes del checkout
+            Informacion util antes de avanzar a pago
           </h2>
         </div>
 

@@ -3,7 +3,7 @@ import { configuracionSitio } from "@/compartido/configuracion/sitio";
 import { PaginaAccesoUsuario } from "@/modulos/autenticacion";
 
 const descripcionAcceso =
-  "Acceso frontend de Rekun LAB con Google, deteccion de sesion y convivencia entre usuario autenticado e invitado.";
+  "Acceso de Rekun LAB con Google cuando esta disponible y continuidad de compra como invitado.";
 
 export const metadata: Metadata = {
   title: "Acceso",

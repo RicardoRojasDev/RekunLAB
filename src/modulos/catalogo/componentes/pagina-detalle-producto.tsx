@@ -38,9 +38,9 @@ export function PaginaDetalleProducto({
         </nav>
 
         <div className="flex flex-wrap gap-2">
-          <Etiqueta variante="suave">Detalle comercial</Etiqueta>
+          <Etiqueta variante="suave">Detalle de producto</Etiqueta>
           {producto.configuracionVariantes ? (
-            <Etiqueta variante="premium">Variantes activas</Etiqueta>
+            <Etiqueta variante="premium">Variantes disponibles</Etiqueta>
           ) : null}
         </div>
 

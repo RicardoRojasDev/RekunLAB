@@ -38,7 +38,7 @@ export function EstadoVacioCarrito({
       descripcion={
         compacto
           ? "Explora el catalogo y agrega productos para continuar armando tu compra."
-          : "Todavia no has agregado productos. El carrito ya queda listo para persistir localmente y conectarse despues al checkout."
+          : "Todavia no has agregado productos. Explora el catalogo para iniciar tu compra."
       }
       accion={accion}
     />

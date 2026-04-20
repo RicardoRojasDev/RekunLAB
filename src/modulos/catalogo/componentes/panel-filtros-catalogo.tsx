@@ -33,17 +33,15 @@ export function PanelFiltrosCatalogo({
       <div className="space-y-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-3">
-            <Etiqueta variante="primaria">Sistema de filtros</Etiqueta>
+            <Etiqueta variante="primaria">Filtros</Etiqueta>
 
             <div className="space-y-2">
               <h2 className="titulo-seccion text-slate-950">
-                Explora por categoria, coleccion, tipo y orden sin acoplar la
-                UI a una fuente fija de datos
+                Encuentra la opcion adecuada para tu compra
               </h2>
               <p className="texto-soporte max-w-3xl">
-                La URL conserva el estado base de filtrado y deja el contrato
-                listo para que despues la misma interfaz pueda hablar con datos
-                reales.
+                Filtra por categoria, coleccion, tipo de producto y orden para
+                recorrer el catalogo con menos friccion.
               </p>
             </div>
           </div>
@@ -108,13 +106,12 @@ export function PanelFiltrosCatalogo({
 
         <div className="flex min-h-6 items-center justify-between gap-3">
           <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-            Query params base habilitados para categoria, coleccion, tipo y
-            orden.
+            Seleccion actual actualizada en la vista del catalogo.
           </p>
 
           {sincronizandoUrl ? (
             <span className="text-xs uppercase tracking-[0.18em] text-slate-500">
-              Sincronizando URL...
+              Actualizando resultados...
             </span>
           ) : null}
         </div>

@@ -3,7 +3,7 @@ import { configuracionSitio } from "@/compartido/configuracion/sitio";
 import { PaginaCheckoutVisual } from "@/modulos/checkout";
 
 const descripcionCheckout =
-  "Checkout visual de Rekun LAB con compra como invitado, direccion de envio, validaciones base y resumen del carrito con IVA incluido.";
+  "Checkout de Rekun LAB con compra como invitado, direccion de envio y resumen claro del pedido antes de pagar.";
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -29,4 +29,3 @@ export const metadata: Metadata = {
 export default function PaginaCheckout() {
   return <PaginaCheckoutVisual />;
 }
-

@@ -11,7 +11,7 @@ type PropiedadesEncabezadoCatalogoProductos = Readonly<{
 const pilaresCatalogo = [
   "Solo Chile",
   "Precios con IVA incluido",
-  "Supabase como fuente de verdad",
+  "Despacho sin retiro",
 ] as const;
 
 export function EncabezadoCatalogoProductos({
@@ -44,8 +44,8 @@ export function EncabezadoCatalogoProductos({
       <Contenedor variante="oscuro" relleno="lg">
         <div className="flex h-full flex-col gap-6">
           <div className="flex flex-wrap gap-2">
-            <Etiqueta variante="oscura">Catalogo visual</Etiqueta>
-            <Etiqueta variante="premium">Catalogo real conectado</Etiqueta>
+            <Etiqueta variante="oscura">Catalogo Rekun LAB</Etiqueta>
+            <Etiqueta variante="premium">Filamentos, impresoras y packs</Etiqueta>
           </div>
 
           <div className="space-y-4">
@@ -53,13 +53,12 @@ export function EncabezadoCatalogoProductos({
               id="titulo-catalogo-productos"
               className="titulo-display max-w-4xl text-white"
             >
-              Catalogo real con estructura escalable para operar y crecer
+              Productos listos para una compra mas clara y directa
             </h1>
 
             <p className="max-w-3xl text-base leading-8 text-white/70 sm:text-[1.05rem]">
-              Filamentos PLA, impresoras 3D y packs viven sobre una capa
-              desacoplada de Supabase para seguir creciendo sin rehacer la
-              experiencia comercial.
+              Explora el catalogo de Rekun LAB por categoria, coleccion o tipo de
+              producto y encuentra rapidamente la opcion adecuada para tu compra.
             </p>
           </div>
 
@@ -76,15 +75,13 @@ export function EncabezadoCatalogoProductos({
       <Contenedor variante="elevado" relleno="lg">
         <div className="space-y-6">
           <div className="space-y-3">
-            <Etiqueta variante="primaria">Resumen comercial</Etiqueta>
+            <Etiqueta variante="primaria">Vista general</Etiqueta>
             <h2 className="titulo-seccion text-slate-950">
-              Base comercial pensada para administrar categorias, productos y
-              futuros modulos sin rigidizar el front
+              Una lectura ordenada del catalogo activo
             </h2>
             <p className="texto-soporte">
-              La pagina separa visualizacion, filtros y acceso a datos para que
-              carrito, checkout, pedidos y futuro panel admin compartan una
-              base estable.
+              Filamentos PLA, impresoras 3D y packs presentados con menos ruido
+              visual y mejor foco en el producto.
             </p>
           </div>
 

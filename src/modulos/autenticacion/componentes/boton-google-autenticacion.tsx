@@ -43,12 +43,12 @@ export function BotonGoogleAutenticacion({
       disabled={deshabilitado}
       title={
         deshabilitado
-          ? "Supabase Auth aun no esta configurado en este entorno"
+          ? "El acceso con Google no esta disponible en este entorno"
           : "Iniciar sesion con Google"
       }
       inicio={cargando ? null : <IconoGoogle />}
     >
-      {deshabilitado ? "Google no configurado" : "Entrar con Google"}
+      {deshabilitado ? "Google no disponible" : "Entrar con Google"}
     </Boton>
   );
 }

@@ -25,7 +25,7 @@ export function BloqueConfianzaCheckout() {
       variante="base"
       etiqueta={<Etiqueta variante="premium">Confianza comercial</Etiqueta>}
       titulo="Compra clara, sin sorpresas"
-      descripcion="Este bloque deja preparada la capa visual para politicas y garantias cuando existan definiciones formales."
+      descripcion="Condiciones visibles antes de confirmar el pago."
     >
       <ul className="grid gap-3">
         {mensajesConfianza.map((mensaje) => (
@@ -43,4 +43,3 @@ export function BloqueConfianzaCheckout() {
     </Tarjeta>
   );
 }
-
