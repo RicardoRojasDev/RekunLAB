@@ -9,18 +9,17 @@ export const enlacesNavegacionPrincipal = [
     href: "/catalogo",
     estado: "disponible",
   },
+  {
+    etiqueta: "Servicios",
+    href: "/servicios",
+    estado: "disponible",
+  },
 ] as const;
 
 export const capacidadesMarca = [
   "Impresion 3D sustentable",
   "Reciclaje de plastico",
   "Filamento PLA ecologico",
-] as const;
-
-export const indicadoresOperacionInicial = [
-  "Solo Chile",
-  "IVA incluido",
-  "Solo envios",
 ] as const;
 
 export const espaciosPreparadosLayout = [

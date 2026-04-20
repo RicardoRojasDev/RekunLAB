@@ -1,7 +1,5 @@
 import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-principal";
-import { Etiqueta } from "@/compartido/componentes/ui/etiqueta";
 import { NavegacionPrincipal } from "@/compartido/componentes/layout/navegacion-principal";
-import { indicadoresOperacionInicial } from "@/compartido/configuracion/layout-global";
 import { AccionesAutenticacionCabecera } from "@/modulos/autenticacion";
 import { AccionesCarritoCabecera } from "@/modulos/carrito";
 import { MarcaPrincipal } from "./marca-principal";
@@ -15,23 +13,6 @@ export function HeaderGlobal() {
             <MarcaPrincipal />
 
             <div className="flex flex-col gap-3 sm:items-end">
-              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-                {indicadoresOperacionInicial.map((etiqueta) => (
-                  <Etiqueta
-                    key={etiqueta}
-                    variante="suave"
-                    inicio={
-                      <span
-                        aria-hidden="true"
-                        className="h-2 w-2 rounded-full bg-[color:var(--color-acento)]"
-                      />
-                    }
-                  >
-                    {etiqueta}
-                  </Etiqueta>
-                ))}
-              </div>
-
               <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                 <AccionesAutenticacionCabecera />
                 <AccionesCarritoCabecera />

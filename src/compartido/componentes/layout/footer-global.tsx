@@ -3,7 +3,6 @@ import { ContenedorPrincipal } from "@/compartido/componentes/base/contenedor-pr
 import {
   capacidadesMarca,
   enlacesNavegacionPrincipal,
-  indicadoresOperacionInicial,
 } from "@/compartido/configuracion/layout-global";
 import { configuracionSitio } from "@/compartido/configuracion/sitio";
 import { MarcaPrincipal } from "./marca-principal";
@@ -60,17 +59,6 @@ export function FooterGlobal() {
             <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-white/78">
               Compra
             </h2>
-
-            <ul className="flex flex-wrap gap-2">
-              {indicadoresOperacionInicial.map((indicador) => (
-                <li
-                  key={indicador}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/68"
-                >
-                  {indicador}
-                </li>
-              ))}
-            </ul>
 
             <p className="max-w-xs text-sm leading-7 text-white/54">
               Filamentos PLA, impresoras 3D y packs presentados con una lectura
