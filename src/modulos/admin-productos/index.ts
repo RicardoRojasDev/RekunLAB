@@ -10,6 +10,7 @@ export {
 } from "./servicios/admin-productos-supabase";
 export { ErrorValidacionProductoAdmin } from "./validaciones/validar-datos-formulario-producto-admin";
 export { validarDatosFormularioProductoAdmin } from "./validaciones/validar-datos-formulario-producto-admin";
+export { PaginaAdminProductos } from "./componentes/pagina-admin-productos";
 export type {
   DatosFormularioProductoAdmin,
   OpcionReferenciaAdminProducto,
