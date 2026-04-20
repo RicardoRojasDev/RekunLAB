@@ -27,9 +27,8 @@ export function ProductosRelacionadosDetalle({
               Otras opciones del catalogo que conversan con esta ficha
             </h2>
             <p className="texto-soporte max-w-3xl">
-              La relacion se arma hoy con criterio mock por categoria,
-              coleccion y tipo de producto, lista para conectarse despues a
-              datos reales.
+              La relacion se calcula con el catalogo real segun categoria,
+              subcategoria, coleccion, marca y nivel comercial.
             </p>
           </div>
         </div>

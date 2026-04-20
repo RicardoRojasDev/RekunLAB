@@ -30,7 +30,7 @@ export function DrawerHeaderCarrito({
             </h2>
             <p className="text-sm leading-7 text-slate-600">
               {hidratado
-                ? `${resumen.cantidadUnidades} unidades listas para continuar hacia el checkout en el siguiente modulo.`
+                ? `${resumen.cantidadUnidades} unidades listas para continuar hacia checkout.`
                 : "Cargando estado local del carrito."}
             </p>
           </div>

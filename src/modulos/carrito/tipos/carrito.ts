@@ -21,23 +21,21 @@ export type VarianteItemCarrito = Readonly<{
 }>;
 
 export type EntradaAgregarItemCarrito = Readonly<{
-  // Campos básicos (existentes)
   productoId: string;
   slug: string;
   nombre: string;
+  nombreCompleto?: string;
   resumen: string;
   categoria: string;
+  subcategoria?: string;
+  marca?: string;
   tipoProducto: string;
+  nivel?: string;
   coleccion?: string;
   imagen: ImagenItemCarrito;
   precioUnitarioIvaIncluido: number;
   cantidad: number;
   etiquetasComerciales?: readonly string[];
-
-  // Campos NUEVOS para snapshot
-  nombreCompleto?: string;
-  marca?: string;
-  nivel?: string;
   formato?: string;
   pesoKg?: number;
   acabado?: string;
@@ -46,8 +44,6 @@ export type EntradaAgregarItemCarrito = Readonly<{
   compatiblePLA?: boolean;
   esDestacado?: boolean;
   estado?: string;
-
-  // Variante (existente)
   variante?: VarianteItemCarrito | null;
 }>;
 

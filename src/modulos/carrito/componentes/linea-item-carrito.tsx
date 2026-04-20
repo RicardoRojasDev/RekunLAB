@@ -24,6 +24,7 @@ export function LineaItemCarrito({
 }: PropiedadesLineaItemCarrito) {
   const { actualizarCantidadItem, eliminarItem } = useCarrito();
   const montoLinea = calcularMontoLineaItemCarrito(item);
+  const nombreVisible = item.nombreCompleto ?? item.nombre;
 
   return (
     <article className="grid gap-4 rounded-[var(--radio-lg)] border border-[color:var(--color-borde)] bg-white/72 p-4 sm:grid-cols-[7rem_minmax(0,1fr)] sm:p-5">
@@ -61,7 +62,7 @@ export function LineaItemCarrito({
                 onClick={alNavegar}
                 className="block font-[var(--fuente-titulos)] text-xl font-semibold leading-tight tracking-[-0.04em] text-slate-950 hover:text-[color:var(--color-primario-700)]"
               >
-                {item.nombre}
+                {nombreVisible}
               </Link>
 
               <p className="text-sm leading-7 text-slate-600">{item.resumen}</p>

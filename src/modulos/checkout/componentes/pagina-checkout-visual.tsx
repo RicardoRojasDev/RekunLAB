@@ -8,7 +8,11 @@ import { Boton, Etiqueta, MensajeError, ModalBase } from "@/compartido/component
 import { formatearPrecioClp } from "@/compartido/utilidades/formatear-precio-clp";
 import { useAutenticacion } from "@/modulos/autenticacion";
 import { useCarrito } from "@/modulos/carrito";
-import type { RespuestaApiCrearPedido, ResultadoCrearPedido, SolicitudCrearPedido } from "@/modulos/pedidos";
+import type {
+  RespuestaApiCrearPedido,
+  ResultadoCrearPedido,
+  SolicitudCrearPedido,
+} from "@/modulos/pedidos";
 import { useFormularioCheckout } from "../hooks/use-formulario-checkout";
 import { BloqueConfianzaCheckout } from "./bloque-confianza-checkout";
 import { CheckoutCargando } from "./checkout-cargando";
@@ -58,7 +62,9 @@ export function PaginaCheckoutVisual() {
   const { actualizarModoCheckout, hidratarDatosClienteDesdeSesion } = checkout;
   const [modalAbierto, setModalAbierto] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
-  const [pedidoCreado, setPedidoCreado] = useState<ResultadoCrearPedido | null>(null);
+  const [pedidoCreado, setPedidoCreado] = useState<ResultadoCrearPedido | null>(
+    null,
+  );
   const [cantidadUnidadesPedido, setCantidadUnidadesPedido] = useState(0);
 
   const estaVacio = hidratado && items.length === 0;
@@ -132,22 +138,20 @@ export function PaginaCheckoutVisual() {
         codigoPostal: checkout.valores.direccionEnvio.codigoPostal,
       },
       items: items.map((item) => ({
-        // Campos existentes
         slug: item.slug,
         nombre: item.nombre,
+        nombreCompleto: item.nombreCompleto,
         resumen: item.resumen,
         categoria: item.categoria,
+        subcategoria: item.subcategoria,
+        marca: item.marca,
         tipoProducto: item.tipoProducto,
+        nivel: item.nivel,
         coleccion: item.coleccion,
         precioUnitarioIvaIncluidoSnapshot: item.precioUnitarioIvaIncluido,
         cantidad: item.cantidad,
         etiquetasComerciales: item.etiquetasComerciales,
-
-        // Campos NUEVOS (si existen en item, se envían)
         idProducto: item.productoId,
-        nombreCompleto: item.nombreCompleto,
-        marca: item.marca,
-        nivel: item.nivel,
         formato: item.formato,
         pesoKg: item.pesoKg,
         acabado: item.acabado,
@@ -156,7 +160,6 @@ export function PaginaCheckoutVisual() {
         compatiblePLA: item.compatiblePLA,
         esDestacado: item.esDestacado,
         estado: item.estado,
-
         variante: item.variante
           ? {
               etiqueta: item.variante.etiqueta,
@@ -188,7 +191,10 @@ export function PaginaCheckoutVisual() {
         return payload;
       })
       .then((resultado) => {
-        const unidades = items.reduce((acumulador, item) => acumulador + item.cantidad, 0);
+        const unidades = items.reduce(
+          (acumulador, item) => acumulador + item.cantidad,
+          0,
+        );
         setPedidoCreado(resultado);
         setCantidadUnidadesPedido(unidades);
         vaciarCarrito();
@@ -317,7 +323,8 @@ export function PaginaCheckoutVisual() {
               Resumen rapido
             </p>
             <p className="text-sm leading-7 text-slate-700">
-              {pedidoCreado ? cantidadUnidadesPedido : resumen.cantidadUnidades} unidades, subtotal{" "}
+              {pedidoCreado ? cantidadUnidadesPedido : resumen.cantidadUnidades}{" "}
+              unidades, subtotal{" "}
               <span className="font-semibold text-slate-950">
                 {formatearPrecioClp(
                   pedidoCreado

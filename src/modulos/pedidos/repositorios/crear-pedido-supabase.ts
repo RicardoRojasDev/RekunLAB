@@ -23,21 +23,31 @@ type PayloadRpcCrearPedido = Readonly<{
   }>[];
 }>;
 
-function construirAtributosSnapshotItem(item: ItemCrearPedido): Record<string, unknown> {
+function construirAtributosSnapshotItem(
+  item: ItemCrearPedido,
+): Record<string, unknown> {
   return {
-    // Campos básicos
-    categoria: item.categoria,
-    tipoProducto: item.tipoProducto,
-    coleccion: item.coleccion ?? null,
-    etiquetasComerciales: item.etiquetasComerciales ?? [],
-
-    // Campos NUEVOS para auditoría
     idProducto: item.idProducto ?? null,
+    slugProducto: item.slug,
+    nombreProducto: item.nombre,
+    nombreCompletoProducto: item.nombreCompleto ?? null,
+    marcaProducto: item.marca ?? null,
+    tipoProducto: item.tipoProducto,
+    categoriaProducto: item.categoria,
+    subcategoriaProducto: item.subcategoria ?? null,
+    nivelProducto: item.nivel ?? null,
+    coleccionProducto: item.coleccion ?? null,
+    etiquetasComerciales: item.etiquetasComerciales ?? [],
+    precioUnitarioCLP: item.precioUnitarioIvaIncluidoSnapshot,
+    cantidad: item.cantidad,
+    subtotalCLP: item.precioUnitarioIvaIncluidoSnapshot * item.cantidad,
+    categoria: item.categoria,
+    subcategoria: item.subcategoria ?? null,
+    tipoProductoLegacy: item.tipoProducto,
+    coleccion: item.coleccion ?? null,
     nombreCompleto: item.nombreCompleto ?? null,
     marca: item.marca ?? null,
     nivel: item.nivel ?? null,
-
-    // Campos NUEVOS específicos por tipo
     formato: item.formato ?? null,
     pesoKg: item.pesoKg ?? null,
     acabado: item.acabado ?? null,
@@ -46,8 +56,6 @@ function construirAtributosSnapshotItem(item: ItemCrearPedido): Record<string, u
     compatiblePLA: item.compatiblePLA ?? null,
     esDestacado: item.esDestacado ?? null,
     estado: item.estado ?? null,
-
-    // Variante (si aplica)
     variante: item.variante
       ? {
           etiqueta: item.variante.etiqueta,
@@ -58,7 +66,9 @@ function construirAtributosSnapshotItem(item: ItemCrearPedido): Record<string, u
   };
 }
 
-function construirPayloadRpc(solicitud: SolicitudCrearPedido): PayloadRpcCrearPedido {
+function construirPayloadRpc(
+  solicitud: SolicitudCrearPedido,
+): PayloadRpcCrearPedido {
   return {
     datosCliente: solicitud.datosCliente,
     direccionDespacho: solicitud.direccionDespacho,
@@ -112,4 +122,3 @@ export async function crearPedidoDesdeCheckoutSupabase(
     totalIvaIncluido: resultado.total_iva_incluido,
   };
 }
-

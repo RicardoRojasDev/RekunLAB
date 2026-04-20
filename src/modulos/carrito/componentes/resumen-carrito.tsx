@@ -58,8 +58,8 @@ export function ResumenCarrito({
               Subtotal del carrito
             </h2>
             <p className="texto-soporte">
-              Esta base ya queda lista para conectar envio y checkout en el
-              siguiente modulo sin rehacer la interfaz.
+              Esta capa ya conversa con checkout y conserva los datos
+              comerciales necesarios para registrar pedidos reales.
             </p>
           </div>
         </div>

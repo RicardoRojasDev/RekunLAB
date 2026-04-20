@@ -17,6 +17,8 @@ export function PaginaDetalleProducto({
   producto,
   productosRelacionados,
 }: PropiedadesPaginaDetalleProducto) {
+  const nombreVisible = producto.nombreCompleto ?? producto.nombre;
+
   return (
     <section aria-labelledby="titulo-detalle-producto">
       <ContenedorPrincipal claseName="flex flex-col gap-[var(--espacio-xl)] pb-[var(--espacio-2xl)]">
@@ -32,7 +34,7 @@ export function PaginaDetalleProducto({
             Catalogo
           </Link>
           <span aria-hidden="true">/</span>
-          <span className="text-slate-900">{producto.nombre}</span>
+          <span className="text-slate-900">{nombreVisible}</span>
         </nav>
 
         <div className="flex flex-wrap gap-2">

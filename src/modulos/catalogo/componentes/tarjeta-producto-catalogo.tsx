@@ -33,6 +33,8 @@ function resolverVarianteEtiquetaComercial(etiqueta: string) {
 export function TarjetaProductoCatalogo({
   producto,
 }: PropiedadesTarjetaProductoCatalogo) {
+  const nombreVisible = producto.nombreCompleto ?? producto.nombre;
+
   return (
     <Contenedor
       etiquetaHtml="article"
@@ -42,7 +44,7 @@ export function TarjetaProductoCatalogo({
       <Link
         href={`/catalogo/${producto.slug}`}
         className="flex h-full flex-col"
-        aria-label={`Ver detalle de ${producto.nombre}`}
+        aria-label={`Ver detalle de ${nombreVisible}`}
       >
         <div className="relative aspect-[4/4.6] overflow-hidden border-b border-[color:var(--color-borde)] bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(237,242,238,0.92))]">
           <Image
@@ -80,7 +82,7 @@ export function TarjetaProductoCatalogo({
 
             <div className="space-y-2">
               <h3 className="font-[var(--fuente-titulos)] text-[1.45rem] font-semibold leading-tight tracking-[-0.04em] text-slate-950">
-                {producto.nombre}
+                {nombreVisible}
               </h3>
 
               <p className="text-sm leading-7 text-slate-600">

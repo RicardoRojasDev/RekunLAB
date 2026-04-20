@@ -22,7 +22,7 @@ export function GrillaProductosCatalogo({
     return (
       <EstadoVacioCatalogo
         titulo="No encontramos productos con esta combinacion de filtros"
-        descripcion="Prueba con otra categoria, una coleccion distinta o reinicia la seleccion para volver a ver todo el catalogo mock."
+        descripcion="Prueba con otra categoria, una coleccion distinta o reinicia la seleccion para volver a ver el catalogo completo."
         accion={
           cantidadFiltrosActivos > 0 ? (
             <Boton variante="secundario" onClick={alLimpiarFiltros}>
@@ -46,7 +46,7 @@ export function GrillaProductosCatalogo({
             <p className="texto-soporte max-w-3xl">
               {cantidadFiltrosActivos > 0
                 ? `Mostrando ${productos.length} de ${cantidadProductosTotales} productos segun la seleccion activa.`
-                : "Cada tarjeta expone imagen, nombre, categoria, coleccion, precio final y etiquetas comerciales sin mezclar todavia detalle completo ni carrito funcional."}
+                : "Cada tarjeta expone imagen, nombre comercial, categoria, coleccion, precio final y etiquetas comerciales usando datos reales del catalogo."}
             </p>
           </div>
         </div>

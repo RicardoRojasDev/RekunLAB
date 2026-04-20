@@ -45,8 +45,8 @@ export function PaginaCarritoCompras() {
             </h1>
             <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-[1.05rem]">
               Ajusta cantidades, elimina productos o sigue explorando el
-              catalogo. Esta etapa no crea pedidos; el checkout visual valida tus
-              datos y direccion antes de integrar pagos.
+              catalogo. Desde aqui puedes pasar al checkout para validar tus
+              datos, direccion y registrar el pedido en Supabase.
             </p>
           </div>
         </div>
@@ -100,9 +100,9 @@ export function PaginaCarritoCompras() {
                     </Link>
 
                     <p className="text-xs leading-6 text-slate-500">
-                      El checkout actual es visual: valida datos y muestra el
-                      resumen con IVA incluido, sin crear pedidos ni integrar
-                      pagos todavia.
+                      El checkout actual valida datos y crea el pedido. El pago
+                      real y los correos transaccionales se integran en los
+                      modulos siguientes.
                     </p>
                   </div>
                 }

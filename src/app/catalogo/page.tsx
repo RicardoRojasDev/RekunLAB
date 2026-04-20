@@ -7,7 +7,7 @@ import {
 } from "@/modulos/catalogo";
 
 const descripcionCatalogo =
-  "Catalogo visual de Rekun LAB con datos mock profesionales, grilla responsive y base lista para reemplazar mocks por datos reales.";
+  "Catalogo real de Rekun LAB con productos administrables desde Supabase, enfoque premium y precios con IVA incluido para Chile.";
 
 export const metadata: Metadata = {
   title: "Catalogo",

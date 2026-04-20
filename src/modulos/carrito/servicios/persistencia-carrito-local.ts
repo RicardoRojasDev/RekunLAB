@@ -26,6 +26,16 @@ function obtenerNumeroPositivo(valor: unknown) {
     : null;
 }
 
+function obtenerNumeroNoNegativo(valor: unknown) {
+  return typeof valor === "number" && Number.isFinite(valor) && valor >= 0
+    ? valor
+    : null;
+}
+
+function obtenerBooleano(valor: unknown) {
+  return typeof valor === "boolean" ? valor : undefined;
+}
+
 function normalizarImagenItemCarrito(valor: unknown): ImagenItemCarrito | null {
   if (!esRegistro(valor)) {
     return null;
@@ -121,15 +131,27 @@ function normalizarItemCarrito(valor: unknown): ItemCarrito | null {
   const productoId = obtenerTexto(valor.productoId);
   const slug = obtenerTexto(valor.slug);
   const nombre = obtenerTexto(valor.nombre);
+  const nombreCompleto = obtenerTexto(valor.nombreCompleto) ?? undefined;
   const resumen = obtenerTexto(valor.resumen);
   const categoria = obtenerTexto(valor.categoria);
+  const subcategoria = obtenerTexto(valor.subcategoria) ?? undefined;
+  const marca = obtenerTexto(valor.marca) ?? undefined;
   const tipoProducto = obtenerTexto(valor.tipoProducto);
+  const nivel = obtenerTexto(valor.nivel) ?? undefined;
   const coleccion = obtenerTexto(valor.coleccion) ?? undefined;
   const imagen = normalizarImagenItemCarrito(valor.imagen);
   const precioUnitarioIvaIncluido = obtenerNumeroPositivo(
     valor.precioUnitarioIvaIncluido,
   );
   const cantidad = obtenerNumeroPositivo(valor.cantidad);
+  const formato = obtenerTexto(valor.formato) ?? undefined;
+  const pesoKg = obtenerNumeroNoNegativo(valor.pesoKg) ?? undefined;
+  const acabado = obtenerTexto(valor.acabado) ?? undefined;
+  const efecto = obtenerTexto(valor.efecto) ?? undefined;
+  const colorHex = obtenerTexto(valor.colorHex) ?? undefined;
+  const compatiblePLA = obtenerBooleano(valor.compatiblePLA);
+  const esDestacado = obtenerBooleano(valor.esDestacado);
+  const estado = obtenerTexto(valor.estado) ?? undefined;
   const etiquetasComerciales = Array.isArray(valor.etiquetasComerciales)
     ? valor.etiquetasComerciales.filter(
         (etiqueta): etiqueta is string => typeof etiqueta === "string",
@@ -159,14 +181,26 @@ function normalizarItemCarrito(valor: unknown): ItemCarrito | null {
     productoId,
     slug,
     nombre,
+    nombreCompleto,
     resumen,
     categoria,
+    subcategoria,
+    marca,
     tipoProducto,
+    nivel,
     coleccion,
     imagen,
     precioUnitarioIvaIncluido,
     cantidad,
     etiquetasComerciales,
+    formato,
+    pesoKg,
+    acabado,
+    efecto,
+    colorHex,
+    compatiblePLA,
+    esDestacado,
+    estado,
     variante,
   };
 }

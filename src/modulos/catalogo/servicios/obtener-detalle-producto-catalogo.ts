@@ -1,9 +1,9 @@
-import { productosCatalogoMock } from "../datos/productos-catalogo-mock";
 import type {
   ProductoCatalogo,
   ProductoCatalogoPorSlug,
   RespuestaProductosRelacionadosCatalogo,
 } from "../tipos/producto-catalogo";
+import { consultarProductosCatalogoSupabase } from "./catalogo-supabase";
 
 type OpcionesProductosRelacionadosCatalogo = Readonly<{
   limite?: number;
@@ -14,6 +14,13 @@ function puntuarProductoRelacionado(
   productoCandidato: ProductoCatalogo,
 ): number {
   let puntaje = 0;
+
+  if (
+    productoActual.subcategoria &&
+    productoCandidato.subcategoria === productoActual.subcategoria
+  ) {
+    puntaje += 4;
+  }
 
   if (
     productoActual.coleccion &&
@@ -30,17 +37,27 @@ function puntuarProductoRelacionado(
     puntaje += 2;
   }
 
+  if (productoActual.marca && productoCandidato.marca === productoActual.marca) {
+    puntaje += 2;
+  }
+
+  if (productoActual.nivel && productoCandidato.nivel === productoActual.nivel) {
+    puntaje += 1;
+  }
+
   return puntaje;
 }
 
 export async function obtenerProductoCatalogoPorSlug(
   slug: string,
 ): Promise<ProductoCatalogoPorSlug> {
-  return productosCatalogoMock.find((producto) => producto.slug === slug) ?? null;
+  const productos = await consultarProductosCatalogoSupabase({ slug });
+  return productos[0] ?? null;
 }
 
 export async function obtenerSlugsCatalogo(): Promise<readonly string[]> {
-  return productosCatalogoMock.map((producto) => producto.slug);
+  const productos = await consultarProductosCatalogoSupabase();
+  return productos.map((producto) => producto.slug);
 }
 
 export async function obtenerProductosRelacionadosCatalogo(
@@ -48,13 +65,16 @@ export async function obtenerProductosRelacionadosCatalogo(
   opciones: OpcionesProductosRelacionadosCatalogo = {},
 ): Promise<RespuestaProductosRelacionadosCatalogo> {
   const { limite = 3 } = opciones;
-  const productoActual = await obtenerProductoCatalogoPorSlug(slug);
+  const [productoActual, productosCatalogo] = await Promise.all([
+    obtenerProductoCatalogoPorSlug(slug),
+    consultarProductosCatalogoSupabase(),
+  ]);
 
   if (!productoActual) {
     return [];
   }
 
-  return productosCatalogoMock
+  return productosCatalogo
     .filter((producto) => producto.slug !== slug)
     .sort((productoA, productoB) => {
       const puntajeA = puntuarProductoRelacionado(productoActual, productoA);

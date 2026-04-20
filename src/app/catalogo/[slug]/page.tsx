@@ -34,12 +34,14 @@ export async function generateMetadata({
     };
   }
 
+  const nombreVisible = producto.nombreCompleto ?? producto.nombre;
+
   return {
-    title: producto.nombre,
+    title: nombreVisible,
     description: producto.resumen,
     keywords: [
       ...configuracionSitio.palabrasClave,
-      producto.nombre,
+      nombreVisible,
       producto.categoria,
       producto.tipoProducto,
       producto.coleccion ?? "",
@@ -48,7 +50,7 @@ export async function generateMetadata({
       canonical: `/catalogo/${producto.slug}`,
     },
     openGraph: {
-      title: `${producto.nombre} | ${configuracionSitio.nombre}`,
+      title: `${nombreVisible} | ${configuracionSitio.nombre}`,
       description: producto.resumen,
       url: `${configuracionSitio.urlBase}/catalogo/${producto.slug}`,
       siteName: configuracionSitio.nombre,
@@ -63,7 +65,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${producto.nombre} | ${configuracionSitio.nombre}`,
+      title: `${nombreVisible} | ${configuracionSitio.nombre}`,
       description: producto.resumen,
     },
   };

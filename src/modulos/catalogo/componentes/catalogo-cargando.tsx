@@ -12,7 +12,7 @@ export function CatalogoCargando() {
             <div className="space-y-6">
               <div className="flex flex-wrap gap-2">
                 <Etiqueta variante="oscura">Catalogo en preparacion</Etiqueta>
-                <Etiqueta variante="premium">Esperando datos mock</Etiqueta>
+                <Etiqueta variante="premium">Consultando Supabase</Etiqueta>
               </div>
 
               <div className="space-y-4">

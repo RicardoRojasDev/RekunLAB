@@ -57,7 +57,10 @@ function resolverSeleccionesVarianteParaCarrito(
         valorOpcion: opcion.valor,
       };
     })
-    .filter((seleccion): seleccion is SeleccionVarianteItemCarrito => Boolean(seleccion));
+    .filter(
+      (seleccion): seleccion is SeleccionVarianteItemCarrito =>
+        Boolean(seleccion),
+    );
 }
 
 export function PanelCompraProductoDetalle({
@@ -71,13 +74,14 @@ export function PanelCompraProductoDetalle({
   alSeleccionarOpcion,
 }: PropiedadesPanelCompraProductoDetalle) {
   const { agregarItem } = useCarrito();
+  const nombreVisible = producto.nombreCompleto ?? producto.nombre;
   const [cantidad, setCantidad] = useState(1);
-  const [ultimaCantidadAgregada, setUltimaCantidadAgregada] = useState<number | null>(
-    null,
-  );
-  const [mensajeErrorVariante, setMensajeErrorVariante] = useState<string | null>(
-    null,
-  );
+  const [ultimaCantidadAgregada, setUltimaCantidadAgregada] = useState<
+    number | null
+  >(null);
+  const [mensajeErrorVariante, setMensajeErrorVariante] = useState<
+    string | null
+  >(null);
 
   function manejarSeleccionVariante(codigoAtributo: string, opcionId: string) {
     setMensajeErrorVariante(null);
@@ -103,14 +107,26 @@ export function PanelCompraProductoDetalle({
         productoId: producto.id,
         slug: producto.slug,
         nombre: producto.nombre,
+        nombreCompleto: producto.nombreCompleto,
         resumen: producto.resumen,
         categoria: producto.categoria,
+        subcategoria: producto.subcategoria,
+        marca: producto.marca,
         tipoProducto: producto.tipoProducto,
+        nivel: producto.nivel,
         coleccion: producto.coleccion,
         imagen: vistaDetalle.imagen,
         precioUnitarioIvaIncluido: vistaDetalle.precioIvaIncluido,
         cantidad,
         etiquetasComerciales: producto.etiquetasComerciales,
+        formato: producto.formato,
+        pesoKg: producto.pesoKg,
+        acabado: producto.acabado,
+        efecto: producto.efecto,
+        colorHex: producto.colorHex,
+        compatiblePLA: producto.compatiblePLA,
+        esDestacado: producto.esDestacado,
+        estado: producto.estado,
         variante: vistaDetalle.varianteSeleccionada
           ? {
               id: vistaDetalle.varianteSeleccionada.id,
@@ -146,7 +162,7 @@ export function PanelCompraProductoDetalle({
               id="titulo-detalle-producto"
               className="font-[var(--fuente-titulos)] text-[clamp(2.25rem,4vw,3.7rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-slate-950"
             >
-              {producto.nombre}
+              {nombreVisible}
             </h1>
 
             <p className="text-base leading-8 text-slate-600 sm:text-[1.05rem]">
@@ -247,15 +263,16 @@ export function PanelCompraProductoDetalle({
               </div>
 
               <p className="text-xs leading-6 text-slate-500">
-                El carrito ya persiste en este dispositivo para validar la UX de
-                compra. Todavia no crea pedidos ni avanza al checkout.
+                El carrito persiste en este dispositivo y conserva el snapshot
+                comercial del producto para continuar luego en checkout.
               </p>
 
               <div aria-live="polite" className="min-h-6">
                 {ultimaCantidadAgregada ? (
                   <p className="text-sm font-medium text-[color:var(--color-primario-700)]">
-                    {ultimaCantidadAgregada} {resolverEtiquetaUnidades(ultimaCantidadAgregada)}{" "}
-                    agregadas al carrito
+                    {ultimaCantidadAgregada}{" "}
+                    {resolverEtiquetaUnidades(ultimaCantidadAgregada)} agregadas
+                    al carrito
                     {vistaDetalle.varianteSeleccionada
                       ? ` (${vistaDetalle.varianteSeleccionada.etiqueta}).`
                       : "."}

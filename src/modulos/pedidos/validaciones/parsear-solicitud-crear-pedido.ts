@@ -26,6 +26,11 @@ function obtenerArreglo(registro: RegistroDesconocido, clave: string) {
   return Array.isArray(valor) ? valor : [];
 }
 
+function obtenerBooleano(registro: RegistroDesconocido, clave: string) {
+  const valor = registro[clave];
+  return typeof valor === "boolean" ? valor : undefined;
+}
+
 function parsearSeleccionVariante(valor: unknown): SeleccionVariantePedido | null {
   if (!esRegistro(valor)) {
     return null;
@@ -72,6 +77,7 @@ function parsearItemCrearPedido(valor: unknown): ItemCrearPedido | null {
   const coleccion = obtenerTexto(valor, "coleccion");
   const idProducto = obtenerTexto(valor, "idProducto");
   const nombreCompleto = obtenerTexto(valor, "nombreCompleto");
+  const subcategoria = obtenerTexto(valor, "subcategoria");
   const marca = obtenerTexto(valor, "marca");
   const nivel = obtenerTexto(valor, "nivel");
   const formato = obtenerTexto(valor, "formato");
@@ -81,15 +87,19 @@ function parsearItemCrearPedido(valor: unknown): ItemCrearPedido | null {
   const estado = obtenerTexto(valor, "estado");
 
   const pesoKg = obtenerNumero(valor, "pesoKg");
-  const compatiblePLA = valor["compatiblePLA"] === true;
-  const esDestacado = valor["esDestacado"] === true;
+  const compatiblePLA = obtenerBooleano(valor, "compatiblePLA");
+  const esDestacado = obtenerBooleano(valor, "esDestacado");
 
   return {
     slug: obtenerTexto(valor, "slug"),
     nombre: obtenerTexto(valor, "nombre"),
+    nombreCompleto: nombreCompleto.length ? nombreCompleto : undefined,
     resumen: obtenerTexto(valor, "resumen"),
     categoria: obtenerTexto(valor, "categoria"),
+    subcategoria: subcategoria.length ? subcategoria : undefined,
+    marca: marca.length ? marca : undefined,
     tipoProducto: obtenerTexto(valor, "tipoProducto"),
+    nivel: nivel.length ? nivel : undefined,
     coleccion: coleccion.length ? coleccion : undefined,
     precioUnitarioIvaIncluidoSnapshot: obtenerNumero(
       valor,
@@ -97,21 +107,15 @@ function parsearItemCrearPedido(valor: unknown): ItemCrearPedido | null {
     ),
     cantidad: obtenerNumero(valor, "cantidad"),
     etiquetasComerciales: etiquetasComerciales.length ? etiquetasComerciales : undefined,
-
-    // Campos NUEVOS
     idProducto: idProducto.length ? idProducto : undefined,
-    nombreCompleto: nombreCompleto.length ? nombreCompleto : undefined,
-    marca: marca.length ? marca : undefined,
-    nivel: nivel.length ? nivel : undefined,
     formato: formato.length ? formato : undefined,
     pesoKg: Number.isFinite(pesoKg) ? pesoKg : undefined,
     acabado: acabado.length ? acabado : undefined,
     efecto: efecto.length ? efecto : undefined,
     colorHex: colorHex.length ? colorHex : undefined,
-    compatiblePLA: compatiblePLA ? true : undefined,
-    esDestacado: esDestacado ? true : undefined,
+    compatiblePLA,
+    esDestacado,
     estado: estado.length ? estado : undefined,
-
     variante,
   };
 }
@@ -154,4 +158,3 @@ export function parsearSolicitudCrearPedido(
     items,
   };
 }
-

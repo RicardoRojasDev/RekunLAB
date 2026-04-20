@@ -11,7 +11,7 @@ type PropiedadesEncabezadoCatalogoProductos = Readonly<{
 const pilaresCatalogo = [
   "Solo Chile",
   "Precios con IVA incluido",
-  "Datos mock desacoplados",
+  "Supabase como fuente de verdad",
 ] as const;
 
 export function EncabezadoCatalogoProductos({
@@ -45,7 +45,7 @@ export function EncabezadoCatalogoProductos({
         <div className="flex h-full flex-col gap-6">
           <div className="flex flex-wrap gap-2">
             <Etiqueta variante="oscura">Catalogo visual</Etiqueta>
-            <Etiqueta variante="premium">Frontend listo para datos reales</Etiqueta>
+            <Etiqueta variante="premium">Catalogo real conectado</Etiqueta>
           </div>
 
           <div className="space-y-4">
@@ -53,14 +53,13 @@ export function EncabezadoCatalogoProductos({
               id="titulo-catalogo-productos"
               className="titulo-display max-w-4xl text-white"
             >
-              Productos con presencia premium, estructura limpia y base lista
-              para integracion real
+              Catalogo real con estructura escalable para operar y crecer
             </h1>
 
             <p className="max-w-3xl text-base leading-8 text-white/70 sm:text-[1.05rem]">
-              El catalogo nace con una grilla comercial flexible, imagenes mock
-              bien modeladas y una capa de servicio separada para reemplazar la
-              fuente sin rehacer la experiencia.
+              Filamentos PLA, impresoras 3D y packs viven sobre una capa
+              desacoplada de Supabase para seguir creciendo sin rehacer la
+              experiencia comercial.
             </p>
           </div>
 
@@ -79,13 +78,13 @@ export function EncabezadoCatalogoProductos({
           <div className="space-y-3">
             <Etiqueta variante="primaria">Resumen comercial</Etiqueta>
             <h2 className="titulo-seccion text-slate-950">
-              Base visual pensada para crecer sin rehacer tarjetas ni fuentes
-              de datos
+              Base comercial pensada para administrar categorias, productos y
+              futuros modulos sin rigidizar el front
             </h2>
             <p className="texto-soporte">
-              La pagina ya diferencia dominio, mocks y componentes para que
-              filtros, detalle, carrito o integracion real entren despues sobre
-              una base estable.
+              La pagina separa visualizacion, filtros y acceso a datos para que
+              carrito, checkout, pedidos y futuro panel admin compartan una
+              base estable.
             </p>
           </div>
 

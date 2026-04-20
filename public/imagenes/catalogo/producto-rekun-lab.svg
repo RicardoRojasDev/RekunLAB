@@ -1,0 +1,25 @@
+<svg width="1200" height="1440" viewBox="0 0 1200 1440" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1440" fill="#EEF4F0"/>
+  <rect x="60" y="60" width="1080" height="1320" rx="48" fill="url(#fondo)"/>
+  <circle cx="915" cy="285" r="210" fill="url(#halo)"/>
+  <path d="M248 326C248 249.784 309.784 188 386 188H700C776.216 188 838 249.784 838 326V640C838 716.216 776.216 778 700 778H386C309.784 778 248 716.216 248 640V326Z" fill="#0E2C25" fill-opacity="0.9"/>
+  <path d="M332 325C332 295.729 355.729 272 385 272H705C734.271 272 758 295.729 758 325V641C758 670.271 734.271 694 705 694H385C355.729 694 332 670.271 332 641V325Z" fill="#F7FAF8"/>
+  <path d="M389 1006C389 947.01 436.81 899.2 495.8 899.2H704.2C763.19 899.2 811 947.01 811 1006C811 1064.99 763.19 1112.8 704.2 1112.8H495.8C436.81 1112.8 389 1064.99 389 1006Z" fill="#0D7C66" fill-opacity="0.12"/>
+  <path d="M430 1006C430 969.651 459.451 940.2 495.8 940.2H704.2C740.549 940.2 770 969.651 770 1006C770 1042.35 740.549 1071.8 704.2 1071.8H495.8C459.451 1071.8 430 1042.35 430 1006Z" stroke="#0D7C66" stroke-width="2"/>
+  <path d="M600 347L655.909 475.194L795 486.557L689.211 578.286L721.263 714.843L600 642.96L478.737 714.843L510.789 578.286L405 486.557L544.091 475.194L600 347Z" fill="#C7A14D"/>
+  <rect x="389" y="1183" width="422" height="2" fill="#0E2C25" fill-opacity="0.12"/>
+  <path d="M454.358 832H515.574V849.556H474.038V875.65H512.374V892.63H474.038V937H454.358V832ZM530.514 832H550.194V919.982H593.93V937H530.514V832ZM652.711 832H678.393L713.707 937H693.102L685.689 912.468H645.13L637.68 937H617.434L652.711 832ZM681.128 896.626L665.265 844.35L649.404 896.626H681.128ZM727.214 832H746.894V884.912L781.055 832H802.259L768.173 882.016L804.658 937H782.179L757.261 897.346L746.894 912.506V937H727.214V832Z" fill="#0E2C25"/>
+  <path d="M431 1247H769" stroke="#0E2C25" stroke-width="2" stroke-linecap="round" stroke-dasharray="10 18"/>
+  <text x="600" y="1288" fill="#0E2C25" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700" letter-spacing="0.28em" text-anchor="middle">REKUN LAB</text>
+  <text x="600" y="1336" fill="#48635D" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="0.18em" text-anchor="middle">CATALOGO OFICIAL</text>
+  <defs>
+    <linearGradient id="fondo" x1="140" y1="132" x2="1008" y2="1328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E2ECE7"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(915 285) rotate(90) scale(210)">
+      <stop stop-color="#C7A14D" stop-opacity="0.48"/>
+      <stop offset="1" stop-color="#C7A14D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

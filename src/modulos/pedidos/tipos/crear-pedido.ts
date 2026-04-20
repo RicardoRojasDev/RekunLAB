@@ -30,22 +30,20 @@ export type VariantePedido = Readonly<{
 }>;
 
 export type ItemCrearPedido = Readonly<{
-  // Campos básicos (existentes)
   slug: string;
   nombre: string;
+  nombreCompleto?: string;
   resumen: string;
   categoria: string;
+  subcategoria?: string;
+  marca?: string;
   tipoProducto: string;
+  nivel?: string;
   coleccion?: string;
   precioUnitarioIvaIncluidoSnapshot: number;
   cantidad: number;
   etiquetasComerciales?: readonly string[];
-
-  // Campos NUEVOS para snapshot completo
   idProducto?: string;
-  nombreCompleto?: string;
-  marca?: string;
-  nivel?: string;
   formato?: string;
   pesoKg?: number;
   acabado?: string;
@@ -54,8 +52,6 @@ export type ItemCrearPedido = Readonly<{
   compatiblePLA?: boolean;
   esDestacado?: boolean;
   estado?: string;
-
-  // Variante (existente)
   variante?: VariantePedido | null;
 }>;
 
@@ -80,4 +76,3 @@ export type RespuestaApiCrearPedido =
       mensaje: string;
       detalle?: string;
     }>;
-

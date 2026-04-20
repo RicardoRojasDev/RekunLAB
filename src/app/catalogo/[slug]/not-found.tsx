@@ -8,7 +8,7 @@ export default function ProductoNoEncontrado() {
       <ContenedorPrincipal claseName="pb-[var(--espacio-2xl)]">
         <EstadoVacio
           titulo="No encontramos esta ficha de producto"
-          descripcion="El slug solicitado no existe en la capa mock actual del catalogo. Puedes volver al listado y seguir explorando desde ahi."
+          descripcion="El producto solicitado no existe, fue desactivado o aun no esta disponible en el catalogo real."
           accion={
             <Link
               href="/catalogo"

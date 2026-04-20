@@ -15,6 +15,7 @@ type PropiedadesResumenCheckout = Readonly<{
 
 function FilaItemResumenCheckout({ item }: Readonly<{ item: ItemCarrito }>) {
   const totalLinea = item.cantidad * item.precioUnitarioIvaIncluido;
+  const nombreVisible = item.nombreCompleto ?? item.nombre;
 
   return (
     <li className="flex gap-3 rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 p-3">
@@ -31,7 +32,7 @@ function FilaItemResumenCheckout({ item }: Readonly<{ item: ItemCarrito }>) {
 
       <div className="min-w-0 flex-1 space-y-1">
         <p className="truncate text-sm font-semibold text-slate-950">
-          {item.nombre}
+          {nombreVisible}
         </p>
         <p className="text-xs text-slate-500">
           {item.variante ? `Variante ${item.variante.etiqueta}` : item.tipoProducto}
@@ -100,4 +101,3 @@ export function ResumenCheckout({
     </Tarjeta>
   );
 }
-
