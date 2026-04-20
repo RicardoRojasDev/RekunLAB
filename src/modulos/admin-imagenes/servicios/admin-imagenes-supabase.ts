@@ -218,7 +218,7 @@ async function desmarcarImagenPrincipalProducto(productoId: string) {
     .from("imagen_producto")
     .update({ es_principal: false })
     .eq("producto_id", productoId)
-    .eq("variante_id", null);
+    .is("variante_id", null);
 
   if (error) {
     throw new ErrorOperacionAdminImagen(

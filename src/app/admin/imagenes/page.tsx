@@ -1,52 +1,49 @@
 import type { Metadata } from "next";
-import { PaginaSeccionAdminBase } from "@/modulos/admin";
+import {
+  obtenerVistaAdminImagenes,
+  PaginaAdminImagenes,
+} from "@/modulos/admin-imagenes";
 
-const basePreparada = [
-  {
-    titulo: "Seccion dedicada a medios",
-    descripcion:
-      "La ruta queda reservada para imagenes y storage sin contaminar productos o pedidos.",
-  },
-  {
-    titulo: "Espacio para integracion de storage",
-    descripcion:
-      "La base ya esta lista para sumar carga, asociacion y organizacion de archivos.",
-  },
-  {
-    titulo: "Preparada para crecimiento modular",
-    descripcion:
-      "La capa visual y la navegacion ya permiten evolucionar esta seccion sin rehacer el backoffice.",
-  },
-] as const;
-
-const siguientePaso = [
-  {
-    titulo: "Carga de imagenes",
-    descripcion: "Subida controlada de imagenes y archivos al storage configurado.",
-  },
-  {
-    titulo: "Asociacion con productos",
-    descripcion: "Relacion entre archivos, catalogo y orden visual del producto.",
-  },
-  {
-    titulo: "Gestion de medios",
-    descripcion: "Vista para revisar, ordenar y mantener activos los recursos cargados.",
-  },
-] as const;
+type PropiedadesPaginaAdminImagenesRuta = Readonly<{
+  searchParams: Promise<{
+    producto?: string | string[];
+  }>;
+}>;
 
 export const metadata: Metadata = {
   title: "Imagenes",
 };
 
-export default function PaginaAdminImagenes() {
+function obtenerProductoIdDesdeQuery(
+  valor?: string | string[],
+) {
+  if (typeof valor === "string" && valor.trim().length) {
+    return valor.trim();
+  }
+
+  if (Array.isArray(valor)) {
+    const primero = valor.find(
+      (item) => typeof item === "string" && item.trim().length,
+    );
+    return primero?.trim() ?? null;
+  }
+
+  return null;
+}
+
+export default async function PaginaAdminImagenesRuta({
+  searchParams,
+}: PropiedadesPaginaAdminImagenesRuta) {
+  const query = await searchParams;
+  const productoId = obtenerProductoIdDesdeQuery(query.producto);
+  const vista = await obtenerVistaAdminImagenes(productoId);
+
   return (
-    <PaginaSeccionAdminBase
-      etiqueta="Imagenes"
-      titulo="Base para medios y storage"
-      descripcion="Seccion lista para alojar la gestion de imagenes del ecommerce."
-      resumen="El objetivo aqui es dejar preparada la zona donde el modulo 22 conectara storage, carga de archivos y asociacion con productos, manteniendo esa responsabilidad separada del resto del panel."
-      preparado={basePreparada}
-      siguientePaso={siguientePaso}
+    <PaginaAdminImagenes
+      key={`admin-imagenes-${vista.productoSeleccionado?.id ?? "sin-producto"}-${vista.imagenes.length}`}
+      productos={vista.productos}
+      productoSeleccionado={vista.productoSeleccionado}
+      imagenes={vista.imagenes}
     />
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { FormEvent } from "react";
 import { useDeferredValue, useState, useTransition } from "react";
 import { formatearPrecioClp } from "@/compartido/utilidades/formatear-precio-clp";
@@ -533,6 +534,12 @@ export function PaginaAdminProductos({
                     </div>
 
                     <div className="flex flex-wrap gap-2 xl:max-w-[18rem] xl:justify-end">
+                      <Link
+                        href={`/admin/imagenes?producto=${producto.id}`}
+                        className="boton-base boton-fantasma min-h-11 px-4 text-sm"
+                      >
+                        Imagenes
+                      </Link>
                       <Boton
                         variante="secundario"
                         onClick={() => abrirModalEdicion(producto)}
