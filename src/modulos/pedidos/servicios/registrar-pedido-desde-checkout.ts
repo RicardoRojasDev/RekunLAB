@@ -1,4 +1,5 @@
 import type { ResultadoCrearPedido, SolicitudCrearPedido } from "../tipos/crear-pedido";
+import { notificarPedidoCreado } from "@/modulos/correos-transaccionales";
 import {
   validarSolicitudCrearPedido,
   type ErroresCrearPedido,
@@ -24,6 +25,44 @@ export async function registrarPedidoDesdeCheckout(
     throw new ErrorValidacionCrearPedido(validacion.errores);
   }
 
-  return crearPedidoDesdeCheckoutSupabase(solicitud);
-}
+  const resultado = await crearPedidoDesdeCheckoutSupabase(solicitud);
 
+  try {
+    const notificacion = await notificarPedidoCreado({
+      solicitud,
+      resultado,
+    });
+
+    if (notificacion.omitido) {
+      console.warn(
+        "Correos transaccionales omitidos para el pedido creado:",
+        resultado.numeroPedido,
+        notificacion.motivoOmitido,
+      );
+    } else {
+      if (notificacion.cliente && !notificacion.cliente.exito) {
+        console.error(
+          "No fue posible enviar el correo al cliente:",
+          resultado.numeroPedido,
+          notificacion.cliente.error,
+        );
+      }
+
+      if (notificacion.interno && !notificacion.interno.exito) {
+        console.error(
+          "No fue posible enviar el correo interno de respaldo:",
+          resultado.numeroPedido,
+          notificacion.interno.error,
+        );
+      }
+    }
+  } catch (error) {
+    console.error(
+      "Error inesperado enviando correos transaccionales del pedido:",
+      resultado.numeroPedido,
+      error,
+    );
+  }
+
+  return resultado;
+}

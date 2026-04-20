@@ -7,6 +7,7 @@ import type {
   ImagenProductoCatalogo,
   ProductoCatalogo,
 } from "../tipos/producto-catalogo";
+import { obtenerCatalogoRealRespaldo } from "../datos/catalogo-real-respaldo";
 
 type RegistroBase = Record<string, unknown>;
 
@@ -56,6 +57,7 @@ export type OpcionesConsultaCatalogo = Readonly<{
 }>;
 
 const rutaImagenFallbackCatalogo = "/imagenes/catalogo/producto-rekun-lab.svg";
+let advertenciaPermisosCatalogoReportada = false;
 
 const seleccionCatalogoSupabase = `
   id,
@@ -87,6 +89,45 @@ const seleccionCatalogoSupabase = `
     es_principal
   )
 `;
+
+function esErrorPermisosSchemaPublic(error: unknown) {
+  if (!error || typeof error !== "object") {
+    return false;
+  }
+
+  const registro = error as Record<string, unknown>;
+
+  return (
+    registro.code === "42501" ||
+    registro.message === "permission denied for schema public"
+  );
+}
+
+function obtenerCatalogoDesdeRespaldoLocal(slug?: string) {
+  const catalogo = obtenerCatalogoRealRespaldo();
+
+  if (!slug) {
+    return catalogo;
+  }
+
+  return catalogo.filter((producto) => producto.slug === slug);
+}
+
+function advertirUsoRespaldoCatalogo(
+  mensaje: string,
+  error?: unknown,
+) {
+  if (advertenciaPermisosCatalogoReportada) {
+    return;
+  }
+
+  advertenciaPermisosCatalogoReportada = true;
+
+  console.warn(
+    `${mensaje} Ejecuta la migracion 20260419233000_auditoria_catalogo_y_pedidos.sql en Supabase SQL Editor y luego valida con npm run supabase:diagnostico.`,
+    error,
+  );
+}
 
 function esRegistro(valor: unknown): valor is RegistroBase {
   return typeof valor === "object" && valor !== null && !Array.isArray(valor);
@@ -392,16 +433,23 @@ export async function consultarProductosCatalogoSupabase(
       .maybeSingle();
 
     if (errorEstado) {
-      console.error(
-        "No fue posible resolver el estado activo del catalogo:",
-        errorEstado,
-      );
-      return [];
+      if (esErrorPermisosSchemaPublic(errorEstado)) {
+        advertirUsoRespaldoCatalogo(
+          "Supabase no permite leer el catalogo real desde este entorno. Se usa respaldo local hasta corregir permisos.",
+          errorEstado,
+        );
+        return obtenerCatalogoDesdeRespaldoLocal(slug);
+      }
+
+      console.error("No fue posible resolver el estado activo del catalogo:", errorEstado);
+      return obtenerCatalogoDesdeRespaldoLocal(slug);
     }
 
     if (!estadoActivo?.id) {
-      console.error("No existe un estado activo configurado para producto.");
-      return [];
+      advertirUsoRespaldoCatalogo(
+        "No existe un estado activo configurado para producto. Se usa respaldo local del catalogo.",
+      );
+      return obtenerCatalogoDesdeRespaldoLocal(slug);
     }
 
     let consulta = cliente
@@ -417,8 +465,16 @@ export async function consultarProductosCatalogoSupabase(
     const { data, error } = await consulta;
 
     if (error) {
+      if (esErrorPermisosSchemaPublic(error)) {
+        advertirUsoRespaldoCatalogo(
+          "Supabase devolvio un problema de permisos al consultar productos. Se usa respaldo local.",
+          error,
+        );
+        return obtenerCatalogoDesdeRespaldoLocal(slug);
+      }
+
       console.error("Error obteniendo catalogo real desde Supabase:", error);
-      return [];
+      return obtenerCatalogoDesdeRespaldoLocal(slug);
     }
 
     const filas = (data ?? []) as unknown as readonly FilaCatalogoSupabase[];
@@ -430,7 +486,15 @@ export async function consultarProductosCatalogoSupabase(
 
     return productos;
   } catch (error) {
+    if (esErrorPermisosSchemaPublic(error)) {
+      advertirUsoRespaldoCatalogo(
+        "Supabase no permite acceder al esquema publico. Se usa respaldo local del catalogo.",
+        error,
+      );
+      return obtenerCatalogoDesdeRespaldoLocal(slug);
+    }
+
     console.error("Error inesperado consultando el catalogo real:", error);
-    return [];
+    return obtenerCatalogoDesdeRespaldoLocal(slug);
   }
 }
