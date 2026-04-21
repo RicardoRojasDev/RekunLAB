@@ -16,6 +16,7 @@ La guia del modelado de datos del negocio esta en `docs/modulo-13-modelado-de-da
 La guia de base de datos en Supabase esta en `docs/modulo-14-base-de-datos-supabase.md`.
 La guia de integracion base con Supabase esta en `docs/modulo-15-integracion-base-supabase.md`.
 La guia del sistema de pedidos esta en `docs/modulo-16-sistema-de-pedidos.md`.
+La guia de correos de confirmacion de pedido esta en `docs/modulo-17-correos-confirmacion-pedido.md`.
 
 ## Objetivo de esta base
 
@@ -229,6 +230,9 @@ La base incluye un archivo `.env.example` con estas variables:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY`
+- `CORREO_ORIGEN_TRANSACCIONAL`
+- `CORREO_RESPALDO_PEDIDOS`
 
 ## Comandos principales
 

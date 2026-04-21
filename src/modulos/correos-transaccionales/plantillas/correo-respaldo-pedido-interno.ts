@@ -5,9 +5,9 @@ import type {
 import {
   construirMarcoCorreoHtml,
   construirResumenPedidoCorreo,
+  construirTablaDetallesCorreo,
   construirTablaItemsCorreo,
   construirTextoPlanoPedido,
-  escaparHtml,
   formatearFechaPedido,
 } from "../utilidades/correos-html";
 
@@ -16,9 +16,11 @@ export function construirCorreoRespaldoPedidoInterno(
   correoInterno: string,
 ): CorreoTransaccionalPreparado {
   const direccion = [
-    `${pedido.direccionDespacho.calle} ${pedido.direccionDespacho.numero}`,
+    `${pedido.direccionDespacho.calle} ${pedido.direccionDespacho.numero}`.trim(),
     pedido.direccionDespacho.departamento || null,
-    `${pedido.direccionDespacho.comuna}, ${pedido.direccionDespacho.region}`,
+    [pedido.direccionDespacho.comuna, pedido.direccionDespacho.region]
+      .filter(Boolean)
+      .join(", "),
     pedido.direccionDespacho.codigoPostal || null,
   ]
     .filter(Boolean)
@@ -28,21 +30,25 @@ export function construirCorreoRespaldoPedidoInterno(
     <p style="margin: 0 0 18px; font-size: 16px; line-height: 1.8; color: #34433f;">
       Se registro un nuevo pedido en el ecommerce de Rekun LAB y este correo deja respaldo interno para operacion.
     </p>
-    <div style="margin-bottom: 24px; border: 1px solid #d8e1dc; border-radius: 18px; background: #f7faf8; padding: 20px;">
-      <div style="display: grid; gap: 10px; font-size: 14px; color: #34433f;">
-        <div><strong>Pedido:</strong> ${escaparHtml(pedido.numeroPedido)}</div>
-        <div><strong>Fecha:</strong> ${escaparHtml(formatearFechaPedido(pedido.fechaISO))}</div>
-        <div><strong>Cliente:</strong> ${escaparHtml(pedido.datosCliente.nombreCompleto)}</div>
-        <div><strong>Correo:</strong> ${escaparHtml(pedido.datosCliente.correo)}</div>
-        <div><strong>Telefono:</strong> ${escaparHtml(pedido.datosCliente.telefono || "No informado")}</div>
-        <div><strong>Despacho:</strong> ${escaparHtml(direccion || "No informado")}</div>
-        ${
-          pedido.direccionDespacho.referencias
-            ? `<div><strong>Referencias:</strong> ${escaparHtml(pedido.direccionDespacho.referencias)}</div>`
-            : ""
-        }
-      </div>
-    </div>
+    ${construirTablaDetallesCorreo([
+      { etiqueta: "Pedido", valor: pedido.numeroPedido },
+      { etiqueta: "Fecha", valor: formatearFechaPedido(pedido.fechaISO) },
+      { etiqueta: "Cliente", valor: pedido.datosCliente.nombreCompleto },
+      { etiqueta: "Correo", valor: pedido.datosCliente.correo },
+      {
+        etiqueta: "Telefono",
+        valor: pedido.datosCliente.telefono || "No informado",
+      },
+      {
+        etiqueta: "Despacho",
+        valor: direccion || "No informado",
+      },
+      {
+        etiqueta: "Referencias",
+        valor: pedido.direccionDespacho.referencias || "Sin referencias",
+      },
+    ])}
+    <div style="height: 24px; line-height: 24px;">&nbsp;</div>
     ${construirTablaItemsCorreo(pedido.items)}
     ${construirResumenPedidoCorreo(pedido)}
   `;
