@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import { EstructuraLayoutGlobal } from "@/compartido/componentes/layout/estructura-layout-global";
 import { configuracionSitio } from "@/compartido/configuracion/sitio";
+import { rutasSeo } from "@/compartido/configuracion/seo";
 import type { PropiedadesConHijos } from "@/compartido/tipos/comunes";
 import { ProveedorAutenticacion } from "@/modulos/autenticacion";
 import { CapaCarritoGlobal, ProveedorCarrito } from "@/modulos/carrito";
@@ -46,11 +47,18 @@ export const metadata: Metadata = {
     siteName: configuracionSitio.nombre,
     title: configuracionSitio.nombre,
     description: configuracionSitio.descripcion,
+    images: [
+      {
+        url: rutasSeo.imagenOpenGraphPorDefecto,
+        alt: configuracionSitio.nombre,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: configuracionSitio.nombre,
     description: configuracionSitio.descripcion,
+    images: [rutasSeo.imagenTwitterPorDefecto],
   },
   alternates: {
     canonical: "/",

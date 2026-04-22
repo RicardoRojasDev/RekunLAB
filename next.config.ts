@@ -29,6 +29,7 @@ const patronesImagenesRemotas: PatronesImagenesRemotas = (() => {
 const configuracionNext: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  trailingSlash: false,
   images: {
     remotePatterns: patronesImagenesRemotas,
   },

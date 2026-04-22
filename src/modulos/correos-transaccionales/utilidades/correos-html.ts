@@ -128,6 +128,7 @@ export function construirMarcoCorreoHtml(
   titulo: string,
   subtitulo: string,
   contenido: string,
+  pie: string = "Correo transaccional de Rekun LAB para pedidos realizados en Chile.",
 ) {
   return `
     <!DOCTYPE html>
@@ -153,7 +154,7 @@ export function construirMarcoCorreoHtml(
                 </div>
               </div>
               <div style="padding: 16px 8px 0; font-size: 12px; line-height: 1.7; color: #5e716a; text-align: center;">
-                Correo transaccional de Rekun LAB para pedidos realizados en Chile.
+                ${escaparHtml(pie)}
               </div>
             </td>
           </tr>

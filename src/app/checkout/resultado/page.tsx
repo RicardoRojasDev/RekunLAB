@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { configuracionSitio } from "@/compartido/configuracion/sitio";
+import { construirMetadataBasica } from "@/compartido/configuracion/seo";
 import { obtenerResumenPagoPedido, PaginaResultadoPago } from "@/modulos/pagos";
 
 type PropiedadesPaginaResultadoCheckout = Readonly<{
@@ -10,24 +10,11 @@ const descripcion =
   "Estado del pago y del pedido en Rekun LAB con confirmacion clara y opcion de reintento si corresponde.";
 
 export const metadata: Metadata = {
-  title: "Resultado del pago",
-  description: descripcion,
-  alternates: {
+  ...construirMetadataBasica({
+    titulo: "Resultado del pago",
+    descripcion,
     canonical: "/checkout/resultado",
-  },
-  openGraph: {
-    title: `Resultado del pago | ${configuracionSitio.nombre}`,
-    description: descripcion,
-    url: `${configuracionSitio.urlBase}/checkout/resultado`,
-    siteName: configuracionSitio.nombre,
-    locale: "es_CL",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `Resultado del pago | ${configuracionSitio.nombre}`,
-    description: descripcion,
-  },
+  }),
 };
 
 function obtenerParametroTexto(

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { configuracionSitio } from "@/compartido/configuracion/sitio";
+import { construirMetadataBasica } from "@/compartido/configuracion/seo";
 import {
   normalizarFiltrosCatalogoDesdeQuery,
   PaginaCatalogoProductos,
@@ -10,30 +10,12 @@ const descripcionCatalogo =
   "Catalogo de Rekun LAB con filamentos PLA, impresoras 3D y packs, pensado para una compra clara en Chile.";
 
 export const metadata: Metadata = {
-  title: "Catalogo",
-  description: descripcionCatalogo,
-  keywords: [
-    ...configuracionSitio.palabrasClave,
-    "catalogo 3d",
-    "productos impresos 3d",
-    "filamento pla chile",
-  ],
-  alternates: {
+  ...construirMetadataBasica({
+    titulo: "Catalogo",
+    descripcion: descripcionCatalogo,
     canonical: "/catalogo",
-  },
-  openGraph: {
-    title: `Catalogo | ${configuracionSitio.nombre}`,
-    description: descripcionCatalogo,
-    url: `${configuracionSitio.urlBase}/catalogo`,
-    siteName: configuracionSitio.nombre,
-    locale: "es_CL",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `Catalogo | ${configuracionSitio.nombre}`,
-    description: descripcionCatalogo,
-  },
+    palabrasClaveExtra: ["catalogo 3d", "productos impresos 3d", "filamento pla chile"],
+  }),
 };
 
 type PropiedadesPaginaCatalogo = Readonly<{
