@@ -5,6 +5,7 @@ import {
   subirImagenProductoAdmin,
   type RespuestaApiAdminImagenes,
 } from "@/modulos/admin-imagenes";
+import { esUuid } from "@/compartido/utilidades/es-uuid";
 
 export const runtime = "nodejs";
 
@@ -63,6 +64,14 @@ export async function POST(request: Request) {
     return responderError(
       "PRODUCTO_REQUERIDO",
       "Debes seleccionar un producto para asociar la imagen.",
+      400,
+    );
+  }
+
+  if (!esUuid(productoId)) {
+    return responderError(
+      "PRODUCTO_INVALIDO",
+      "El identificador del producto no es valido.",
       400,
     );
   }

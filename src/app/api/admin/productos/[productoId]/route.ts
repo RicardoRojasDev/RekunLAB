@@ -9,6 +9,7 @@ import {
   type RespuestaApiAdminProductos,
   validarDatosFormularioProductoAdmin,
 } from "@/modulos/admin-productos";
+import { esUuid } from "@/compartido/utilidades/es-uuid";
 
 export const runtime = "nodejs";
 
@@ -54,6 +55,14 @@ export async function PATCH(
   }
 
   const { productoId } = await params;
+
+  if (!esUuid(productoId)) {
+    return responderError(
+      "PRODUCTO_INVALIDO",
+      "El identificador del producto no es valido.",
+      400,
+    );
+  }
   let body: unknown;
 
   try {

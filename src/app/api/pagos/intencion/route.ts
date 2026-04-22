@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { RespuestaApiCrearIntencionPago } from "@/modulos/pagos";
 import { crearIntencionPagoPedido } from "@/modulos/pagos";
+import { esUuid } from "@/compartido/utilidades/es-uuid";
 
 export const runtime = "nodejs";
 
@@ -32,6 +33,16 @@ export async function POST(request: Request) {
   const pedidoId = obtenerPedidoId((body ?? {}) as BodyCrearIntencionPago);
 
   if (!pedidoId) {
+    const respuesta: RespuestaApiCrearIntencionPago = {
+      ok: false,
+      codigo: "PEDIDO_INVALIDO",
+      mensaje: "Necesitamos un pedido valido para crear la intencion de pago.",
+    };
+
+    return NextResponse.json(respuesta, { status: 400 });
+  }
+
+  if (!esUuid(pedidoId)) {
     const respuesta: RespuestaApiCrearIntencionPago = {
       ok: false,
       codigo: "PEDIDO_INVALIDO",

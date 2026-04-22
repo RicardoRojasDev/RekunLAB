@@ -6,6 +6,7 @@ import {
   marcarImagenProductoComoPrincipalAdmin,
   type RespuestaApiAdminImagenes,
 } from "@/modulos/admin-imagenes";
+import { esUuid } from "@/compartido/utilidades/es-uuid";
 
 export const runtime = "nodejs";
 
@@ -50,6 +51,14 @@ export async function PATCH(
   }
 
   const { imagenId } = await params;
+
+  if (!esUuid(imagenId)) {
+    return responderError(
+      "IMAGEN_INVALIDA",
+      "El identificador de la imagen no es valido.",
+      400,
+    );
+  }
   let body: unknown;
 
   try {
@@ -106,6 +115,14 @@ export async function DELETE(
   }
 
   const { imagenId } = await params;
+
+  if (!esUuid(imagenId)) {
+    return responderError(
+      "IMAGEN_INVALIDA",
+      "El identificador de la imagen no es valido.",
+      400,
+    );
+  }
 
   try {
     await eliminarImagenProductoAdmin(imagenId);
