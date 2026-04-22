@@ -72,10 +72,16 @@ export async function PaginaInicioRekunLab() {
 
   return (
     <section aria-labelledby="titulo-inicio-rekun-lab">
-      <ContenedorPrincipal claseName="flex flex-col gap-[var(--espacio-xl)] pb-[var(--espacio-2xl)]">
-        <header className="grid gap-6 xl:grid-cols-[1.06fr_0.94fr] xl:items-start">
-          <Contenedor variante="oscuro" relleno="lg">
-            <div className="space-y-7">
+      <ContenedorPrincipal claseName="flex flex-col gap-[var(--espacio-xl)] pb-[var(--espacio-2xl)] lg:gap-[var(--espacio-2xl)] xl:!max-w-[88rem] 2xl:!max-w-[94rem]">
+        <div className="relative z-0">
+          <header className="grid gap-5 lg:gap-6 xl:grid-cols-[0.92fr_1.08fr] xl:items-start xl:gap-7 2xl:grid-cols-[0.88fr_1.12fr]">
+            <Contenedor variante="oscuro" relleno="md" claseName="relative overflow-hidden">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(13,124,102,0.22),transparent_52%),radial-gradient(circle_at_bottom_right,rgba(188,174,124,0.16),transparent_55%)]"
+              />
+
+              <div className="relative space-y-6 xl:space-y-5">
               <div className="flex flex-wrap gap-2">
                 <Etiqueta variante="oscura">Rekun LAB</Etiqueta>
                 <Etiqueta variante="premium">Tecnologia y sustentabilidad</Etiqueta>
@@ -84,12 +90,12 @@ export async function PaginaInicioRekunLab() {
               <div className="space-y-4">
                 <h1
                   id="titulo-inicio-rekun-lab"
-                  className="titulo-display max-w-5xl text-white"
+                  className="max-w-4xl text-balance font-[var(--fuente-titulos)] text-[clamp(2.35rem,3.35vw,3.85rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-white"
                 >
                   Ecommerce chileno para impresion 3D, filamentos PLA y equipamiento
                 </h1>
 
-                <p className="max-w-3xl text-base leading-8 text-white/72 sm:text-[1.05rem]">
+                <p className="max-w-3xl text-pretty text-base leading-8 text-white/70 sm:text-[1.05rem]">
                   Rekun LAB combina economia circular, materiales con identidad y
                   seleccion de impresoras 3D para una compra clara, sobria y
                   enfocada en Chile.
@@ -99,14 +105,14 @@ export async function PaginaInicioRekunLab() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/catalogo"
-                  className="boton-base boton-primario min-h-12 px-5 text-sm"
+                  className="boton-base boton-primario min-h-11 px-5 text-sm"
                 >
                   Ver catalogo
                 </Link>
                 {cantidadFilamentos > 0 ? (
                   <Link
                     href="/catalogo?tipo=Filamento"
-                    className="boton-base boton-secundario min-h-12 px-5 text-sm"
+                    className="boton-base boton-secundario min-h-11 px-5 text-sm"
                   >
                     Explorar filamentos PLA
                   </Link>
@@ -117,12 +123,12 @@ export async function PaginaInicioRekunLab() {
                 {condicionesCompra.map((condicion) => (
                   <div
                     key={condicion.titulo}
-                    className="rounded-[var(--radio-md)] border border-white/10 bg-white/6 px-4 py-4"
+                    className="rounded-[var(--radio-md)] border border-white/10 bg-white/6 px-4 py-3.5"
                   >
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/56">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/56">
                       {condicion.titulo}
                     </p>
-                    <p className="mt-2 text-sm leading-7 text-white/82">
+                    <p className="mt-1.5 text-sm leading-6 text-white/82">
                       {condicion.descripcion}
                     </p>
                   </div>
@@ -141,24 +147,30 @@ export async function PaginaInicioRekunLab() {
               {resumenTienda.map((item) => (
                 <div
                   key={item.etiqueta}
-                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-4"
+                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-3.5"
                 >
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
                     {item.etiqueta}
                   </p>
-                  <p className="mt-2 font-[var(--fuente-titulos)] text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+                  <p className="mt-2 font-[var(--fuente-titulos)] text-2xl font-semibold tracking-[-0.04em] text-slate-950">
                     {String(item.valor).padStart(2, "0")}
                   </p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-5 rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/74 px-4 py-4 text-sm leading-7 text-slate-700">
+            <div className="mt-4 rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/74 px-4 py-3.5 text-sm leading-7 text-slate-700">
               Informacion clara para comparar: categoria, precio final con IVA incluido y
               acceso al detalle.
             </div>
           </Tarjeta>
-        </header>
+          </header>
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 -bottom-10 -z-10 h-16 bg-[radial-gradient(circle_at_top,rgba(13,124,102,0.12),transparent_62%)]"
+          />
+        </div>
 
         <section aria-labelledby="titulo-bloques-inicio" className="space-y-6">
           <div className="space-y-3">
