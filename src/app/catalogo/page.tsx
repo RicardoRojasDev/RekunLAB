@@ -7,7 +7,7 @@ import {
 } from "@/modulos/catalogo";
 
 const descripcionCatalogo =
-  "Catalogo de Rekun LAB con filamentos PLA, impresoras 3D y packs, pensado para una compra clara en Chile.";
+  "Catalogo de Rekun LAB con productos de impresion 3D, pensado para una compra clara en Chile.";
 
 export const metadata: Metadata = {
   ...construirMetadataBasica({

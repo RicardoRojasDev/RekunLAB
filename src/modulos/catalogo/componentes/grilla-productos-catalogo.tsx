@@ -46,7 +46,7 @@ export function GrillaProductosCatalogo({
             <p className="texto-soporte max-w-3xl">
               {cantidadFiltrosActivos > 0
                 ? `Mostrando ${productos.length} de ${cantidadProductosTotales} productos segun la seleccion activa.`
-                : "Una vitrina mas limpia para comparar nombre comercial, categoria, precio final y atributos relevantes."}
+                : "Explora productos con informacion clara: categoria, precio final con IVA incluido y acceso al detalle."}
             </p>
           </div>
         </div>

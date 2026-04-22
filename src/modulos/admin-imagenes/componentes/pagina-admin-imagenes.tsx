@@ -206,7 +206,7 @@ export function PaginaAdminImagenes({
 
   async function eliminarImagen(imagenId: string) {
     const confirmar = window.confirm(
-      "Vas a eliminar la imagen del producto y del storage. Deseas continuar?",
+      "Vas a eliminar la imagen del producto. Deseas continuar?",
     );
 
     if (!confirmar) {
@@ -249,9 +249,9 @@ export function PaginaAdminImagenes({
     <section className="space-y-6">
       <Tarjeta
         variante="elevada"
-        etiqueta={<Etiqueta variante="primaria">Modulo 22</Etiqueta>}
-        titulo="Gestion de imagenes y storage"
-        descripcion="Sube imagenes a Supabase Storage, asocialas a productos del catalogo y define cual debe verse como principal."
+        etiqueta={<Etiqueta variante="primaria">Imagenes</Etiqueta>}
+        titulo="Gestion de imagenes"
+        descripcion="Sube imagenes, asocialas a productos del catalogo y define cual debe verse como principal."
       >
         <div className="grid gap-3 md:grid-cols-3">
           <div className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/84 px-4 py-4">
@@ -430,7 +430,7 @@ export function PaginaAdminImagenes({
           <Tarjeta
             etiqueta={<Etiqueta variante="suave">Asociadas</Etiqueta>}
             titulo="Imagenes del producto"
-            descripcion="Cada imagen queda almacenada en un bucket dedicado y asociada al producto en la tabla imagen_producto."
+            descripcion="Cada imagen queda asociada al producto seleccionado y puedes ajustar cual se muestra como principal."
           >
             {imagenes.length ? (
               <div className="grid gap-4 lg:grid-cols-2">
@@ -479,10 +479,6 @@ export function PaginaAdminImagenes({
                           <div className="flex items-center justify-between gap-3">
                             <dt>Archivo</dt>
                             <dd>{imagen.nombreArchivoOriginal ?? "Sin nombre"}</dd>
-                          </div>
-                          <div className="flex items-center justify-between gap-3">
-                            <dt>Storage</dt>
-                            <dd className="truncate text-right">{imagen.rutaStorage ?? "Sin ruta"}</dd>
                           </div>
                         </dl>
 

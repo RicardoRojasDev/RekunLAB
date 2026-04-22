@@ -29,6 +29,19 @@ function resolverEtiquetaEstado(estado: ResumenPagoPedido["pago"]["estado"]) {
   }
 }
 
+function resolverTextoEstadoPago(estado: ResumenPagoPedido["pago"]["estado"]) {
+  switch (estado) {
+    case "pagado":
+      return "Pagado";
+    case "pendiente":
+      return "Pendiente";
+    case "fallido":
+      return "Fallido";
+    default:
+      return "Sin pago";
+  }
+}
+
 type PropiedadesPaginaResultadoPago = Readonly<{
   resumen: ResumenPagoPedido | null;
   errorRetorno?: string | null;
@@ -48,7 +61,7 @@ export function PaginaResultadoPago({
             descripcion={
               errorRetorno
                 ? errorRetorno
-                : "La pagina de resultado necesita un identificador de pedido valido para consultar el estado del pago."
+                : "No pudimos encontrar el pedido asociado a este resultado. Vuelve al checkout para continuar."
             }
             acciones={
               <Link
@@ -149,12 +162,12 @@ export function PaginaResultadoPago({
                 <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
                   Estado del pago
                 </dt>
-                <dd>{resumen.pago.estado}</dd>
+                <dd>{resolverTextoEstadoPago(resumen.pago.estado)}</dd>
               </div>
 
               <div className="space-y-1">
                 <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Referencia pasarela
+                  Referencia de pago
                 </dt>
                 <dd>{resumen.pago.referenciaExterna ?? "No disponible"}</dd>
               </div>
@@ -174,7 +187,7 @@ export function PaginaResultadoPago({
             {resumen.pago.ultimoError ? (
               <div className="mt-5 rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/80 p-4 text-sm leading-7 text-slate-700">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Detalle operativo
+                  Detalle
                 </p>
                 <p>{resumen.pago.ultimoError}</p>
               </div>

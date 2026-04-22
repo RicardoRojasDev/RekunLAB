@@ -50,7 +50,7 @@ export function ResumenFiltrosActivosCatalogo({
       </div>
 
       <Boton variante="fantasma" tamanio="sm" onClick={alLimpiarFiltros}>
-        Reiniciar seleccion
+        Limpiar filtros
       </Boton>
     </section>
   );

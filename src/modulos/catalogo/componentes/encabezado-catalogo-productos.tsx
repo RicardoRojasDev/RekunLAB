@@ -45,7 +45,7 @@ export function EncabezadoCatalogoProductos({
         <div className="flex h-full flex-col gap-6">
           <div className="flex flex-wrap gap-2">
             <Etiqueta variante="oscura">Catalogo Rekun LAB</Etiqueta>
-            <Etiqueta variante="premium">Filamentos, impresoras y packs</Etiqueta>
+            <Etiqueta variante="premium">Productos de impresion 3D</Etiqueta>
           </div>
 
           <div className="space-y-4">
@@ -80,8 +80,7 @@ export function EncabezadoCatalogoProductos({
               Una lectura ordenada del catalogo activo
             </h2>
             <p className="texto-soporte">
-              Filamentos PLA, impresoras 3D y packs presentados con menos ruido
-              visual y mejor foco en el producto.
+              Productos del catalogo presentados con informacion clara para comparar y decidir.
             </p>
           </div>
 

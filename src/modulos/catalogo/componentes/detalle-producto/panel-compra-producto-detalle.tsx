@@ -220,13 +220,10 @@ export function PanelCompraProductoDetalle({
                   ) : vistaDetalle.varianteSeleccionada ? (
                     <div className="space-y-1">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                        Variante validada
+                        Variante seleccionada
                       </p>
                       <p className="text-sm font-semibold text-slate-900">
                         {vistaDetalle.varianteSeleccionada.etiqueta}
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        Codigo referencia {vistaDetalle.varianteSeleccionada.codigoReferencia}
                       </p>
                     </div>
                   ) : (

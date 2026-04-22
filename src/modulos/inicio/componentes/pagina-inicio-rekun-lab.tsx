@@ -18,10 +18,10 @@ const bloquesInicio = [
       "Desarrollamos soluciones a medida para marcas, talleres y proyectos que necesitan precision, consistencia y criterio tecnico.",
   },
   {
-    etiqueta: "Impresoras y packs",
+    etiqueta: "Impresoras y equipos",
     titulo: "Equipamiento para crecer",
     descripcion:
-      "Seleccion de impresoras 3D y packs listos para iniciar, equipar o ampliar una operacion real en Chile.",
+      "Seleccion de impresoras 3D y equipamiento para iniciar, equipar o ampliar una operacion en Chile.",
   },
 ] as const;
 
@@ -61,6 +61,14 @@ export async function PaginaInicioRekunLab() {
       producto.coleccion ? [producto.coleccion] : [],
     ),
   ).size;
+  const resumenTienda: Array<{ etiqueta: string; valor: number }> = [
+    { etiqueta: "Filamentos", valor: cantidadFilamentos },
+    { etiqueta: "Impresoras", valor: cantidadImpresoras },
+    ...(cantidadPacks > 0 ? [{ etiqueta: "Packs", valor: cantidadPacks }] : []),
+    ...(cantidadColecciones > 0
+      ? [{ etiqueta: "Colecciones", valor: cantidadColecciones }]
+      : []),
+  ];
 
   return (
     <section aria-labelledby="titulo-inicio-rekun-lab">
@@ -78,14 +86,13 @@ export async function PaginaInicioRekunLab() {
                   id="titulo-inicio-rekun-lab"
                   className="titulo-display max-w-5xl text-white"
                 >
-                  Ecommerce chileno para filamentos PLA, impresion 3D y equipamiento
-                  listo para negocio real
+                  Ecommerce chileno para impresion 3D, filamentos PLA y equipamiento
                 </h1>
 
                 <p className="max-w-3xl text-base leading-8 text-white/72 sm:text-[1.05rem]">
                   Rekun LAB combina economia circular, materiales con identidad y
                   seleccion de impresoras 3D para una compra clara, sobria y
-                  orientada a operacion.
+                  enfocada en Chile.
                 </p>
               </div>
 
@@ -96,12 +103,14 @@ export async function PaginaInicioRekunLab() {
                 >
                   Ver catalogo
                 </Link>
-                <Link
-                  href="/catalogo?tipo=Filamento"
-                  className="boton-base boton-secundario min-h-12 px-5 text-sm"
-                >
-                  Explorar filamentos PLA
-                </Link>
+                {cantidadFilamentos > 0 ? (
+                  <Link
+                    href="/catalogo?tipo=Filamento"
+                    className="boton-base boton-secundario min-h-12 px-5 text-sm"
+                  >
+                    Explorar filamentos PLA
+                  </Link>
+                ) : null}
               </div>
 
               <div className="grid gap-3 sm:grid-cols-3">
@@ -124,51 +133,29 @@ export async function PaginaInicioRekunLab() {
 
           <Tarjeta
             variante="elevada"
-            etiqueta={<Etiqueta variante="primaria">Panorama actual</Etiqueta>}
-            titulo="Catalogo activo para compra real"
-            descripcion="La vitrina ya integra filamentos, impresoras 3D y packs bajo una experiencia de compra enfocada en Chile."
+            etiqueta={<Etiqueta variante="primaria">En tienda</Etiqueta>}
+            titulo="Catalogo disponible"
+            descripcion="Explora el catalogo disponible con precios finales con IVA incluido y acceso directo al detalle."
           >
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Filamentos
-                </p>
-                <p className="mt-2 font-[var(--fuente-titulos)] text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-                  {String(cantidadFilamentos).padStart(2, "0")}
-                </p>
-              </div>
-
-              <div className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Impresoras
-                </p>
-                <p className="mt-2 font-[var(--fuente-titulos)] text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-                  {String(cantidadImpresoras).padStart(2, "0")}
-                </p>
-              </div>
-
-              <div className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Packs
-                </p>
-                <p className="mt-2 font-[var(--fuente-titulos)] text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-                  {String(cantidadPacks).padStart(2, "0")}
-                </p>
-              </div>
-
-              <div className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  Colecciones
-                </p>
-                <p className="mt-2 font-[var(--fuente-titulos)] text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-                  {String(cantidadColecciones).padStart(2, "0")}
-                </p>
-              </div>
+              {resumenTienda.map((item) => (
+                <div
+                  key={item.etiqueta}
+                  className="rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/78 px-4 py-4"
+                >
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    {item.etiqueta}
+                  </p>
+                  <p className="mt-2 font-[var(--fuente-titulos)] text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+                    {String(item.valor).padStart(2, "0")}
+                  </p>
+                </div>
+              ))}
             </div>
 
             <div className="mt-5 rounded-[var(--radio-md)] border border-[color:var(--color-borde)] bg-white/74 px-4 py-4 text-sm leading-7 text-slate-700">
-              Catalogo enfocado en una lectura simple: nombre comercial, categoria,
-              precio final y acceso directo a compra.
+              Informacion clara para comparar: categoria, precio final con IVA incluido y
+              acceso al detalle.
             </div>
           </Tarjeta>
         </header>
@@ -178,11 +165,11 @@ export async function PaginaInicioRekunLab() {
             <Etiqueta variante="suave">Que hacemos</Etiqueta>
             <div className="space-y-2">
               <h2 id="titulo-bloques-inicio" className="titulo-seccion text-slate-950">
-                Una propuesta mas clara y menos ruidosa
+                Tres lineas principales
               </h2>
               <p className="texto-soporte max-w-3xl">
-                Dejamos visibles solo las capas que hoy aportan valor real al
-                ecommerce.
+                Filamentos PLA, impresion 3D y equipamiento para proyectos que
+                necesitan precision y continuidad.
               </p>
             </div>
           </div>
@@ -209,11 +196,10 @@ export async function PaginaInicioRekunLab() {
                   id="titulo-destacados-inicio"
                   className="titulo-seccion text-slate-950"
                 >
-                  Productos visibles desde el catalogo real
+                  Productos destacados
                 </h2>
                 <p className="texto-soporte max-w-3xl">
-                  Una seleccion breve para entrar al ecommerce sin secciones
-                  decorativas ni promesas vacias.
+                  Una seleccion breve para empezar a explorar el catalogo.
                 </p>
               </div>
             </div>

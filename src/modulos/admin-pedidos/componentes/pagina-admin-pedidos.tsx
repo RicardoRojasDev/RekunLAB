@@ -125,7 +125,7 @@ export function PaginaAdminPedidos({
     <section className="space-y-6">
       <Tarjeta
         variante="elevada"
-        etiqueta={<Etiqueta variante="primaria">Modulo 21</Etiqueta>}
+        etiqueta={<Etiqueta variante="primaria">Pedidos</Etiqueta>}
         titulo="Administracion de pedidos"
         descripcion="Vista operativa para revisar pedidos, su contexto de cliente, el estado comercial y el estado del pago sin salir del backoffice."
       >

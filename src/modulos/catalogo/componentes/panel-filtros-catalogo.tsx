@@ -41,7 +41,7 @@ export function PanelFiltrosCatalogo({
               </h2>
               <p className="texto-soporte max-w-3xl">
                 Filtra por categoria, coleccion, tipo de producto y orden para
-                recorrer el catalogo con menos friccion.
+                recorrer el catalogo de forma simple.
               </p>
             </div>
           </div>
@@ -104,11 +104,7 @@ export function PanelFiltrosCatalogo({
           />
         </div>
 
-        <div className="flex min-h-6 items-center justify-between gap-3">
-          <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-            Seleccion actual actualizada en la vista del catalogo.
-          </p>
-
+        <div className="flex min-h-6 items-center justify-end">
           {sincronizandoUrl ? (
             <span className="text-xs uppercase tracking-[0.18em] text-slate-500">
               Actualizando resultados...

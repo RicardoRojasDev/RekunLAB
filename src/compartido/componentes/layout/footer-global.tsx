@@ -61,8 +61,8 @@ export function FooterGlobal() {
             </h2>
 
             <p className="max-w-xs text-sm leading-7 text-white/54">
-              Filamentos PLA, impresoras 3D y packs presentados con una lectura
-              simple, precios con IVA incluido y foco en despacho dentro de Chile.
+              Productos de impresion 3D presentados con una lectura simple, precios
+              con IVA incluido y foco en despacho dentro de Chile.
             </p>
           </section>
         </div>

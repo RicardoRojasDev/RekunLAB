@@ -317,6 +317,9 @@ export function PaginaAdminProductos({
 
   async function activarODesactivarProducto(producto: ProductoAdmin) {
     const codigoEstadoDestino = producto.estado === "activo" ? "inactivo" : "activo";
+    const nombreEstadoDestino =
+      opciones.estados.find((estado) => estado.codigo === codigoEstadoDestino)
+        ?.nombre ?? codigoEstadoDestino;
 
     await ejecutarAccionRapida(
       producto,
@@ -324,7 +327,7 @@ export function PaginaAdminProductos({
         accion: "actualizar-estado",
         estadoCodigo: codigoEstadoDestino,
       },
-      `Producto ${producto.nombre} actualizado a estado ${codigoEstadoDestino}.`,
+      `Producto ${producto.nombre} actualizado a estado ${nombreEstadoDestino}.`,
     );
 
     if (productoEditando?.id === producto.id) {
@@ -339,7 +342,7 @@ export function PaginaAdminProductos({
 
   async function eliminarProducto(producto: ProductoAdmin) {
     const confirmar = window.confirm(
-      `Vas a ocultar logicamente ${producto.nombre} del catalogo activo. Deseas continuar?`,
+      `Vas a ocultar ${producto.nombre} del catalogo. Deseas continuar?`,
     );
 
     if (!confirmar) {
@@ -351,7 +354,7 @@ export function PaginaAdminProductos({
       {
         accion: "eliminacion-logica",
       },
-      `Producto ${producto.nombre} marcado con eliminacion logica.`,
+      `Producto ${producto.nombre} oculto del catalogo.`,
     );
   }
 
@@ -359,9 +362,9 @@ export function PaginaAdminProductos({
     <section className="space-y-6">
       <Tarjeta
         variante="elevada"
-        etiqueta={<Etiqueta variante="primaria">Modulo 20</Etiqueta>}
+        etiqueta={<Etiqueta variante="primaria">Productos</Etiqueta>}
         titulo="Administracion de productos"
-        descripcion="Gestiona el catalogo real de Rekun LAB desde el panel admin, sin tocar codigo y manteniendo la estructura preparada para crecer."
+        descripcion="Gestiona productos del catalogo: crea, edita y ajusta su estado para controlar lo que se muestra en la tienda."
         acciones={
           <Boton onClick={abrirModalCreacion} disabled={!opciones.categorias.length}>
             Crear producto

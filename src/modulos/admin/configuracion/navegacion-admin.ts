@@ -10,19 +10,19 @@ export const enlacesNavegacionAdmin: readonly EnlaceNavegacionAdmin[] = [
   {
     href: "/admin/productos",
     etiqueta: "Productos",
-    descripcion: "Base para catalogo y categorias",
+    descripcion: "Gestion de catalogo y categorias",
     claveVisual: "PD",
   },
   {
     href: "/admin/pedidos",
     etiqueta: "Pedidos",
-    descripcion: "Base para operacion diaria",
+    descripcion: "Seguimiento y gestion operativa",
     claveVisual: "PE",
   },
   {
     href: "/admin/imagenes",
     etiqueta: "Imagenes",
-    descripcion: "Base para storage y medios",
+    descripcion: "Biblioteca de imagenes del catalogo",
     claveVisual: "IM",
   },
 ] as const;
